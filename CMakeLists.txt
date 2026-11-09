@@ -30,3 +30,6 @@ target_compile_options(mcm_common PUBLIC -O3 -Wall -Wextra -Wno-unused-parameter
 
 add_executable(calib_filter bench/calib_filter.cpp)
 target_link_libraries(calib_filter PRIVATE mcm_common)
+
+add_executable(calib_agg bench/calib_agg.cpp)
+target_link_libraries(calib_agg PRIVATE mcm_common)

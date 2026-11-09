@@ -1,0 +1,210 @@
+{
+  "coefficients": {
+    "Apple-M1": {
+      "l_extendedprice_by_l_partkey/cpu-e": {
+        "alpha_us": 7.731601896984055,
+        "beta_us_per_elem": 0.014521426103932875,
+        "bytes_per_elem": 8.0,
+        "eff_bw_GBps": 0.5509100788546752,
+        "median_rel_err": 0.07926298269008883,
+        "max_rel_err": 0.1305327426527676,
+        "points": 16
+      },
+      "l_extendedprice_by_l_partkey/cpu-p": {
+        "alpha_us": 8.481751536746508,
+        "beta_us_per_elem": 0.0015615707889894185,
+        "bytes_per_elem": 8.0,
+        "eff_bw_GBps": 5.123046650467416,
+        "median_rel_err": 0.3444993801363858,
+        "max_rel_err": 0.6502241205199217,
+        "points": 16
+      },
+      "l_extendedprice_by_l_partkey/gpu-cold": {
+        "alpha_us": 359.49870683814873,
+        "beta_us_per_elem": 0.0018187787261320033,
+        "bytes_per_elem": 8.0,
+        "eff_bw_GBps": 4.398555956839015,
+        "median_rel_err": 0.028575927151133308,
+        "max_rel_err": 0.12769969482317295,
+        "points": 16
+      },
+      "l_extendedprice_by_l_partkey/gpu-warm": {
+        "alpha_us": 317.1157690286751,
+        "beta_us_per_elem": 0.0015020273680736082,
+        "bytes_per_elem": 8.0,
+        "eff_bw_GBps": 5.326134643112543,
+        "median_rel_err": 0.040409089159280084,
+        "max_rel_err": 0.16456407511587928,
+        "points": 16
+      },
+      "l_extendedprice_by_l_shipdate/cpu-e": {
+        "alpha_us": 19.368421051402404,
+        "beta_us_per_elem": 0.0028095537631386237,
+        "bytes_per_elem": 8.0,
+        "eff_bw_GBps": 2.847427269397756,
+        "median_rel_err": 0.04590721818582282,
+        "max_rel_err": 0.10807565163189235,
+        "points": 16
+      },
+      "l_extendedprice_by_l_shipdate/cpu-p": {
+        "alpha_us": 3.851023799624747,
+        "beta_us_per_elem": 0.0004221690067463923,
+        "bytes_per_elem": 8.0,
+        "eff_bw_GBps": 18.949756784978305,
+        "median_rel_err": 0.006897921757661265,
+        "max_rel_err": 0.05162578772611953,
+        "points": 16
+      },
+      "l_extendedprice_by_l_shipdate/gpu-cold": {
+        "alpha_us": 339.84421546260756,
+        "beta_us_per_elem": 0.0004286948710011508,
+        "bytes_per_elem": 8.0,
+        "eff_bw_GBps": 18.661291611250757,
+        "median_rel_err": 0.035260333798127916,
+        "max_rel_err": 0.15086575919993195,
+        "points": 16
+      },
+      "l_extendedprice_by_l_shipdate/gpu-warm": {
+        "alpha_us": 297.17289790033306,
+        "beta_us_per_elem": 0.00015351021801321223,
+        "bytes_per_elem": 8.0,
+        "eff_bw_GBps": 52.11379479189757,
+        "median_rel_err": 0.044659595390946535,
+        "max_rel_err": 0.1208395966733195,
+        "points": 16
+      },
+      "l_extendedprice_by_l_shipmode/cpu-e": {
+        "alpha_us": 1.888029212902528,
+        "beta_us_per_elem": 0.001327401025445845,
+        "bytes_per_elem": 8.0,
+        "eff_bw_GBps": 6.026814690242517,
+        "median_rel_err": 0.06269154157449396,
+        "max_rel_err": 0.30646108017724993,
+        "points": 16
+      },
+      "l_extendedprice_by_l_shipmode/cpu-p": {
+        "alpha_us": 0.8899257260943803,
+        "beta_us_per_elem": 0.00041001814845662357,
+        "bytes_per_elem": 8.0,
+        "eff_bw_GBps": 19.51133146206657,
+        "median_rel_err": 0.011163312658570785,
+        "max_rel_err": 0.061942613568246714,
+        "points": 16
+      },
+      "l_extendedprice_by_l_shipmode/gpu-cold": {
+        "alpha_us": 297.4918597724273,
+        "beta_us_per_elem": 0.00040935952421762513,
+        "bytes_per_elem": 8.0,
+        "eff_bw_GBps": 19.542723514958485,
+        "median_rel_err": 0.027950298608069163,
+        "max_rel_err": 0.10779629697140009,
+        "points": 16
+      },
+      "l_extendedprice_by_l_shipmode/gpu-warm": {
+        "alpha_us": 247.10510767030854,
+        "beta_us_per_elem": 0.00014382700532803198,
+        "bytes_per_elem": 8.0,
+        "eff_bw_GBps": 55.62237760394219,
+        "median_rel_err": 0.0356650520454827,
+        "max_rel_err": 0.09709228421277813,
+        "points": 16
+      },
+      "l_extendedprice_by_l_suppkey/cpu-e": {
+        "alpha_us": 21.674728219800837,
+        "beta_us_per_elem": 0.003437226152211531,
+        "bytes_per_elem": 8.0,
+        "eff_bw_GBps": 2.327458143786307,
+        "median_rel_err": 0.15228540470577995,
+        "max_rel_err": 0.4656033795311775,
+        "points": 16
+      },
+      "l_extendedprice_by_l_suppkey/cpu-p": {
+        "alpha_us": 3.363528776047356,
+        "beta_us_per_elem": 0.0009233798868123021,
+        "bytes_per_elem": 8.0,
+        "eff_bw_GBps": 8.663823107104543,
+        "median_rel_err": 0.04214647992424653,
+        "max_rel_err": 0.2717765307077152,
+        "points": 16
+      },
+      "l_extendedprice_by_l_suppkey/gpu-cold": {
+        "alpha_us": 338.8563473068299,
+        "beta_us_per_elem": 0.0007656887967627826,
+        "bytes_per_elem": 8.0,
+        "eff_bw_GBps": 10.448108988694623,
+        "median_rel_err": 0.040938196942972294,
+        "max_rel_err": 0.12299866313397075,
+        "points": 16
+      },
+      "l_extendedprice_by_l_suppkey/gpu-warm": {
+        "alpha_us": 305.98654514657676,
+        "beta_us_per_elem": 0.00022704803450787953,
+        "bytes_per_elem": 8.0,
+        "eff_bw_GBps": 35.23483485483494,
+        "median_rel_err": 0.1559646929019905,
+        "max_rel_err": 0.49237530227445087,
+        "points": 16
+      },
+      "sum_l_extendedprice/cpu-e": {
+        "alpha_us": 0.6094785794854356,
+        "beta_us_per_elem": 0.00019817227993996507,
+        "bytes_per_elem": 4.0,
+        "eff_bw_GBps": 20.184457691114883,
+        "median_rel_err": 0.020768136860095834,
+        "max_rel_err": 0.06576095846984076,
+        "points": 16
+      },
+      "sum_l_extendedprice/cpu-p": {
+        "alpha_us": 0.6291816344583054,
+        "beta_us_per_elem": 6.496172871771539e-05,
+        "bytes_per_elem": 4.0,
+        "eff_bw_GBps": 61.57471605137841,
+        "median_rel_err": 0.019298958285676373,
+        "max_rel_err": 0.11516334010374862,
+        "points": 16
+      },
+      "sum_l_extendedprice/gpu-cold": {
+        "alpha_us": 307.97328575481856,
+        "beta_us_per_elem": 0.00016810161213917437,
+        "bytes_per_elem": 4.0,
+        "eff_bw_GBps": 23.795131700987657,
+        "median_rel_err": 0.040524971804986584,
+        "max_rel_err": 0.20174638070428116,
+        "points": 16
+      },
+      "sum_l_extendedprice/gpu-warm": {
+        "alpha_us": 268.4956997018111,
+        "beta_us_per_elem": 7.437447810291818e-05,
+        "bytes_per_elem": 4.0,
+        "eff_bw_GBps": 53.781889998137075,
+        "median_rel_err": 0.043323051000235036,
+        "max_rel_err": 0.08369716985746935,
+        "points": 16
+      }
+    }
+  },
+  "crossovers": {
+    "Apple-M1": {
+      "l_extendedprice_by_l_partkey/gpu-cold vs l_extendedprice_by_l_partkey/cpu-e": 27692.424616612785,
+      "l_extendedprice_by_l_partkey/gpu-cold vs l_extendedprice_by_l_partkey/cpu-p": null,
+      "l_extendedprice_by_l_partkey/gpu-warm vs l_extendedprice_by_l_partkey/cpu-e": 23763.32220930877,
+      "l_extendedprice_by_l_partkey/gpu-warm vs l_extendedprice_by_l_partkey/cpu-p": 5183343.730423434,
+      "l_extendedprice_by_l_shipdate/gpu-cold vs l_extendedprice_by_l_shipdate/cpu-e": 134605.1189633882,
+      "l_extendedprice_by_l_shipdate/gpu-cold vs l_extendedprice_by_l_shipdate/cpu-p": null,
+      "l_extendedprice_by_l_shipdate/gpu-warm vs l_extendedprice_by_l_shipdate/cpu-e": 104593.34424647526,
+      "l_extendedprice_by_l_shipdate/gpu-warm vs l_extendedprice_by_l_shipdate/cpu-p": 1091800.7763074616,
+      "l_extendedprice_by_l_shipmode/gpu-cold vs l_extendedprice_by_l_shipmode/cpu-e": 321993.9732180357,
+      "l_extendedprice_by_l_shipmode/gpu-cold vs l_extendedprice_by_l_shipmode/cpu-p": 450335588.1608146,
+      "l_extendedprice_by_l_shipmode/gpu-warm vs l_extendedprice_by_l_shipmode/cpu-e": 207183.5595318298,
+      "l_extendedprice_by_l_shipmode/gpu-warm vs l_extendedprice_by_l_shipmode/cpu-p": 924956.3266846656,
+      "l_extendedprice_by_l_suppkey/gpu-cold vs l_extendedprice_by_l_suppkey/cpu-e": 118726.25267249944,
+      "l_extendedprice_by_l_suppkey/gpu-cold vs l_extendedprice_by_l_suppkey/cpu-p": 2127531.8626146116,
+      "l_extendedprice_by_l_suppkey/gpu-warm vs l_extendedprice_by_l_suppkey/cpu-e": 88565.74510892054,
+      "l_extendedprice_by_l_suppkey/gpu-warm vs l_extendedprice_by_l_suppkey/cpu-p": 434595.9693916581,
+      "sum_l_extendedprice/gpu-cold vs sum_l_extendedprice/cpu-e": 10221382.817685582,
+      "sum_l_extendedprice/gpu-cold vs sum_l_extendedprice/cpu-p": null,
+      "sum_l_extendedprice/gpu-warm vs sum_l_extendedprice/cpu-e": 2163901.274070602,
+      "sum_l_extendedprice/gpu-warm vs sum_l_extendedprice/cpu-p": null
+    }
+  }
+}

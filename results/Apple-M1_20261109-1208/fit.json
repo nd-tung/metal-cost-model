@@ -1,0 +1,50 @@
+{
+  "coefficients": {
+    "Apple-M1": {
+      "l_quantity/cpu-e": {
+        "alpha_us": 0.8723545261239602,
+        "beta_us_per_elem": 0.00018086495492875568,
+        "bytes_per_elem": 4.0,
+        "eff_bw_GBps": 22.115948341543753,
+        "median_rel_err": 0.048991135660845696,
+        "max_rel_err": 0.19165199022304408,
+        "points": 16
+      },
+      "l_quantity/cpu-p": {
+        "alpha_us": 0.031042371071649224,
+        "beta_us_per_elem": 6.868246780895961e-05,
+        "bytes_per_elem": 4.0,
+        "eff_bw_GBps": 58.239025585481386,
+        "median_rel_err": 0.06801302255427699,
+        "max_rel_err": 0.656591869711203,
+        "points": 16
+      },
+      "l_quantity/gpu-cold": {
+        "alpha_us": 313.1149540471275,
+        "beta_us_per_elem": 0.00017127721387108722,
+        "bytes_per_elem": 4.0,
+        "eff_bw_GBps": 23.353952984140804,
+        "median_rel_err": 0.05064901625997018,
+        "max_rel_err": 0.1830124329957075,
+        "points": 16
+      },
+      "l_quantity/gpu-warm": {
+        "alpha_us": 265.35615823680683,
+        "beta_us_per_elem": 7.085459159470445e-05,
+        "bytes_per_elem": 4.0,
+        "eff_bw_GBps": 56.45364555737489,
+        "median_rel_err": 0.031170615813468517,
+        "max_rel_err": 0.09815374948341708,
+        "points": 16
+      }
+    }
+  },
+  "crossovers": {
+    "Apple-M1": {
+      "l_quantity/gpu-cold vs l_quantity/cpu-e": 32566857.786721908,
+      "l_quantity/gpu-cold vs l_quantity/cpu-p": null,
+      "l_quantity/gpu-warm vs l_quantity/cpu-e": 2404171.713419093,
+      "l_quantity/gpu-warm vs l_quantity/cpu-p": null
+    }
+  }
+}
