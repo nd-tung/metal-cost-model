@@ -1,0 +1,46 @@
+{
+  "coefficients": {
+    "Apple-M1": {
+      "l_quantity/cpu-e": {
+        "alpha_us": -0.00983836226107891,
+        "beta_us_per_elem": 4.8860322948185504e-05,
+        "eff_bw_GBps": 81.86601640439106,
+        "median_rel_err": 0.06431337324957034,
+        "max_rel_err": 0.3700665986686489,
+        "points": 13
+      },
+      "l_quantity/cpu-p": {
+        "alpha_us": -0.006009713219518971,
+        "beta_us_per_elem": 4.966091480597639e-05,
+        "eff_bw_GBps": 80.54624075347529,
+        "median_rel_err": 0.06769198909049635,
+        "max_rel_err": 0.27241459977278054,
+        "points": 13
+      },
+      "l_quantity/gpu-cold": {
+        "alpha_us": 212.9220354681096,
+        "beta_us_per_elem": 0.00017839556044578364,
+        "eff_bw_GBps": 22.422082646028873,
+        "median_rel_err": 0.03813309591479579,
+        "max_rel_err": 0.11817272538477243,
+        "points": 13
+      },
+      "l_quantity/gpu-warm": {
+        "alpha_us": 194.5886644643681,
+        "beta_us_per_elem": 7.430880630267013e-05,
+        "eff_bw_GBps": 53.82942075139038,
+        "median_rel_err": 0.04499944144099822,
+        "max_rel_err": 0.07070661273665287,
+        "points": 13
+      }
+    }
+  },
+  "crossovers": {
+    "Apple-M1": {
+      "l_quantity/gpu-cold vs l_quantity/cpu-e": null,
+      "l_quantity/gpu-cold vs l_quantity/cpu-p": null,
+      "l_quantity/gpu-warm vs l_quantity/cpu-e": null,
+      "l_quantity/gpu-warm vs l_quantity/cpu-p": null
+    }
+  }
+}
