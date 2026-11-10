@@ -33,3 +33,6 @@ target_link_libraries(calib_filter PRIVATE mcm_common)
 
 add_executable(calib_agg bench/calib_agg.cpp)
 target_link_libraries(calib_agg PRIVATE mcm_common)
+
+add_executable(calib_contention bench/calib_contention.cpp)
+target_link_libraries(calib_contention PRIVATE mcm_common)

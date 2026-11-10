@@ -1,0 +1,11 @@
+commit: 341645a0c7d65d246649fb3145f6df9357577d9e
+source_dirty: yes
+started: 2026-11-10T08:26:08Z
+script: scripts/run_calib_filter.sh
+changed or untracked source files (snapshot in source.tar.gz):
+ M CMakeLists.txt
+ M src/common/bench.hpp
+?? analysis/
+?? bench/
+?? scripts/
+settings: MIN_LOG2=10 MAX_LOG2=26 REPS=15 CACHE=cold COLUMN=data/tpch-sf10/l_quantity.u32 THR=2400 DISPATCH='pipelined' BATCH=16 COOLDOWN=20

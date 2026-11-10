@@ -1,0 +1,197 @@
+{
+  "settings": {
+    "max_err": 0.2
+  },
+  "coefficients": {
+    "Apple-M1": {
+      "l_quantity/cpu-e": {
+        "alpha_us": 0.6399096006416098,
+        "beta_us_per_elem": 0.00021069366536295898,
+        "bytes_per_elem": 4.0,
+        "eff_bw_GBps": 18.984908697227596,
+        "median_rel_err": 0.015630084782582244,
+        "max_rel_err": 0.10536722570544228,
+        "fit_ok": true,
+        "points": 16
+      },
+      "l_quantity/cpu-p": {
+        "alpha_us": 0.47907597274627883,
+        "beta_us_per_elem": 6.765673940150929e-05,
+        "bytes_per_elem": 4.0,
+        "eff_bw_GBps": 59.12197418001447,
+        "median_rel_err": 0.027799772025315965,
+        "max_rel_err": 0.19597922332262666,
+        "fit_ok": true,
+        "points": 16
+      },
+      "l_quantity/gpu-cold": {
+        "alpha_us": 305.8543631277873,
+        "beta_us_per_elem": 0.00019468522069257904,
+        "bytes_per_elem": 4.0,
+        "eff_bw_GBps": 20.54598693095593,
+        "median_rel_err": 0.0522827605381656,
+        "max_rel_err": 0.18367889059507153,
+        "fit_ok": true,
+        "points": 16
+      },
+      "l_quantity/gpu-cold-pipe": {
+        "alpha_us": 39.23042655339164,
+        "beta_us_per_elem": 0.00013020885060226154,
+        "bytes_per_elem": 4.0,
+        "eff_bw_GBps": 30.71987796143349,
+        "median_rel_err": 0.0686258611268302,
+        "max_rel_err": 0.22810189395800687,
+        "fit_ok": false,
+        "points": 16
+      },
+      "l_quantity/gpu-warm": {
+        "alpha_us": 260.8462575049582,
+        "beta_us_per_elem": 7.355126709634649e-05,
+        "bytes_per_elem": 4.0,
+        "eff_bw_GBps": 54.3838353560967,
+        "median_rel_err": 0.019025504880111364,
+        "max_rel_err": 0.0914485485119662,
+        "fit_ok": true,
+        "points": 16
+      },
+      "l_quantity/gpu-warm-pipe": {
+        "alpha_us": 32.7383620361605,
+        "beta_us_per_elem": 6.441899633400487e-05,
+        "bytes_per_elem": 4.0,
+        "eff_bw_GBps": 62.093485270408024,
+        "median_rel_err": 0.0885809247051961,
+        "max_rel_err": 0.2711413050381891,
+        "fit_ok": false,
+        "points": 16
+      }
+    }
+  },
+  "crossovers": {
+    "Apple-M1": {
+      "l_quantity/gpu-cold vs l_quantity/cpu-e": 19065840.549261913,
+      "l_quantity/gpu-cold vs l_quantity/cpu-p": null,
+      "l_quantity/gpu-cold-pipe vs l_quantity/cpu-e": 479475.7503945285,
+      "l_quantity/gpu-cold-pipe vs l_quantity/cpu-p": null,
+      "l_quantity/gpu-warm vs l_quantity/cpu-e": 1897344.301931055,
+      "l_quantity/gpu-warm vs l_quantity/cpu-p": null,
+      "l_quantity/gpu-warm-pipe vs l_quantity/cpu-e": 219439.5834125266,
+      "l_quantity/gpu-warm-pipe vs l_quantity/cpu-p": 9963510.195476694
+    }
+  },
+  "crossovers_detail": {
+    "Apple-M1": {
+      "l_quantity/gpu-cold vs l_quantity/cpu-e": {
+        "fitted_n": 19065840.549261913,
+        "fitted_status": "disagrees_with_measured",
+        "fitted_agrees_with_measured": false,
+        "n_min": 1024,
+        "n_max": 33554432,
+        "cpu_over_gpu_at_n_max": 1.071892436307446,
+        "measured_last_loss_n": 8388608,
+        "measured_first_win_n": 16777216,
+        "measured_interp_n": 9212565.688445872,
+        "measured_status": "in_range",
+        "report_n": 9212565.688445872,
+        "report": "2^23.1 (measured: GPU slower at 2^23.0, faster from 2^24.0 on)"
+      },
+      "l_quantity/gpu-cold vs l_quantity/cpu-p": {
+        "fitted_n": null,
+        "fitted_status": "none",
+        "fitted_agrees_with_measured": true,
+        "n_min": 1024,
+        "n_max": 33554432,
+        "cpu_over_gpu_at_n_max": 0.32432401171472425,
+        "measured_last_loss_n": null,
+        "measured_first_win_n": null,
+        "measured_interp_n": null,
+        "measured_status": "gpu_never_wins_in_range",
+        "report_n": null,
+        "report": "none up to 2^25.0 (at 2^25.0: GPU 3.08x the CPU time)"
+      },
+      "l_quantity/gpu-cold-pipe vs l_quantity/cpu-e": {
+        "fitted_n": 479475.7503945285,
+        "fitted_status": "poor_fit",
+        "fitted_agrees_with_measured": true,
+        "n_min": 1024,
+        "n_max": 33554432,
+        "cpu_over_gpu_at_n_max": 1.7121215586627134,
+        "measured_last_loss_n": 262144,
+        "measured_first_win_n": 524288,
+        "measured_interp_n": 370862.26739217254,
+        "measured_status": "in_range",
+        "report_n": 370862.26739217254,
+        "report": "2^18.5 (measured: GPU slower at 2^18.0, faster from 2^19.0 on)"
+      },
+      "l_quantity/gpu-cold-pipe vs l_quantity/cpu-p": {
+        "fitted_n": null,
+        "fitted_status": "none",
+        "fitted_agrees_with_measured": true,
+        "n_min": 1024,
+        "n_max": 33554432,
+        "cpu_over_gpu_at_n_max": 0.5180390435085491,
+        "measured_last_loss_n": null,
+        "measured_first_win_n": null,
+        "measured_interp_n": null,
+        "measured_status": "gpu_never_wins_in_range",
+        "report_n": null,
+        "report": "none up to 2^25.0 (at 2^25.0: GPU 1.93x the CPU time)"
+      },
+      "l_quantity/gpu-warm vs l_quantity/cpu-e": {
+        "fitted_n": 1897344.301931055,
+        "fitted_status": "disagrees_with_measured",
+        "fitted_agrees_with_measured": false,
+        "n_min": 1024,
+        "n_max": 33554432,
+        "cpu_over_gpu_at_n_max": 2.8029438114490492,
+        "measured_last_loss_n": 2097152,
+        "measured_first_win_n": 4194304,
+        "measured_interp_n": 2208349.2566683237,
+        "measured_status": "in_range",
+        "report_n": 2208349.2566683237,
+        "report": "2^21.1 (measured: GPU slower at 2^21.0, faster from 2^22.0 on)"
+      },
+      "l_quantity/gpu-warm vs l_quantity/cpu-p": {
+        "fitted_n": null,
+        "fitted_status": "none",
+        "fitted_agrees_with_measured": true,
+        "n_min": 1024,
+        "n_max": 33554432,
+        "cpu_over_gpu_at_n_max": 0.8480906765904009,
+        "measured_last_loss_n": null,
+        "measured_first_win_n": null,
+        "measured_interp_n": null,
+        "measured_status": "gpu_never_wins_in_range",
+        "report_n": null,
+        "report": "none up to 2^25.0 (at 2^25.0: GPU 1.18x the CPU time)"
+      },
+      "l_quantity/gpu-warm-pipe vs l_quantity/cpu-e": {
+        "fitted_n": 219439.5834125266,
+        "fitted_status": "poor_fit",
+        "fitted_agrees_with_measured": true,
+        "n_min": 1024,
+        "n_max": 33554432,
+        "cpu_over_gpu_at_n_max": 3.012052629197026,
+        "measured_last_loss_n": 131072,
+        "measured_first_win_n": 262144,
+        "measured_interp_n": 187555.80439182685,
+        "measured_status": "in_range",
+        "report_n": 187555.80439182685,
+        "report": "2^17.5 (measured: GPU slower at 2^17.0, faster from 2^18.0 on)"
+      },
+      "l_quantity/gpu-warm-pipe vs l_quantity/cpu-p": {
+        "fitted_n": 9963510.195476694,
+        "fitted_status": "poor_fit",
+        "fitted_agrees_with_measured": false,
+        "n_min": 1024,
+        "n_max": 33554432,
+        "cpu_over_gpu_at_n_max": 0.9113610275694378,
+        "measured_last_loss_n": null,
+        "measured_first_win_n": null,
+        "measured_interp_n": null,
+        "measured_status": "gpu_never_wins_in_range",
+        "report_n": null,
+        "report": "none up to 2^25.0 (at 2^25.0: GPU 1.10x the CPU time)"
+      }
+    }
+  }
+}
