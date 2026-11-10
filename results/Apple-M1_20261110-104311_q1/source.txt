@@ -1,0 +1,13 @@
+commit: ffa8f94e9f60284ce1085aeafa51abb28161438a
+source_dirty: yes
+started: 2026-11-10T09:43:11Z
+script: scripts/run_val_q1.sh
+changed or untracked source files (snapshot in source.tar.gz):
+ M CMakeLists.txt
+ M src/common/bench.hpp
+?? analysis/
+?? bench/
+?? kernels/q1.metal
+?? scripts/
+?? src/engine/
+settings: DATA=data/tpch-sf10 MIN_LOG2=10 MAX_LOG2=25 REPS=15 CACHE=cold DISPATCH='sync pipelined' BATCH=16 COOLDOWN=20

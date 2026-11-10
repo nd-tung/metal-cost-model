@@ -1,0 +1,10 @@
+commit: ffa8f94e9f60284ce1085aeafa51abb28161438a
+source_dirty: yes
+started: 2026-11-10T09:21:38Z
+script: scripts/run_calib_contention.sh
+changed or untracked source files (snapshot in source.tar.gz):
+ M src/common/bench.hpp
+?? analysis/
+?? bench/
+?? scripts/
+settings: THREADS='1 2 4' REPS=5 DURATION=1.5 COOLDOWN=20

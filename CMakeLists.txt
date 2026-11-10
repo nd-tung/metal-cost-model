@@ -36,3 +36,6 @@ target_link_libraries(calib_agg PRIVATE mcm_common)
 
 add_executable(calib_contention bench/calib_contention.cpp)
 target_link_libraries(calib_contention PRIVATE mcm_common)
+
+add_executable(val_q1 bench/val_q1.cpp)
+target_link_libraries(val_q1 PRIVATE mcm_common)

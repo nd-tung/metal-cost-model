@@ -139,6 +139,71 @@ BatchTiming run_pipelined(MTL::CommandQueue* q, MTL::ComputePipelineState* pso, 
   return b;
 }
 
+// ---------------------------------------------------------------- private storage + blit
+// The alternative to letting the kernel read host memory wrapped no-copy: copy the morsel into a
+// MTLStorageModePrivate buffer with a blit, then run the kernel on the private copy. On UMA both
+// live in the same DRAM, so the question is whether the GPU reads private memory faster (different
+// page layout / compression) by enough to pay for the copy. The blit is its own term: it runs in its
+// own command buffer, committed right before the kernel's, so each has its own GPU start/end time.
+// The kernel's buffer is hazard-tracked (the default), so it waits for the blit.
+struct BlitCopy {
+  MTL::Buffer* src;
+  MTL::Buffer* dst;
+  size_t bytes;
+};
+
+struct BlitComputeTiming {
+  double encode_us = 0;     // host: build + commit both command buffers
+  double total_us = 0;      // host: start of encoding .. kernel completion (blit + kernel + overheads)
+  double blit_exec_us = 0;  // blit command buffer GPUEndTime - GPUStartTime (0 without copies)
+  double exec_us = 0;       // kernel command buffer GPUEndTime - GPUStartTime
+  bool ok = true;
+};
+
+// One synchronous round trip: optional blit command buffer (copies; empty = data already resident in
+// the private buffer), then the kernel's command buffer; waits for the kernel.
+template <class EncodeFn>  // void(MTL::ComputeCommandEncoder*): bind buffers and dispatch
+BlitComputeTiming run_blit_then_compute(MTL::CommandQueue* q, MTL::ComputePipelineState* pso,
+                                        const std::vector<BlitCopy>& copies, EncodeFn&& encode) {
+  NS::AutoreleasePool* pool = NS::AutoreleasePool::alloc()->init();
+  BlitComputeTiming t;
+  auto t0 = Clock::now();
+  MTL::CommandBuffer* cbb = nullptr;
+  if (!copies.empty()) {
+    cbb = q->commandBuffer();
+    MTL::BlitCommandEncoder* be = cbb->blitCommandEncoder();
+    for (const BlitCopy& c : copies) be->copyFromBuffer(c.src, 0, c.dst, 0, c.bytes);
+    be->endEncoding();
+    cbb->commit();
+  }
+  MTL::CommandBuffer* cb = q->commandBuffer();
+  MTL::ComputeCommandEncoder* enc = cb->computeCommandEncoder();
+  enc->setComputePipelineState(pso);
+  encode(enc);
+  enc->endEncoding();
+  cb->commit();
+  auto t1 = Clock::now();
+  cb->waitUntilCompleted();
+  auto t2 = Clock::now();
+  if (cbb) cbb->waitUntilCompleted();  // already done: the kernel waited for it
+  t.encode_us = us_since(t0, t1);
+  t.total_us = us_since(t0, t2);
+  t.exec_us = (cb->GPUEndTime() - cb->GPUStartTime()) * 1e6;
+  if (cb->status() != MTL::CommandBufferStatusCompleted) t.ok = false;
+  if (cbb) {
+    t.blit_exec_us = (cbb->GPUEndTime() - cbb->GPUStartTime()) * 1e6;
+    if (cbb->status() != MTL::CommandBufferStatusCompleted) t.ok = false;
+  }
+  pool->release();
+  return t;
+}
+
+inline MTL::Buffer* new_private_buffer(MTL::Device* dev, size_t bytes) {
+  MTL::Buffer* b = dev->newBuffer(bytes, MTL::ResourceStorageModePrivate);
+  if (!b) throw std::runtime_error("cannot allocate a private buffer of " + std::to_string(bytes) + " bytes");
+  return b;
+}
+
 // Morsels per pipelined batch: up to K, each on its own buffer (so no morsel reads cache lines
 // the previous one left behind), capped so the whole batch fits in cap_bytes; at least 2.
 inline int batch_size(int K, size_t morsel_bytes, size_t cap_bytes) {

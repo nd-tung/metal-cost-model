@@ -1,0 +1,14 @@
+{
+  "hw_model": "MacBookAir10,1",
+  "cpu_brand": "Apple M1",
+  "os_version": "15.7.4",
+  "mem_bytes": 17179869184,
+  "p_cores": 4,
+  "e_cores": 4,
+  "gpu_cores": 7,
+  "page_size": 16384,
+  "gpu_name": "Apple M1",
+  "gpu_recommended_max_working_set": 11453251584,
+  "low_power_mode": false,
+  "power_source": "Battery"
+}

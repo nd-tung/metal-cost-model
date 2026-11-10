@@ -1,0 +1,11 @@
+commit: 341645a0c7d65d246649fb3145f6df9357577d9e
+source_dirty: yes
+started: 2026-11-10T08:28:20Z
+script: scripts/run_calib_agg.sh
+changed or untracked source files (snapshot in source.tar.gz):
+M  CMakeLists.txt
+M  src/common/bench.hpp
+?? analysis/
+?? bench/
+?? scripts/
+settings: DATA=data/tpch-sf10 VALS=l_extendedprice KEYS='- l_shipmode l_shipdate l_suppkey l_partkey' MIN_LOG2=10 MAX_LOG2=25 REPS=15 CACHE=cold DISPATCH='pipelined' BATCH=16 COOLDOWN=20

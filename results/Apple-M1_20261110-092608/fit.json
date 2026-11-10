@@ -1,0 +1,117 @@
+{
+  "settings": {
+    "max_err": 0.2
+  },
+  "coefficients": {
+    "Apple-M1": {
+      "l_quantity/cpu-e": {
+        "alpha_us": 0.6834966899995348,
+        "beta_us_per_elem": 0.00019035261275917115,
+        "bytes_per_elem": 4.0,
+        "eff_bw_GBps": 21.01363328834729,
+        "median_rel_err": 0.09744153413065082,
+        "max_rel_err": 0.33618529968661615,
+        "fit_ok": false,
+        "points": 16
+      },
+      "l_quantity/cpu-p": {
+        "alpha_us": 0.4281197291784049,
+        "beta_us_per_elem": 6.222580618553529e-05,
+        "bytes_per_elem": 4.0,
+        "eff_bw_GBps": 64.28201167974294,
+        "median_rel_err": 0.028561000798236508,
+        "max_rel_err": 0.21643778657627752,
+        "fit_ok": false,
+        "points": 16
+      },
+      "l_quantity/gpu-cold-pipe": {
+        "alpha_us": 43.810096168151574,
+        "beta_us_per_elem": 0.00011614199858808219,
+        "bytes_per_elem": 4.0,
+        "eff_bw_GBps": 34.44059899629157,
+        "median_rel_err": 0.06586601726771577,
+        "max_rel_err": 0.2602128995538502,
+        "fit_ok": false,
+        "points": 16
+      },
+      "l_quantity/gpu-warm-pipe": {
+        "alpha_us": 37.160405934383064,
+        "beta_us_per_elem": 6.901175833047366e-05,
+        "bytes_per_elem": 4.0,
+        "eff_bw_GBps": 57.96113730134756,
+        "median_rel_err": 0.09164574575695339,
+        "max_rel_err": 0.3439992575805965,
+        "fit_ok": false,
+        "points": 16
+      }
+    }
+  },
+  "crossovers": {
+    "Apple-M1": {
+      "l_quantity/gpu-cold-pipe vs l_quantity/cpu-e": 581137.8865390571,
+      "l_quantity/gpu-cold-pipe vs l_quantity/cpu-p": null,
+      "l_quantity/gpu-warm-pipe vs l_quantity/cpu-e": 300615.23314736626,
+      "l_quantity/gpu-warm-pipe vs l_quantity/cpu-p": null
+    }
+  },
+  "crossovers_detail": {
+    "Apple-M1": {
+      "l_quantity/gpu-cold-pipe vs l_quantity/cpu-e": {
+        "fitted_n": 581137.8865390571,
+        "fitted_status": "poor_fit",
+        "fitted_agrees_with_measured": true,
+        "n_min": 1024,
+        "n_max": 33554432,
+        "cpu_over_gpu_at_n_max": 1.6503219942980418,
+        "measured_last_loss_n": 524288,
+        "measured_first_win_n": 1048576,
+        "measured_interp_n": 553662.9719032441,
+        "measured_status": "in_range",
+        "report_n": 553662.9719032441,
+        "report": "2^19.1 (measured: GPU slower at 2^19.0, faster from 2^20.0 on)"
+      },
+      "l_quantity/gpu-cold-pipe vs l_quantity/cpu-p": {
+        "fitted_n": null,
+        "fitted_status": "none",
+        "fitted_agrees_with_measured": true,
+        "n_min": 1024,
+        "n_max": 33554432,
+        "cpu_over_gpu_at_n_max": 0.5512446945828547,
+        "measured_last_loss_n": null,
+        "measured_first_win_n": null,
+        "measured_interp_n": null,
+        "measured_status": "gpu_never_wins_in_range",
+        "report_n": null,
+        "report": "none up to 2^25.0 (at 2^25.0: GPU 1.81x the CPU time)"
+      },
+      "l_quantity/gpu-warm-pipe vs l_quantity/cpu-e": {
+        "fitted_n": 300615.23314736626,
+        "fitted_status": "poor_fit",
+        "fitted_agrees_with_measured": false,
+        "n_min": 1024,
+        "n_max": 33554432,
+        "cpu_over_gpu_at_n_max": 2.4852998696219033,
+        "measured_last_loss_n": 131072,
+        "measured_first_win_n": 262144,
+        "measured_interp_n": 245518.60742454033,
+        "measured_status": "in_range",
+        "report_n": 245518.60742454033,
+        "report": "2^17.9 (measured: GPU slower at 2^17.0, faster from 2^18.0 on)"
+      },
+      "l_quantity/gpu-warm-pipe vs l_quantity/cpu-p": {
+        "fitted_n": null,
+        "fitted_status": "none",
+        "fitted_agrees_with_measured": true,
+        "n_min": 1024,
+        "n_max": 33554432,
+        "cpu_over_gpu_at_n_max": 0.8301461001610553,
+        "measured_last_loss_n": null,
+        "measured_first_win_n": null,
+        "measured_interp_n": null,
+        "measured_status": "gpu_never_wins_in_range",
+        "report_n": null,
+        "report": "none up to 2^25.0 (at 2^25.0: GPU 1.20x the CPU time)"
+      }
+    }
+  }
+}
