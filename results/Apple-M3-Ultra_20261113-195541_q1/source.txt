@@ -1,0 +1,37 @@
+commit: 881fea04c6a77eef79ae21207060918cde4ce8d6
+source_dirty: yes
+started: 2026-11-13T18:55:41Z
+script: scripts/run_val_query.sh
+flush_mb: 512 (MCM_FLUSH_MB)
+load: 5.38 3.54 2.60 | users logged in: 4
+changed or untracked source files (snapshot in source.tar.gz):
+ M CMakeLists.txt
+ M bench/calib_agg.cpp
+ M bench/calib_filter.cpp
+ M bench/val_q1.cpp
+ M kernels/q1.metal
+ M src/common/bench.hpp
+ M src/common/metal_ctx.cpp
+ M src/common/metal_ctx.hpp
+ M src/engine/q1.hpp
+ M src/engine/q1_gpu.hpp
+?? analysis/
+?? bench/calib_join.cpp
+?? bench/calib_reg.cpp
+?? bench/calib_sort.cpp
+?? bench/val_q6.cpp
+?? bench/val_query.hpp
+?? bench/val_stream.cpp
+?? kernels/agg_reg.metal
+?? kernels/join.metal
+?? kernels/q6.metal
+?? kernels/sort.metal
+?? kernels/spin.metal
+?? kernels/stream.metal
+?? scripts/
+?? src/engine/columns.hpp
+?? src/engine/hash_join.hpp
+?? src/engine/q6.hpp
+?? src/engine/q6_gpu.hpp
+?? src/engine/radix_sort.hpp
+settings: QUERY=q1 DATA=data/tpch-sf10 MIN_LOG2=10 MAX_LOG2=25 REPS=15 CACHE=cold DISPATCH='sync pipelined' BATCH=16 SPIN=20 COOLDOWN=20 GPU_GROUPS='' CPUS='p e' GPU_FINAL='1' GPU_LOADS='eager'

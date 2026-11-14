@@ -19,8 +19,14 @@
 //   device=cpu, qos=p|e    : one worker thread; p = USER_INTERACTIVE QoS, e = whole process under
 //                            the darwin background policy (thread QoS alone does not reach E-cores)
 //
-// --cache cold (default) reads a 64 MB scratch buffer before every timed rep, so input
-// comes from DRAM for CPU and GPU alike; --cache hot skips it (input may be cache-resident).
+// --cache: the state of the morsel's input at dispatch, set by what last touched it (the router's
+// cache policy; common/bench.hpp Toucher). cold (default) reads a 64 MB scratch buffer before every
+// timed rep, so input comes from DRAM for CPU and GPU alike; hot skips it (input may be
+// cache-resident). cpu-write, cpu-read, gpu-write and gpu-read flush, then let one CPU thread or a GPU
+// kernel rewrite (x += 0) or read the morsel's rows, untimed, right before the timed morsel: a
+// producer or a scan on that device has just left them in the caches it shares with the consumer.
+// They need --state warm --storage shared (the GPU) or --device cpu. CSV column cache; analysis/fit.py
+// names every state but cold <config>-<state>.
 //
 // GPU dispatch (--dispatch, CSV columns dispatch + batch):
 //   sync (default) : one command buffer per timed rep: encode, commit, waitUntilCompleted.
@@ -31,6 +37,9 @@
 //                    a router pays per morsel when it keeps the GPU queue full. Command buffers
 //                    overlap on the GPU, so gpu_spacing_us (spacing of completions) is smaller and
 //                    is only a diagnostic (see common/bench.hpp).
+//
+// --gpu-spin-ms M: after each flush, keep the GPU busy ~M ms with ALU-only work (untimed; common/bench.hpp
+// GpuSpin) so the timed morsel runs at the clock of a busy GPU, as under a router that keeps it fed.
 //
 // One morsel = one GPU dispatch (one command buffer) or one CPU worker.
 // Output: one CSV row per repetition (pipelined: per batch); analysis/fit.py takes medians.
@@ -184,18 +193,18 @@ struct GpuRunner {
 // ---------------------------------------------------------------- CSV
 void write_rows(const std::string& path, const std::string& machine, const std::string& data,
                 uint32_t thr, const std::string& cache, const std::string& dispatch, const std::string& storage,
-                const std::vector<Row>& rows) {
+                double spin_ms, const std::vector<Row>& rows) {
   bool exists = std::ifstream(path).good();
   std::ofstream f(path, std::ios::app);
   if (!exists)
     f << "machine,op,data,thr,device,qos,state,n,bytes,rep,t_wrap_us,t_encode_us,t_total_us,gpu_exec_us,ok,cache,"
-         "dispatch,batch,gpu_spacing_us,storage,t_blit_us\n";
+         "dispatch,batch,gpu_spacing_us,storage,t_blit_us,gpu_spin_ms\n";
   for (const Row& r : rows) {
     f << machine << ",filter_count," << data << "," << thr << "," << r.device << "," << r.qos << "," << r.state << "," << r.n << ","
       << r.n * sizeof(uint32_t) << "," << r.rep << "," << r.t_wrap << "," << r.t_encode << ","
       << r.t_total << "," << r.gpu_exec << "," << (r.ok ? 1 : 0) << "," << cache << ","
       << (r.device == "gpu" ? dispatch : "-") << "," << r.batch << "," << r.spacing << ","
-      << (r.device == "gpu" ? storage : "-") << "," << r.t_blit << "\n";
+      << (r.device == "gpu" ? storage : "-") << "," << r.t_blit << "," << (r.device == "gpu" ? spin_ms : 0.0) << "\n";
   }
 }
 
@@ -204,8 +213,11 @@ void usage() {
                "                    [--column data/tpch-sf1/l_quantity.u32 --thr 2400]   (TPC-H column)\n"
                "                    [--sel 0.5]                                       (random data)\n"
                "                    [--min-log2 10] [--max-log2 26] [--reps 15]\n"
-               "                    [--cache cold|hot] [--flush-mb 64]   (cold: flush caches before each timed rep)\n"
+               "                    [--cache cold|hot|cpu-write|cpu-read|gpu-write|gpu-read] [--flush-mb 64]\n"
+               "                        (cold: flush caches before each timed rep; cpu-*/gpu-*: flush, then that device\n"
+               "                         rewrites or reads the morsel's rows, untimed: its cache state at dispatch)\n"
                "                    [--dispatch sync|pipelined] [--batch 16] [--batch-mb 1024]   (GPU only)\n"
+               "                    [--gpu-spin-ms 0]   (GPU only: keep the GPU busy ~M ms after each flush)\n"
                "                    [--storage shared|private]   (GPU only; private: blit, then kernel)\n"
                "                    [--out results/calib_filter.csv] [--machine-json path]\n";
 }
@@ -229,7 +241,8 @@ int main(int argc, char** argv) {
     const std::string out_path = a.str("out", "results/calib_filter.csv");
     if (max_l2 > 30) throw std::runtime_error("max-log2 > 30 not supported (uint32 n)");
     const std::string cache = a.str("cache", "cold");
-    if (cache != "cold" && cache != "hot") throw std::runtime_error("--cache must be cold or hot");
+    if (std::find(kCachePolicies.begin(), kCachePolicies.end(), cache) == kCachePolicies.end())
+      throw std::runtime_error("--cache must be one of cold, hot, cpu-write, cpu-read, gpu-write, gpu-read");
     const std::string dispatch = a.str("dispatch", "sync");
     if (dispatch != "sync" && dispatch != "pipelined") throw std::runtime_error("--dispatch must be sync or pipelined");
     const bool pipelined = dispatch == "pipelined";
@@ -239,20 +252,29 @@ int main(int argc, char** argv) {
     if (storage == "private" && device != "gpu") throw std::runtime_error("--storage applies to --device gpu only");
     if (storage == "private" && pipelined) throw std::runtime_error("--storage private supports --dispatch sync only");
     if (state == "resident" && storage != "private") throw std::runtime_error("--state resident needs --storage private");
+    if (cache_policy_touches(cache) && device == "gpu" && (state != "warm" || storage != "shared"))
+      throw std::runtime_error("--cache " + cache + " needs --state warm --storage shared (a GPU-resident buffer)");
     const int batch = static_cast<int>(a.i64("batch", 16));
+    const double spin_ms = a.f64("gpu-spin-ms", 0);
+    if (spin_ms > 0 && device != "gpu") throw std::runtime_error("--gpu-spin-ms applies to --device gpu only");
     const size_t batch_cap = static_cast<size_t>(a.i64("batch-mb", 1024)) << 20;
     acquire_bench_lock();  // one benchmark process at a time (common/bench.hpp)
-    CacheFlusher flusher(static_cast<size_t>(a.i64("flush-mb", 64)) << 20);
+    CacheFlusher flusher(static_cast<size_t>(a.i64("flush-mb", default_flush_mb())) << 20);
     auto flush = [&] { if (cache == "cold") flusher(); };
 
     NS::AutoreleasePool* pool = NS::AutoreleasePool::alloc()->init();
-    MetalCtx ctx(std::string(MCM_KERNEL_DIR) + "/filter.metal");
+    MetalCtx ctx(std::vector<std::string>{std::string(MCM_KERNEL_DIR) + "/filter.metal", std::string(MCM_KERNEL_DIR) + "/spin.metal",
+                                          std::string(MCM_KERNEL_DIR) + "/touch.metal"});
     MachineInfo mi = collect_machine_info(ctx.device());
     if (a.has("machine-json")) std::ofstream(a.str("machine-json", "")) << mi.to_json();
     std::cerr << "machine: " << mi.cpu_brand << " | P=" << mi.p_cores << " E=" << mi.e_cores
               << " GPU cores=" << mi.gpu_cores << " | mem=" << (mi.mem_bytes >> 30) << " GiB"
               << " | macOS " << mi.os_version << " | power=" << mi.power_source
               << (mi.low_power_mode ? " (LOW POWER MODE ON)" : "") << "\n";
+    std::unique_ptr<GpuSpin> gspin;  // --gpu-spin-ms: ALU-only GPU work after each flush (busy clock regime)
+    if (spin_ms > 0) gspin = std::make_unique<GpuSpin>(ctx, spin_ms);
+    auto spin = [&] { if (gspin) (*gspin)(); };
+    Toucher touch(&ctx, cache);  // --cache cpu-*/gpu-*: the producer step after each flush (untimed)
 
     // Master data: a TPC-H column, or random uint32.
     const std::string column = a.str("column", "");
@@ -320,6 +342,7 @@ int main(int argc, char** argv) {
             for (int r = 0; r < reps; ++r) {
               Row row{"gpu", "-", state, n, r};
               flush();
+              spin();
               row.ok = run_priv(state == "warm" ? src : nullptr, row) && row.ok;
               rows.push_back(row);
             }
@@ -337,6 +360,7 @@ int main(int argc, char** argv) {
               std::memcpy(mem.data(), mv, bytes);  // CPU-touched, GPU-unseen
               Row row{"gpu", "-", "cold", n, r};
               flush();
+              spin();
               auto t0 = Clock::now();
               MTL::Buffer* src = wrap_no_copy(ctx.device(), mem);
               row.t_wrap = us_since(t0, Clock::now());
@@ -356,11 +380,15 @@ int main(int argc, char** argv) {
             std::memcpy(mem.back()->data(), mv, bytes);
             bufs.push_back(wrap_no_copy(ctx.device(), *mem.back()));
           }
+          std::vector<Toucher::Range> ranges;
+          for (int k = 0; k < K; ++k) ranges.push_back({static_cast<uint32_t*>(mem[k]->data()), bufs[k], 0, n});
           Row warm{};
           for (int w = 0; w < 3; ++w) timed(bufs, warm);  // make resident, untimed
           for (int r = 0; r < reps; ++r) {
             Row row{"gpu", "-", "warm", n, r};
             flush();
+            touch(ranges);  // --cache cpu-*/gpu-*: the producer's pass over the K morsels
+            spin();
             row.ok = timed(bufs, row) && row.ok;
             rows.push_back(row);
           }
@@ -384,6 +412,7 @@ int main(int argc, char** argv) {
             std::vector<MTL::Buffer*> bufs;
             bufs.reserve(K);
             flush();  // the memcpy above would otherwise leave the input cache-hot
+            spin();
             auto t0 = Clock::now();
             for (auto& m : mem) bufs.push_back(wrap_no_copy(ctx.device(), *m));
             row.t_wrap = us_since(t0, Clock::now()) / K;
@@ -399,15 +428,19 @@ int main(int argc, char** argv) {
       }
     } else if (device == "cpu") {
       place_cpu_process(qos);  // see common/bench.hpp: E needs the process-wide policy
+      // --cache gpu-*: the GPU touches the master column itself, wrapped no-copy (the CPU reads the same memory).
+      MTL::Buffer* master_buf = cache_policy_on_gpu(cache) ? wrap_no_copy(ctx.device(), master) : nullptr;
       // Run the whole sweep inside one worker thread with the requested QoS.
       std::thread worker([&] {
         place_cpu_thread(qos);
         for (int l2 = min_l2; l2 <= max_l2; ++l2) {
           const uint64_t n = 1ull << l2;
           const uint32_t expect = cpu_count(mv, n, thr);
+          const std::vector<Toucher::Range> ranges{{static_cast<uint32_t*>(master.data()), master_buf, 0, static_cast<uint32_t>(n)}};
           for (int r = 0; r < reps; ++r) {
             Row row{"cpu", qos, r == 0 ? "first" : "warm", n, r};
             flush();
+            touch(ranges);  // --cache cpu-*: this thread's own pass (L2); gpu-*: a GPU kernel's
             asm volatile("" ::: "memory");  // stop the compiler reusing `expect`
             auto t0 = Clock::now();
             uint32_t c = cpu_count(mv, n, thr);
@@ -419,12 +452,13 @@ int main(int argc, char** argv) {
         }
       });
       worker.join();
+      if (master_buf) master_buf->release();
     } else {
       throw std::runtime_error("--device must be gpu or cpu");
     }
 
     size_t bad = std::count_if(rows.begin(), rows.end(), [](const Row& r) { return !r.ok; });
-    write_rows(out_path, mi.tag(), data_tag, thr, cache, dispatch, storage, rows);
+    write_rows(out_path, mi.tag(), data_tag, thr, cache, dispatch, storage, spin_ms, rows);
     std::cerr << rows.size() << " rows -> " << out_path << (bad ? " | WARNING: " : "")
               << (bad ? std::to_string(bad) + " rows failed the correctness check" : "") << "\n";
     pool->release();

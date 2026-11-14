@@ -26,6 +26,7 @@
 #include <vector>
 
 #include "common/metal_ctx.hpp"
+#include "engine/columns.hpp"
 
 namespace mcm::q1 {
 
@@ -72,19 +73,7 @@ struct Columns {
 
 inline Columns load_columns(const std::string& dir) {
   Columns c;
-  for (int i = 0; i < 7; ++i) {
-    const std::string path = dir + "/" + kColumnNames[i] + ".u32";
-    std::ifstream f(path, std::ios::binary | std::ios::ate);
-    if (!f) throw std::runtime_error("cannot open column " + path);
-    const size_t bytes = static_cast<size_t>(f.tellg());
-    const size_t rows = bytes / sizeof(uint32_t);
-    if (i == 0) c.rows = rows;
-    if (rows != c.rows) throw std::runtime_error(path + ": row count differs from l_shipdate");
-    c.mem[i] = std::make_unique<PageAlloc>(bytes);
-    f.seekg(0);
-    f.read(static_cast<char*>(c.mem[i]->data()), static_cast<std::streamsize>(bytes));
-    if (!f) throw std::runtime_error("short read on " + path);
-  }
+  c.rows = load_u32_columns(dir, kColumnNames, c.mem);
   return c;
 }
 

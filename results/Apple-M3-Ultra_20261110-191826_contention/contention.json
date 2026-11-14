@@ -1,0 +1,361 @@
+{
+  "machine": "Apple-M3-Ultra",
+  "gpu_solo_GBps": 769.974,
+  "gpu_solo_first_GBps": 769.529,
+  "gpu_solo_last_GBps": 770.441,
+  "gpu_drift": 0.0011851405210201449,
+  "cpu_solo_GBps": {
+    "e": {
+      "1": 13.4404,
+      "2": 17.8807,
+      "4": 29.9142,
+      "8": 35.8764,
+      "16": 35.9948,
+      "24": 36.0303
+    },
+    "p": {
+      "1": 79.0529,
+      "2": 122.289,
+      "4": 241.361,
+      "8": 249.583,
+      "16": 253.918,
+      "24": 232.822
+    }
+  },
+  "pairs": [
+    {
+      "qos": "e",
+      "threads": 1,
+      "cpu_solo_GBps": 13.4404,
+      "gpu_solo_GBps": 769.974,
+      "cpu_GBps": 9.52379,
+      "gpu_GBps": 763.585,
+      "total_GBps": 773.10879,
+      "cpu_GBps_iqr": [
+        9.48049,
+        9.53063
+      ],
+      "gpu_GBps_iqr": [
+        763.451,
+        764.022
+      ],
+      "kappa_cpu": 0.2914057617332818,
+      "kappa_gpu": 0.008297682778899085,
+      "gpu_busy_frac": 0.9984272852677946,
+      "reps": 5
+    },
+    {
+      "qos": "e",
+      "threads": 2,
+      "cpu_solo_GBps": 17.8807,
+      "gpu_solo_GBps": 769.974,
+      "cpu_GBps": 16.5911,
+      "gpu_GBps": 752.854,
+      "total_GBps": 769.4451,
+      "cpu_GBps_iqr": [
+        16.4829,
+        16.6073
+      ],
+      "gpu_GBps_iqr": [
+        751.49,
+        753.347
+      ],
+      "kappa_cpu": 0.07212245605597101,
+      "kappa_gpu": 0.022234517009665278,
+      "gpu_busy_frac": 0.9926890061846875,
+      "reps": 5
+    },
+    {
+      "qos": "e",
+      "threads": 4,
+      "cpu_solo_GBps": 29.9142,
+      "gpu_solo_GBps": 769.974,
+      "cpu_GBps": 26.0261,
+      "gpu_GBps": 746.112,
+      "total_GBps": 772.1051,
+      "cpu_GBps_iqr": [
+        26.0202,
+        26.0391
+      ],
+      "gpu_GBps_iqr": [
+        745.491,
+        746.248
+      ],
+      "kappa_cpu": 0.12997506201068398,
+      "kappa_gpu": 0.030990656827373453,
+      "gpu_busy_frac": 0.9916753312538324,
+      "reps": 5
+    },
+    {
+      "qos": "e",
+      "threads": 8,
+      "cpu_solo_GBps": 35.8764,
+      "gpu_solo_GBps": 769.974,
+      "cpu_GBps": 29.9342,
+      "gpu_GBps": 742.394,
+      "total_GBps": 772.3282,
+      "cpu_GBps_iqr": [
+        29.683,
+        30.0214
+      ],
+      "gpu_GBps_iqr": [
+        741.475,
+        746.646
+      ],
+      "kappa_cpu": 0.1656297733328873,
+      "kappa_gpu": 0.03581939130412204,
+      "gpu_busy_frac": 0.9924561497041104,
+      "reps": 5
+    },
+    {
+      "qos": "e",
+      "threads": 16,
+      "cpu_solo_GBps": 35.9948,
+      "gpu_solo_GBps": 769.974,
+      "cpu_GBps": 31.2022,
+      "gpu_GBps": 742.155,
+      "total_GBps": 773.467,
+      "cpu_GBps_iqr": [
+        31.1052,
+        31.312
+      ],
+      "gpu_GBps_iqr": [
+        739.646,
+        742.594
+      ],
+      "kappa_cpu": 0.13314701012368446,
+      "kappa_gpu": 0.03612979139555372,
+      "gpu_busy_frac": 0.9907898595153679,
+      "reps": 5
+    },
+    {
+      "qos": "e",
+      "threads": 24,
+      "cpu_solo_GBps": 36.0303,
+      "gpu_solo_GBps": 769.974,
+      "cpu_GBps": 31.9306,
+      "gpu_GBps": 740.376,
+      "total_GBps": 773.9341,
+      "cpu_GBps_iqr": [
+        30.6248,
+        32.7906
+      ],
+      "gpu_GBps_iqr": [
+        739.277,
+        744.177
+      ],
+      "kappa_cpu": 0.11378478669342185,
+      "kappa_gpu": 0.038440259021733314,
+      "gpu_busy_frac": 0.9881985259819012,
+      "reps": 5
+    },
+    {
+      "qos": "p",
+      "threads": 1,
+      "cpu_solo_GBps": 79.0529,
+      "gpu_solo_GBps": 769.974,
+      "cpu_GBps": 25.9925,
+      "gpu_GBps": 753.235,
+      "total_GBps": 779.2167000000001,
+      "cpu_GBps_iqr": [
+        25.9817,
+        25.998
+      ],
+      "gpu_GBps_iqr": [
+        753.185,
+        753.431
+      ],
+      "kappa_cpu": 0.671201183005304,
+      "kappa_gpu": 0.02173969510658802,
+      "gpu_busy_frac": 0.9982941294062772,
+      "reps": 5
+    },
+    {
+      "qos": "p",
+      "threads": 2,
+      "cpu_solo_GBps": 122.289,
+      "gpu_solo_GBps": 769.974,
+      "cpu_GBps": 50.4476,
+      "gpu_GBps": 734.511,
+      "total_GBps": 784.9585999999999,
+      "cpu_GBps_iqr": [
+        50.4328,
+        50.4495
+      ],
+      "gpu_GBps_iqr": [
+        734.319,
+        734.803
+      ],
+      "kappa_cpu": 0.587472299225605,
+      "kappa_gpu": 0.04605739934075703,
+      "gpu_busy_frac": 0.9985673543365851,
+      "reps": 5
+    },
+    {
+      "qos": "p",
+      "threads": 4,
+      "cpu_solo_GBps": 241.361,
+      "gpu_solo_GBps": 769.974,
+      "cpu_GBps": 98.534,
+      "gpu_GBps": 701.699,
+      "total_GBps": 800.233,
+      "cpu_GBps_iqr": [
+        98.5292,
+        98.5853
+      ],
+      "gpu_GBps_iqr": [
+        701.657,
+        701.866
+      ],
+      "kappa_cpu": 0.5917567461188842,
+      "kappa_gpu": 0.08867182528241224,
+      "gpu_busy_frac": 0.9984138091905761,
+      "reps": 5
+    },
+    {
+      "qos": "p",
+      "threads": 8,
+      "cpu_solo_GBps": 249.583,
+      "gpu_solo_GBps": 769.974,
+      "cpu_GBps": 178.754,
+      "gpu_GBps": 632.224,
+      "total_GBps": 810.9780000000001,
+      "cpu_GBps_iqr": [
+        177.789,
+        181.07
+      ],
+      "gpu_GBps_iqr": [
+        627.515,
+        634.138
+      ],
+      "kappa_cpu": 0.2837893606535702,
+      "kappa_gpu": 0.17890214474774468,
+      "gpu_busy_frac": 0.9986271242919027,
+      "reps": 5
+    },
+    {
+      "qos": "p",
+      "threads": 16,
+      "cpu_solo_GBps": 253.918,
+      "gpu_solo_GBps": 769.974,
+      "cpu_GBps": 265.311,
+      "gpu_GBps": 649.2,
+      "total_GBps": 914.3899999999999,
+      "cpu_GBps_iqr": [
+        264.208,
+        266.407
+      ],
+      "gpu_GBps_iqr": [
+        648.126,
+        651.172
+      ],
+      "kappa_cpu": -0.04486881591694947,
+      "kappa_gpu": 0.15685464704002994,
+      "gpu_busy_frac": 0.9960478786505472,
+      "reps": 5
+    },
+    {
+      "qos": "p",
+      "threads": 24,
+      "cpu_solo_GBps": 232.822,
+      "gpu_solo_GBps": 769.974,
+      "cpu_GBps": 551.966,
+      "gpu_GBps": 628.63,
+      "total_GBps": 1175.278,
+      "cpu_GBps_iqr": [
+        544.056,
+        560.788
+      ],
+      "gpu_GBps_iqr": [
+        612.46,
+        634.028
+      ],
+      "kappa_cpu": -1.3707639312436108,
+      "kappa_gpu": 0.18356983482559153,
+      "gpu_busy_frac": 0.9984938755381396,
+      "reps": 5
+    }
+  ],
+  "run": "Apple-M3-Ultra_20261110-191826_contention",
+  "shared_cap": {
+    "B_max_GBps": 783.2519238071292,
+    "w_gpu": 1.1755433935317727,
+    "median_rel_err": 0.048299730139583386,
+    "max_rel_err": 1.4204267582465504,
+    "all_pairs_over_cap": true,
+    "points": [
+      {
+        "qos": "e",
+        "threads": 1,
+        "cpu_pred_GBps": 11.460340117397928,
+        "gpu_pred_GBps": 771.7915836897313
+      },
+      {
+        "qos": "e",
+        "threads": 2,
+        "cpu_pred_GBps": 15.173143260058653,
+        "gpu_pred_GBps": 768.0787805470704
+      },
+      {
+        "qos": "e",
+        "threads": 4,
+        "cpu_pred_GBps": 25.057807987196526,
+        "gpu_pred_GBps": 758.1941158199326
+      },
+      {
+        "qos": "e",
+        "threads": 8,
+        "cpu_pred_GBps": 29.861672501116445,
+        "gpu_pred_GBps": 753.3902513060127
+      },
+      {
+        "qos": "e",
+        "threads": 16,
+        "cpu_pred_GBps": 29.95645340778218,
+        "gpu_pred_GBps": 753.295470399347
+      },
+      {
+        "qos": "e",
+        "threads": 24,
+        "cpu_pred_GBps": 29.984867022533887,
+        "gpu_pred_GBps": 753.2670567845952
+      },
+      {
+        "qos": "p",
+        "threads": 1,
+        "cpu_pred_GBps": 62.91294251372346,
+        "gpu_pred_GBps": 720.3389812934056
+      },
+      {
+        "qos": "p",
+        "threads": 2,
+        "cpu_pred_GBps": 93.22619378091602,
+        "gpu_pred_GBps": 690.0257300262132
+      },
+      {
+        "qos": "p",
+        "threads": 4,
+        "cpu_pred_GBps": 164.89023758273925,
+        "gpu_pred_GBps": 618.3616862243899
+      },
+      {
+        "qos": "p",
+        "threads": 8,
+        "cpu_pred_GBps": 169.2931803277488,
+        "gpu_pred_GBps": 613.9587434793802
+      },
+      {
+        "qos": "p",
+        "threads": 16,
+        "cpu_pred_GBps": 171.58945548612803,
+        "gpu_pred_GBps": 611.662468321001
+      },
+      {
+        "qos": "p",
+        "threads": 24,
+        "cpu_pred_GBps": 160.25018772174036,
+        "gpu_pred_GBps": 623.0017360853888
+      }
+    ]
+  }
+}

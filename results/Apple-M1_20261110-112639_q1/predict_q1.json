@@ -1,0 +1,575 @@
+{
+  "model": "models/Apple-M1.json",
+  "runs": [
+    "Apple-M1_20261110-112639_q1",
+    "Apple-M1_20261110-112842_q1",
+    "Apple-M1_20261110-113043_q1",
+    "Apple-M1_20261110-113242_q1",
+    "Apple-M1_20261110-162953_q1",
+    "Apple-M1_20261110-163202_q1"
+  ],
+  "coefficients": {
+    "cpu-p": {
+      "calibration": "cpu-p",
+      "alpha_us": 0.4132266491601345,
+      "k": 1.0,
+      "stream_us_per_row": 0.00046065859503293343,
+      "compute_us_per_row": 0.0016450482590356045,
+      "beta": {
+        "stream": 0.00046065859503293343,
+        "roofline": 0.0016450482590356045,
+        "additive": 0.002105706854068538,
+        "per-device": 0.002105706854068538
+      },
+      "q1_fit": {
+        "alpha_us": 0.8164448712746615,
+        "beta_us_per_row": 0.0020231909739134362
+      }
+    },
+    "cpu-e": {
+      "calibration": "cpu-e",
+      "alpha_us": 0.8027491436741828,
+      "k": 1.0,
+      "stream_us_per_row": 0.001417155159370008,
+      "compute_us_per_row": 0.007769651378231787,
+      "beta": {
+        "stream": 0.001417155159370008,
+        "roofline": 0.007769651378231787,
+        "additive": 0.009186806537601795,
+        "per-device": 0.009186806537601795
+      },
+      "q1_fit": {
+        "alpha_us": 3.6150870058905724,
+        "beta_us_per_row": 0.010863277362062084
+      }
+    },
+    "gpu-warm": {
+      "calibration": "gpu-warm",
+      "alpha_us": 271.1505327987757,
+      "k": 1.0,
+      "stream_us_per_row": 0.0004914176276769241,
+      "compute_us_per_row": 9.305484876922989e-06,
+      "beta": {
+        "stream": 0.0004914176276769241,
+        "roofline": 0.0004914176276769241,
+        "additive": 0.0005007231125538471,
+        "per-device": 0.0004914176276769241
+      },
+      "q1_fit": {
+        "alpha_us": 326.04517282015604,
+        "beta_us_per_row": 0.0006241939605594563
+      }
+    },
+    "gpu-warm-pipe": {
+      "calibration": "gpu-warm-pipe",
+      "alpha_us": 37.160405934383064,
+      "k": 0.48830146470373476,
+      "stream_us_per_row": 0.000541693741342296,
+      "compute_us_per_row": 0.0,
+      "beta": {
+        "stream": 0.000541693741342296,
+        "roofline": 0.000541693741342296,
+        "additive": 0.000541693741342296,
+        "per-device": 0.000541693741342296
+      },
+      "q1_fit": {
+        "alpha_us": 42.417911506523154,
+        "beta_us_per_row": 0.0005818663945430499
+      }
+    },
+    "gpu-warm-spin": {
+      "calibration": "gpu-warm-spin",
+      "alpha_us": 297.2437502682967,
+      "k": 1.0,
+      "stream_us_per_row": 0.0005281724993887315,
+      "compute_us_per_row": 0.0,
+      "beta": {
+        "stream": 0.0005281724993887315,
+        "roofline": 0.0005281724993887315,
+        "additive": 0.0005281724993887315,
+        "per-device": 0.0005281724993887315
+      },
+      "q1_fit": {
+        "alpha_us": 377.55101083660446,
+        "beta_us_per_row": 0.000522749428335791
+      }
+    },
+    "gpu-warm-pipe-spin": {
+      "calibration": "gpu-warm-pipe-spin",
+      "alpha_us": 29.66654753050132,
+      "k": 0.5849119218763343,
+      "stream_us_per_row": 0.00046868567052094854,
+      "compute_us_per_row": 2.3586633931035352e-05,
+      "beta": {
+        "stream": 0.00046868567052094854,
+        "roofline": 0.00046868567052094854,
+        "additive": 0.0004922723044519839,
+        "per-device": 0.00046868567052094854
+      },
+      "q1_fit": {
+        "alpha_us": 35.358311047552505,
+        "beta_us_per_row": 0.0005418792461303784
+      }
+    }
+  },
+  "rules": {
+    "stream": {
+      "devices": {
+        "cpu-p": {
+          "alpha_us": 0.4132266491601345,
+          "beta_ns_per_row": 0.46065859503293344,
+          "k": 1.0,
+          "err_median": 0.7710672173540742,
+          "err_p90": 0.7823090214086517,
+          "bias_median": -0.7710672173540742
+        },
+        "cpu-e": {
+          "alpha_us": 0.8027491436741828,
+          "beta_ns_per_row": 1.417155159370008,
+          "k": 1.0,
+          "err_median": 0.8686703684078261,
+          "err_p90": 0.8886048383025336,
+          "bias_median": -0.8686703684078261
+        },
+        "gpu-warm": {
+          "alpha_us": 271.1505327987757,
+          "beta_ns_per_row": 0.4914176276769241,
+          "k": 1.0,
+          "err_median": 0.16644652679055838,
+          "err_p90": 0.46302274084031025,
+          "bias_median": -0.16644652679055838
+        },
+        "gpu-warm-pipe": {
+          "alpha_us": 37.160405934383064,
+          "beta_ns_per_row": 0.541693741342296,
+          "k": 0.48830146470373476,
+          "err_median": 0.13334332412624122,
+          "err_p90": 0.4887127713487157,
+          "bias_median": -0.13334332412624122
+        },
+        "gpu-warm-spin": {
+          "alpha_us": 297.2437502682967,
+          "beta_ns_per_row": 0.5281724993887315,
+          "k": 1.0,
+          "err_median": 0.16715460265263954,
+          "err_p90": 0.5802252995662824,
+          "bias_median": -0.16715460265263954
+        },
+        "gpu-warm-pipe-spin": {
+          "alpha_us": 29.66654753050132,
+          "beta_ns_per_row": 0.46868567052094856,
+          "k": 0.5849119218763343,
+          "err_median": 0.2247025465413583,
+          "err_p90": 0.34195556340425287,
+          "bias_median": -0.2247025465413583
+        }
+      },
+      "placement": {
+        "sync": {
+          "accuracy": 0.5625,
+          "points": 48,
+          "mean_slowdown_when_wrong": 2.6643464779236634,
+          "max_slowdown": 4.098110392839383
+        },
+        "pipelined": {
+          "accuracy": 0.4166666666666667,
+          "points": 48,
+          "mean_slowdown_when_wrong": 3.1688625130947465,
+          "max_slowdown": 4.219975413737805
+        },
+        "sync-spin": {
+          "accuracy": 0.5833333333333334,
+          "points": 48,
+          "mean_slowdown_when_wrong": 3.0224031932704647,
+          "max_slowdown": 4.083378957391098
+        },
+        "pipelined-spin": {
+          "accuracy": 0.3125,
+          "points": 48,
+          "mean_slowdown_when_wrong": 3.0230594110385227,
+          "max_slowdown": 4.243981099527488
+        }
+      }
+    },
+    "roofline": {
+      "devices": {
+        "cpu-p": {
+          "alpha_us": 0.4132266491601345,
+          "beta_ns_per_row": 1.6450482590356044,
+          "k": 1.0,
+          "err_median": 0.19474612018630677,
+          "err_p90": 0.24901905430238896,
+          "bias_median": -0.19474612018630677
+        },
+        "cpu-e": {
+          "alpha_us": 0.8027491436741828,
+          "beta_ns_per_row": 7.769651378231787,
+          "k": 1.0,
+          "err_median": 0.3279201543125486,
+          "err_p90": 0.4130743663581937,
+          "bias_median": -0.3279201543125486
+        },
+        "gpu-warm": {
+          "alpha_us": 271.1505327987757,
+          "beta_ns_per_row": 0.4914176276769241,
+          "k": 1.0,
+          "err_median": 0.16644652679055838,
+          "err_p90": 0.46302274084031025,
+          "bias_median": -0.16644652679055838
+        },
+        "gpu-warm-pipe": {
+          "alpha_us": 37.160405934383064,
+          "beta_ns_per_row": 0.541693741342296,
+          "k": 0.48830146470373476,
+          "err_median": 0.13334332412624122,
+          "err_p90": 0.4887127713487157,
+          "bias_median": -0.13334332412624122
+        },
+        "gpu-warm-spin": {
+          "alpha_us": 297.2437502682967,
+          "beta_ns_per_row": 0.5281724993887315,
+          "k": 1.0,
+          "err_median": 0.16715460265263954,
+          "err_p90": 0.5802252995662824,
+          "bias_median": -0.16715460265263954
+        },
+        "gpu-warm-pipe-spin": {
+          "alpha_us": 29.66654753050132,
+          "beta_ns_per_row": 0.46868567052094856,
+          "k": 0.5849119218763343,
+          "err_median": 0.2247025465413583,
+          "err_p90": 0.34195556340425287,
+          "bias_median": -0.2247025465413583
+        }
+      },
+      "placement": {
+        "sync": {
+          "accuracy": 0.9375,
+          "points": 48,
+          "mean_slowdown_when_wrong": 1.2270874737559148,
+          "max_slowdown": 1.262271223730984
+        },
+        "pipelined": {
+          "accuracy": 0.8958333333333334,
+          "points": 48,
+          "mean_slowdown_when_wrong": 1.2190790500111828,
+          "max_slowdown": 1.373813485280152
+        },
+        "sync-spin": {
+          "accuracy": 0.9791666666666666,
+          "points": 48,
+          "mean_slowdown_when_wrong": 1.2823555658930919,
+          "max_slowdown": 1.2823555658930919
+        },
+        "pipelined-spin": {
+          "accuracy": 1.0,
+          "points": 48,
+          "mean_slowdown_when_wrong": 1.0,
+          "max_slowdown": 1.0
+        }
+      }
+    },
+    "additive": {
+      "devices": {
+        "cpu-p": {
+          "alpha_us": 0.4132266491601345,
+          "beta_ns_per_row": 2.1057068540685377,
+          "k": 1.0,
+          "err_median": 0.03939723577346723,
+          "err_p90": 0.06382169194939366,
+          "bias_median": 0.029107205036503183
+        },
+        "cpu-e": {
+          "alpha_us": 0.8027491436741828,
+          "beta_ns_per_row": 9.186806537601795,
+          "k": 1.0,
+          "err_median": 0.20684435662804945,
+          "err_p90": 0.30602296889519687,
+          "bias_median": -0.20684435662804945
+        },
+        "gpu-warm": {
+          "alpha_us": 271.1505327987757,
+          "beta_ns_per_row": 0.5007231125538472,
+          "k": 1.0,
+          "err_median": 0.15828219068926003,
+          "err_p90": 0.4565009553647545,
+          "bias_median": -0.15828219068926003
+        },
+        "gpu-warm-pipe": {
+          "alpha_us": 37.160405934383064,
+          "beta_ns_per_row": 0.541693741342296,
+          "k": 0.48830146470373476,
+          "err_median": 0.13334332412624122,
+          "err_p90": 0.4887127713487157,
+          "bias_median": -0.13334332412624122
+        },
+        "gpu-warm-spin": {
+          "alpha_us": 297.2437502682967,
+          "beta_ns_per_row": 0.5281724993887315,
+          "k": 1.0,
+          "err_median": 0.16715460265263954,
+          "err_p90": 0.5802252995662824,
+          "bias_median": -0.16715460265263954
+        },
+        "gpu-warm-pipe-spin": {
+          "alpha_us": 29.66654753050132,
+          "beta_ns_per_row": 0.4922723044519839,
+          "k": 0.5849119218763343,
+          "err_median": 0.2059710092055217,
+          "err_p90": 0.3414298725476871,
+          "bias_median": -0.2059710092055217
+        }
+      },
+      "placement": {
+        "sync": {
+          "accuracy": 0.9375,
+          "points": 48,
+          "mean_slowdown_when_wrong": 1.2270874737559148,
+          "max_slowdown": 1.262271223730984
+        },
+        "pipelined": {
+          "accuracy": 0.8958333333333334,
+          "points": 48,
+          "mean_slowdown_when_wrong": 1.2190790500111828,
+          "max_slowdown": 1.373813485280152
+        },
+        "sync-spin": {
+          "accuracy": 0.9166666666666666,
+          "points": 48,
+          "mean_slowdown_when_wrong": 1.4238358007320606,
+          "max_slowdown": 2.288818042271815
+        },
+        "pipelined-spin": {
+          "accuracy": 0.9375,
+          "points": 48,
+          "mean_slowdown_when_wrong": 1.294546689798117,
+          "max_slowdown": 1.4101718631178708
+        }
+      }
+    },
+    "per-device": {
+      "devices": {
+        "cpu-p": {
+          "alpha_us": 0.4132266491601345,
+          "beta_ns_per_row": 2.1057068540685377,
+          "k": 1.0,
+          "err_median": 0.03939723577346723,
+          "err_p90": 0.06382169194939366,
+          "bias_median": 0.029107205036503183
+        },
+        "cpu-e": {
+          "alpha_us": 0.8027491436741828,
+          "beta_ns_per_row": 9.186806537601795,
+          "k": 1.0,
+          "err_median": 0.20684435662804945,
+          "err_p90": 0.30602296889519687,
+          "bias_median": -0.20684435662804945
+        },
+        "gpu-warm": {
+          "alpha_us": 271.1505327987757,
+          "beta_ns_per_row": 0.4914176276769241,
+          "k": 1.0,
+          "err_median": 0.16644652679055838,
+          "err_p90": 0.46302274084031025,
+          "bias_median": -0.16644652679055838
+        },
+        "gpu-warm-pipe": {
+          "alpha_us": 37.160405934383064,
+          "beta_ns_per_row": 0.541693741342296,
+          "k": 0.48830146470373476,
+          "err_median": 0.13334332412624122,
+          "err_p90": 0.4887127713487157,
+          "bias_median": -0.13334332412624122
+        },
+        "gpu-warm-spin": {
+          "alpha_us": 297.2437502682967,
+          "beta_ns_per_row": 0.5281724993887315,
+          "k": 1.0,
+          "err_median": 0.16715460265263954,
+          "err_p90": 0.5802252995662824,
+          "bias_median": -0.16715460265263954
+        },
+        "gpu-warm-pipe-spin": {
+          "alpha_us": 29.66654753050132,
+          "beta_ns_per_row": 0.46868567052094856,
+          "k": 0.5849119218763343,
+          "err_median": 0.2247025465413583,
+          "err_p90": 0.34195556340425287,
+          "bias_median": -0.2247025465413583
+        }
+      },
+      "placement": {
+        "sync": {
+          "accuracy": 0.9375,
+          "points": 48,
+          "mean_slowdown_when_wrong": 1.2270874737559148,
+          "max_slowdown": 1.262271223730984
+        },
+        "pipelined": {
+          "accuracy": 0.8958333333333334,
+          "points": 48,
+          "mean_slowdown_when_wrong": 1.2190790500111828,
+          "max_slowdown": 1.373813485280152
+        },
+        "sync-spin": {
+          "accuracy": 0.9166666666666666,
+          "points": 48,
+          "mean_slowdown_when_wrong": 1.4238358007320606,
+          "max_slowdown": 2.288818042271815
+        },
+        "pipelined-spin": {
+          "accuracy": 0.9375,
+          "points": 48,
+          "mean_slowdown_when_wrong": 1.294546689798117,
+          "max_slowdown": 1.4101718631178708
+        }
+      }
+    },
+    "q1-fit": {
+      "devices": {
+        "cpu-p": {
+          "alpha_us": 0.8164448712746615,
+          "beta_ns_per_row": 2.023190973913436,
+          "k": 1.0,
+          "err_median": 0.017170711356186363,
+          "err_p90": 0.06630453161962845,
+          "bias_median": -0.003367085524339111
+        },
+        "cpu-e": {
+          "alpha_us": 3.6150870058905724,
+          "beta_ns_per_row": 10.863277362062085,
+          "k": 1.0,
+          "err_median": 0.07738434092358046,
+          "err_p90": 0.21785241098088165,
+          "bias_median": -0.02906188158079408
+        },
+        "gpu-warm": {
+          "alpha_us": 326.04517282015604,
+          "beta_ns_per_row": 0.6241939605594563,
+          "k": 1.0,
+          "err_median": 0.15362164072058015,
+          "err_p90": 0.32968066790325984,
+          "bias_median": 0.02499554196950893
+        },
+        "gpu-warm-pipe": {
+          "alpha_us": 42.417911506523154,
+          "beta_ns_per_row": 0.5818663945430499,
+          "k": 1.0,
+          "err_median": 0.12567138624840418,
+          "err_p90": 0.3188129292556846,
+          "bias_median": 0.02600502783564814
+        },
+        "gpu-warm-spin": {
+          "alpha_us": 377.55101083660446,
+          "beta_ns_per_row": 0.522749428335791,
+          "k": 1.0,
+          "err_median": 0.05753377013760125,
+          "err_p90": 0.4974235731107114,
+          "bias_median": -0.0064298381440675186
+        },
+        "gpu-warm-pipe-spin": {
+          "alpha_us": 35.358311047552505,
+          "beta_ns_per_row": 0.5418792461303784,
+          "k": 1.0,
+          "err_median": 0.07442690279430705,
+          "err_p90": 0.22395049525509148,
+          "bias_median": -0.03150661913004393
+        }
+      },
+      "placement": {
+        "sync": {
+          "accuracy": 0.9375,
+          "points": 48,
+          "mean_slowdown_when_wrong": 1.2270874737559148,
+          "max_slowdown": 1.262271223730984
+        },
+        "pipelined": {
+          "accuracy": 0.8958333333333334,
+          "points": 48,
+          "mean_slowdown_when_wrong": 1.2190790500111828,
+          "max_slowdown": 1.373813485280152
+        },
+        "sync-spin": {
+          "accuracy": 0.9166666666666666,
+          "points": 48,
+          "mean_slowdown_when_wrong": 1.4238358007320606,
+          "max_slowdown": 2.288818042271815
+        },
+        "pipelined-spin": {
+          "accuracy": 1.0,
+          "points": 48,
+          "mean_slowdown_when_wrong": 1.0,
+          "max_slowdown": 1.0
+        }
+      }
+    }
+  },
+  "crossovers": {
+    "gpu-warm vs cpu-p": {
+      "measured": "2^18.8 (measured: GPU slower at 2^18.0, faster from 2^19.0 on)",
+      "measured_n": 441260.92248757277,
+      "stream": null,
+      "roofline": 234682.83416742898,
+      "additive": 168685.38860967488,
+      "per-device": 167713.0106076399
+    },
+    "gpu-warm vs cpu-e": {
+      "measured": "2^15.3 (measured: GPU slower at 2^15.0, faster from 2^16.0 on)",
+      "measured_n": 39799.34071633384,
+      "stream": 292035.02547926485,
+      "roofline": 37144.696491025905,
+      "additive": 31124.24442937113,
+      "per-device": 31090.93640958692
+    },
+    "gpu-warm-pipe vs cpu-p": {
+      "measured": "2^16.1 (measured: GPU slower at 2^16.0, faster from 2^17.0 on)",
+      "measured_n": 68602.45376128385,
+      "stream": null,
+      "roofline": 26618.00568048767,
+      "additive": 19958.30926864392,
+      "per-device": 19958.30926864392
+    },
+    "gpu-warm-pipe vs cpu-e": {
+      "measured": "2^11.7 (measured: GPU slower at 2^11.0, faster from 2^12.0 on)",
+      "measured_n": 3441.29728114889,
+      "stream": 31542.79673943403,
+      "roofline": 4844.366577359343,
+      "additive": 4074.921295803,
+      "per-device": 4074.921295803
+    },
+    "gpu-warm-spin vs cpu-p": {
+      "measured": "2^18.1 (measured: GPU slower at 2^18.0, faster from 2^19.0 on)",
+      "measured_n": 285882.6643112052,
+      "stream": null,
+      "roofline": 265768.6148663363,
+      "additive": 188161.0519216772,
+      "per-device": 188161.0519216772
+    },
+    "gpu-warm-spin vs cpu-e": {
+      "measured": "2^15.3 (measured: GPU slower at 2^15.0, faster from 2^16.0 on)",
+      "measured_n": 40992.784593994715,
+      "stream": 333460.9486430996,
+      "roofline": 40936.52775688048,
+      "additive": 34236.46268179743,
+      "per-device": 34236.46268179743
+    },
+    "gpu-warm-pipe-spin vs cpu-p": {
+      "measured": "2^14.4 (measured: GPU slower at 2^14.0, faster from 2^15.0 on)",
+      "measured_n": 21237.43317877167,
+      "stream": null,
+      "roofline": 21338.639690442375,
+      "additive": 16092.963447617809,
+      "per-device": 15971.744739641808
+    },
+    "gpu-warm-pipe-spin vs cpu-e": {
+      "measured": "2^11.7 (measured: GPU slower at 2^11.0, faster from 2^12.0 on)",
+      "measured_n": 3249.7570779802945,
+      "stream": 25252.32847212408,
+      "roofline": 3850.811012077952,
+      "additive": 3243.5350159580053,
+      "per-device": 3238.514280199914
+    }
+  },
+  "coef_regime": "auto",
+  "pipe_form": "overlap"
+}

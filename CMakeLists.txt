@@ -39,3 +39,18 @@ target_link_libraries(calib_contention PRIVATE mcm_common)
 
 add_executable(val_q1 bench/val_q1.cpp)
 target_link_libraries(val_q1 PRIVATE mcm_common)
+
+add_executable(val_q6 bench/val_q6.cpp)
+target_link_libraries(val_q6 PRIVATE mcm_common)
+
+add_executable(calib_join bench/calib_join.cpp)
+target_link_libraries(calib_join PRIVATE mcm_common)
+
+add_executable(calib_sort bench/calib_sort.cpp)
+target_link_libraries(calib_sort PRIVATE mcm_common)
+
+add_executable(val_stream bench/val_stream.cpp)
+target_link_libraries(val_stream PRIVATE mcm_common)
+
+add_executable(calib_reg bench/calib_reg.cpp)
+target_link_libraries(calib_reg PRIVATE mcm_common)

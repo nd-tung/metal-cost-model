@@ -1,0 +1,8 @@
+commit: 881fea04c6a77eef79ae21207060918cde4ce8d6
+source_dirty: yes
+started: 2026-11-10T10:32:42Z
+script: scripts/run_val_q1.sh
+changed or untracked source files (snapshot in source.tar.gz):
+?? analysis/
+?? scripts/
+settings: DATA=data/tpch-sf10 MIN_LOG2=10 MAX_LOG2=25 REPS=15 CACHE=cold DISPATCH='sync pipelined' BATCH=16 SPIN=20 COOLDOWN=20

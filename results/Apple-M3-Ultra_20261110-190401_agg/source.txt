@@ -1,0 +1,25 @@
+commit: 881fea04c6a77eef79ae21207060918cde4ce8d6
+source_dirty: yes
+started: 2026-11-10T18:04:01Z
+script: scripts/run_calib_agg.sh
+flush_mb: 512 (MCM_FLUSH_MB)
+load: 1.52 1.59 1.73 | users logged in: 5
+changed or untracked source files (snapshot in source.tar.gz):
+ M CMakeLists.txt
+ M bench/calib_agg.cpp
+ M bench/calib_filter.cpp
+ M bench/val_q1.cpp
+ M kernels/q1.metal
+ M src/common/bench.hpp
+ M src/common/metal_ctx.cpp
+ M src/common/metal_ctx.hpp
+?? analysis/
+?? bench/calib_join.cpp
+?? bench/calib_sort.cpp
+?? kernels/join.metal
+?? kernels/sort.metal
+?? kernels/spin.metal
+?? scripts/
+?? src/engine/hash_join.hpp
+?? src/engine/radix_sort.hpp
+settings: DATA=data/tpch-sf10 VALS=l_extendedprice KEYS='- l_shipmode l_shipdate l_suppkey l_partkey' MIN_LOG2=10 MAX_LOG2=25 REPS=15 CACHE=cold DISPATCH='sync pipelined' BATCH=16 STORAGE='shared' SPIN=20 COOLDOWN=20

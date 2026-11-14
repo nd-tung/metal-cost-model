@@ -10,6 +10,7 @@
 
 #include <algorithm>
 #include <cstdint>
+#include <cstdio>
 #include <cstdlib>
 #include <cstring>
 #include <fstream>
@@ -39,6 +40,13 @@ struct CacheFlusher {
   PageAlloc buf;
   volatile uint64_t sink = 0;
 };
+
+// Default --flush-mb: MCM_FLUSH_MB if set, else 64 MB (M1: 12 MB P-L2 + 8 MB SLC). Chips with a large
+// SLC need more, e.g. 512 MB on an M3 Ultra (16 MB L2 per P-cluster, ~96 MB SLC over two dies).
+inline long long default_flush_mb() {
+  const char* e = std::getenv("MCM_FLUSH_MB");
+  return e && std::atoll(e) > 0 ? std::atoll(e) : 64;
+}
 
 // Process-level part of CPU placement. Call once, before starting the worker thread.
 // Thread-level QoS (BACKGROUND) and PRIO_DARWIN_THREAD do NOT keep a thread off the
@@ -70,7 +78,38 @@ inline void place_cpu_thread(const std::string& qos) {
 inline constexpr const char* kBenchLockFile = "/tmp/metal-cost-model-bench.lock";
 inline constexpr const char* kSweepLockDir = "/tmp/metal-cost-model-sweep.lock";
 
+// The protocol is AC power with Low Power Mode off (README). A benchmark refuses to start otherwise,
+// and checks again when it exits: if the power source changed during the run, it exits with status 3
+// so a sweep stops instead of mixing battery data into an AC run. MCM_ALLOW_BATTERY=1 skips both.
+inline std::string power_state() {
+  std::string out;
+  if (FILE* f = popen("pmset -g batt 2>/dev/null | head -1; pmset -g 2>/dev/null | grep -i lowpowermode", "r")) {
+    char buf[256];
+    while (fgets(buf, sizeof(buf), f)) out += buf;
+    pclose(f);
+  }
+  const bool ac = out.find("AC Power") != std::string::npos;
+  const size_t lp = out.find("lowpowermode");
+  const bool low = lp != std::string::npos && out.find('1', lp) != std::string::npos;
+  return std::string(ac ? "AC" : "not AC") + (low ? ", Low Power Mode on" : "");
+}
+
+inline void require_ac_power() {
+  const char* allow = std::getenv("MCM_ALLOW_BATTERY");
+  if (allow && std::string(allow) == "1") return;
+  const std::string s = power_state();
+  if (s != "AC") throw std::runtime_error("power: " + s + "; plug in AC and turn Low Power Mode off (or set MCM_ALLOW_BATTERY=1)");
+  std::atexit([] {
+    const std::string now = power_state();
+    if (now != "AC") {
+      std::cerr << "error: the power state changed during the run (" << now << "); discard this run\n";
+      std::_Exit(3);
+    }
+  });
+}
+
 inline void acquire_bench_lock() {
+  require_ac_power();
   long sweep = 0;
   std::ifstream pf(std::string(kSweepLockDir) + "/pid");
   if (pf >> sweep && sweep > 0 && kill(static_cast<pid_t>(sweep), 0) == 0) {
@@ -203,6 +242,142 @@ inline MTL::Buffer* new_private_buffer(MTL::Device* dev, size_t bytes) {
   if (!b) throw std::runtime_error("cannot allocate a private buffer of " + std::to_string(bytes) + " bytes");
   return b;
 }
+
+// ---------------------------------------------------------------- busy GPU (clock state)
+// ALU-only GPU busy loop of about `ms` milliseconds (kernels/spin.metal gpu_spin; the benchmark's MetalCtx
+// must compile spin.metal too), sync, untimed.
+class GpuSpin {
+ public:
+  GpuSpin(MetalCtx& ctx, double ms) : ctx_(ctx) {
+    pso_ = ctx.pipeline("gpu_spin");
+    out_ = ctx.device()->newBuffer(sizeof(uint32_t), MTL::ResourceStorageModeShared);
+    for (int i = 0; i < 3; ++i) run(1u << 14);  // warm up, then scale the loop to the target time
+    const double us = run(1u << 16);
+    iters_ = static_cast<uint32_t>(std::clamp((1u << 16) * (ms * 1e3) / std::max(us, 1.0), 1.0, 4e9));
+    std::cerr << "gpu spin: " << iters_ << " iterations ~ " << run(iters_) / 1e3 << " ms\n";
+  }
+  ~GpuSpin() {
+    out_->release();
+    pso_->release();
+  }
+  void operator()() { run(iters_); }
+
+ private:
+  double run(uint32_t iters) {  // returns GPU execution time in us
+    NS::AutoreleasePool* pool = NS::AutoreleasePool::alloc()->init();
+    MTL::CommandBuffer* cb = ctx_.queue()->commandBuffer();
+    MTL::ComputeCommandEncoder* enc = cb->computeCommandEncoder();
+    enc->setComputePipelineState(pso_);
+    enc->setBuffer(out_, 0, 0);
+    enc->setBytes(&iters, sizeof(iters), 1);
+    enc->dispatchThreadgroups(MTL::Size(1024, 1, 1), MTL::Size(256, 1, 1));
+    enc->endEncoding();
+    cb->commit();
+    cb->waitUntilCompleted();
+    const double us = (cb->GPUEndTime() - cb->GPUStartTime()) * 1e6;
+    pool->release();
+    return us;
+  }
+  MetalCtx& ctx_;
+  MTL::ComputePipelineState* pso_ = nullptr;
+  MTL::Buffer* out_ = nullptr;
+  uint32_t iters_ = 1;
+};
+
+// ---------------------------------------------------------------- cache state (the router's cache policy)
+// Where a morsel's input is at dispatch depends on what last touched it; a router decides that when it
+// places the producer and the consumer. --cache of calib_filter names the state, set after the flush:
+//   cold      : nothing (the flush: DRAM; every model so far);  hot: no flush at all (the old behaviour)
+//   cpu-write : one CPU thread rewrites the morsel's rows in place, x += 0 with a runtime zero, so the
+//               data is unchanged and every line is written: a CPU operator has just produced it. For
+//               a CPU consumer it is the consumer thread itself (L2); for the GPU, the dispatching thread
+//   cpu-read  : the same thread reads (sums) the rows: another scan has just used the column
+//   gpu-write, gpu-read : a GPU kernel does the same (kernels/touch.metal, compiled with the benchmark's
+//               kernels), one sync command buffer over the morsel's buffers, untimed
+inline const std::vector<std::string> kCachePolicies = {"cold", "hot", "cpu-write", "cpu-read", "gpu-write", "gpu-read"};
+inline bool cache_policy_touches(const std::string& p) { return p != "cold" && p != "hot"; }
+inline bool cache_policy_on_gpu(const std::string& p) { return p.rfind("gpu-", 0) == 0; }
+
+struct TouchParams {
+  uint32_t n, zero;  // must match TouchParams in kernels/touch.metal
+};
+
+class Toucher {
+ public:
+  struct Range {  // rows [0, n) of one morsel: host pointer (CPU policies) or buffer + byte offset (GPU)
+    uint32_t* host = nullptr;
+    MTL::Buffer* buf = nullptr;
+    size_t offset = 0;
+    uint32_t n = 0;
+  };
+
+  // ctx may be null for a policy without a GPU step.
+  Toucher(MetalCtx* ctx, const std::string& policy) : policy_(policy) {
+    if (std::find(kCachePolicies.begin(), kCachePolicies.end(), policy) == kCachePolicies.end())
+      throw std::runtime_error("--cache must be one of cold, hot, cpu-write, cpu-read, gpu-write, gpu-read");
+    if (cache_policy_on_gpu(policy)) {
+      if (!ctx) throw std::runtime_error("--cache " + policy + " needs the GPU");
+      ctx_ = ctx;
+      pso_ = ctx->pipeline(policy == "gpu-write" ? "touch_write" : "touch_read");
+      out_ = ctx->device()->newBuffer(sizeof(uint32_t), MTL::ResourceStorageModeShared);
+      tg_ = std::min<NS::UInteger>(256, pso_->maxTotalThreadsPerThreadgroup());
+    }
+  }
+  ~Toucher() {
+    if (out_) out_->release();
+    if (pso_) pso_->release();
+  }
+  Toucher(const Toucher&) = delete;
+  Toucher& operator=(const Toucher&) = delete;
+
+  bool active() const { return cache_policy_touches(policy_); }
+  void operator()(const std::vector<Range>& ranges) {
+    if (!active()) return;
+    if (cache_policy_on_gpu(policy_)) {
+      gpu(ranges);
+    } else {
+      for (const Range& r : ranges) cpu(r);
+    }
+  }
+
+ private:
+  void cpu(const Range& r) {
+    const uint32_t z = zero_;  // read from a volatile: the compiler cannot drop the stores
+    if (policy_ == "cpu-write") {
+      for (uint32_t i = 0; i < r.n; ++i) r.host[i] += z;
+    } else {
+      uint32_t s = 0;
+      for (uint32_t i = 0; i < r.n; ++i) s += r.host[i];
+      sink_ = s;
+    }
+  }
+  void gpu(const std::vector<Range>& ranges) {
+    NS::AutoreleasePool* pool = NS::AutoreleasePool::alloc()->init();
+    MTL::CommandBuffer* cb = ctx_->queue()->commandBuffer();
+    MTL::ComputeCommandEncoder* enc = cb->computeCommandEncoder();
+    enc->setComputePipelineState(pso_);
+    for (const Range& r : ranges) {
+      const TouchParams p{r.n, 0};
+      const NS::UInteger groups = std::clamp<NS::UInteger>((r.n + tg_ * 16 - 1) / (tg_ * 16), 1, 4096);
+      enc->setBuffer(r.buf, r.offset, 0);
+      enc->setBuffer(out_, 0, 1);
+      enc->setBytes(&p, sizeof(p), 2);
+      enc->dispatchThreadgroups(MTL::Size(groups, 1, 1), MTL::Size(tg_, 1, 1));
+    }
+    enc->endEncoding();
+    cb->commit();
+    cb->waitUntilCompleted();
+    if (cb->status() != MTL::CommandBufferStatusCompleted) throw std::runtime_error("cache-state touch kernel failed");
+    pool->release();
+  }
+
+  std::string policy_;
+  MetalCtx* ctx_ = nullptr;
+  MTL::ComputePipelineState* pso_ = nullptr;
+  MTL::Buffer* out_ = nullptr;
+  NS::UInteger tg_ = 256;
+  volatile uint32_t zero_ = 0, sink_ = 0;
+};
 
 // Morsels per pipelined batch: up to K, each on its own buffer (so no morsel reads cache lines
 // the previous one left behind), capped so the whole batch fits in cap_bytes; at least 2.

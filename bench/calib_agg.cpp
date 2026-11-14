@@ -28,6 +28,8 @@
 //                    a diagnostic (see common/bench.hpp). The check compares the table with K x the
 //                    reference.
 //
+// --gpu-spin-ms M: after each flush, keep the GPU busy ~M ms (ALU only, untimed): busy clock regime.
+//
 // Not timed on either device: zeroing the aggregation table before each rep.
 // Timed: the aggregation pass (CPU) / encode .. waitUntilCompleted (GPU), as in calib_filter.
 
@@ -225,19 +227,20 @@ struct GpuRunner {
 void write_rows(const std::string& path, const std::string& machine, const std::string& op,
                 const std::string& data, const std::string& cache, uint32_t groups,
                 const std::string& gpath, uint64_t bytes_per_row, const std::string& dispatch,
-                const std::string& storage, const std::vector<Row>& rows) {
+                const std::string& storage,
+                double spin_ms, const std::vector<Row>& rows) {
   bool exists = std::ifstream(path).good();
   std::ofstream f(path, std::ios::app);
   if (!exists)
     f << "machine,op,data,thr,device,qos,state,n,bytes,rep,t_wrap_us,t_encode_us,t_total_us,gpu_exec_us,ok,"
-         "cache,groups,path,dispatch,batch,gpu_spacing_us,storage,t_blit_us\n";
+         "cache,groups,path,dispatch,batch,gpu_spacing_us,storage,t_blit_us,gpu_spin_ms\n";
   for (const Row& r : rows) {
     f << machine << "," << op << "," << data << ",0," << r.device << "," << r.qos << "," << r.state << ","
       << r.n << "," << r.n * bytes_per_row << "," << r.rep << "," << r.t_wrap << "," << r.t_encode << ","
       << r.t_total << "," << r.gpu_exec << "," << (r.ok ? 1 : 0) << "," << cache << "," << groups << ","
       << (r.device == "gpu" ? gpath : (groups > 1 && groups <= CPU_COPY_MAX_G) ? "copies8" : "scalar") << ","
       << (r.device == "gpu" ? dispatch : "-") << "," << r.batch << "," << r.spacing << ","
-      << (r.device == "gpu" ? storage : "-") << "," << r.t_blit << "\n";
+      << (r.device == "gpu" ? storage : "-") << "," << r.t_blit << "," << (r.device == "gpu" ? spin_ms : 0.0) << "\n";
   }
 }
 
@@ -249,6 +252,7 @@ void usage() {
                "                 [--min-log2 10] [--max-log2 25] [--reps 15]\n"
                "                 [--cache cold|hot] [--flush-mb 64]\n"
                "                 [--dispatch sync|pipelined] [--batch 16] [--batch-mb 1024]   (GPU only)\n"
+               "                    [--gpu-spin-ms 0]   (GPU only: keep the GPU busy ~M ms after each flush)\n"
                "                 [--storage shared|private]   (GPU only; private: blit, then kernel)\n"
                "                 [--out results/calib_agg.csv] [--machine-json path]\n";
 }
@@ -282,17 +286,22 @@ int main(int argc, char** argv) {
     if (storage == "private" && pipelined) throw std::runtime_error("--storage private supports --dispatch sync only");
     if (state == "resident" && storage != "private") throw std::runtime_error("--state resident needs --storage private");
     const int batch = static_cast<int>(a.i64("batch", 16));
+    const double spin_ms = a.f64("gpu-spin-ms", 0);
+    if (spin_ms > 0 && device != "gpu") throw std::runtime_error("--gpu-spin-ms applies to --device gpu only");
     const size_t batch_cap = static_cast<size_t>(a.i64("batch-mb", 1024)) << 20;
     acquire_bench_lock();  // one benchmark process at a time (common/bench.hpp)
 
     NS::AutoreleasePool* pool = NS::AutoreleasePool::alloc()->init();
-    MetalCtx ctx(std::string(MCM_KERNEL_DIR) + "/agg.metal");
+    MetalCtx ctx(std::vector<std::string>{std::string(MCM_KERNEL_DIR) + "/agg.metal", std::string(MCM_KERNEL_DIR) + "/spin.metal"});
     MachineInfo mi = collect_machine_info(ctx.device());
     if (a.has("machine-json")) std::ofstream(a.str("machine-json", "")) << mi.to_json();
     std::cerr << "machine: " << mi.cpu_brand << " | P=" << mi.p_cores << " E=" << mi.e_cores
               << " GPU cores=" << mi.gpu_cores << " | mem=" << (mi.mem_bytes >> 30) << " GiB"
               << " | macOS " << mi.os_version << " | power=" << mi.power_source
               << (mi.low_power_mode ? " (LOW POWER MODE ON)" : "") << "\n";
+    std::unique_ptr<GpuSpin> gspin;  // --gpu-spin-ms: ALU-only GPU work after each flush (busy clock regime)
+    if (spin_ms > 0) gspin = std::make_unique<GpuSpin>(ctx, spin_ms);
+    auto spin = [&] { if (gspin) (*gspin)(); };
 
     // ---- data
     const std::string vals_path = a.str("vals", "");
@@ -332,7 +341,7 @@ int main(int argc, char** argv) {
     std::cerr << "data: " << data << " | G=" << G << " | base=" << base
               << (device == "gpu" ? " | gpu path=" + gpath : "") << " | cache=" << cache << "\n";
 
-    CacheFlusher flusher(static_cast<size_t>(a.i64("flush-mb", 64)) << 20);
+    CacheFlusher flusher(static_cast<size_t>(a.i64("flush-mb", default_flush_mb())) << 20);
     auto flush = [&] { if (cache == "cold") flusher(); };
 
     std::vector<Row> rows;
@@ -409,6 +418,7 @@ int main(int argc, char** argv) {
               Row row{"gpu", "-", state, n, r};
               g.zero_out();
               flush();
+              spin();
               row.ok = (state == "warm" ? run_priv(bk, bv, row) : run_priv(nullptr, nullptr, row)) && row.ok;
               rows.push_back(row);
             }
@@ -429,6 +439,7 @@ int main(int argc, char** argv) {
               Row row{"gpu", "-", "cold", n, r};
               g.zero_out();
               flush();
+              spin();
               auto t0 = Clock::now();
               MTL::Buffer *bk, *bv;
               wrap(km, vm, bk, bv);
@@ -459,6 +470,7 @@ int main(int argc, char** argv) {
             Row row{"gpu", "-", "warm", n, r};
             zero();
             flush();
+            spin();
             row.ok = timed(kbufs, vbufs, row) && row.ok;
             rows.push_back(row);
           }
@@ -486,6 +498,7 @@ int main(int argc, char** argv) {
             vbufs.reserve(K);
             zero();
             flush();
+            spin();
             auto t0 = Clock::now();
             for (int k = 0; k < K; ++k) {
               kbufs.push_back(grouped ? wrap_no_copy(ctx.device(), *kmem[k]) : nullptr);
@@ -532,7 +545,7 @@ int main(int argc, char** argv) {
     }
 
     size_t bad = std::count_if(rows.begin(), rows.end(), [](const Row& r) { return !r.ok; });
-    write_rows(out_path, mi.tag(), op, data, cache, G, gpath, bpr, dispatch, storage, rows);
+    write_rows(out_path, mi.tag(), op, data, cache, G, gpath, bpr, dispatch, storage, spin_ms, rows);
     std::cerr << rows.size() << " rows -> " << out_path << (bad ? " | WARNING: " : "")
               << (bad ? std::to_string(bad) + " rows failed the correctness check" : "") << "\n";
     pool->release();

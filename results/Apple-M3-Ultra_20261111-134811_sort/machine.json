@@ -1,0 +1,14 @@
+{
+  "hw_model": "Mac15,14",
+  "cpu_brand": "Apple M3 Ultra",
+  "os_version": "26.3.1",
+  "mem_bytes": 103079215104,
+  "p_cores": 24,
+  "e_cores": 8,
+  "gpu_cores": 80,
+  "page_size": 16384,
+  "gpu_name": "Apple M3 Ultra",
+  "gpu_recommended_max_working_set": 83494174720,
+  "low_power_mode": false,
+  "power_source": "AC"
+}

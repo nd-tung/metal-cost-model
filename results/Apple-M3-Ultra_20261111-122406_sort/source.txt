@@ -1,0 +1,25 @@
+commit: 881fea04c6a77eef79ae21207060918cde4ce8d6
+source_dirty: yes
+started: 2026-11-11T11:24:06Z
+script: scripts/run_calib_sort.sh
+flush_mb: 512 (MCM_FLUSH_MB)
+load: 3.63 3.77 3.14 | users logged in: 5
+changed or untracked source files (snapshot in source.tar.gz):
+ M CMakeLists.txt
+ M bench/calib_agg.cpp
+ M bench/calib_filter.cpp
+ M bench/val_q1.cpp
+ M kernels/q1.metal
+ M src/common/bench.hpp
+ M src/common/metal_ctx.cpp
+ M src/common/metal_ctx.hpp
+?? analysis/
+?? bench/calib_join.cpp
+?? bench/calib_sort.cpp
+?? kernels/join.metal
+?? kernels/sort.metal
+?? kernels/spin.metal
+?? scripts/
+?? src/engine/hash_join.hpp
+?? src/engine/radix_sort.hpp
+settings: DATA=data/tpch-sf10 KEYS='random l_partkey l_shipdate l_orderkey' MERGE_KEYS='random' MERGE_RUNS='4 16 64' MIN_LOG2=10 MAX_LOG2=25 STD_MAX_LOG2=22 REPS=15 CACHE=cold SPIN=20 COOLDOWN=20
