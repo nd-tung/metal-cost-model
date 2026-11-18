@@ -54,3 +54,9 @@ target_link_libraries(val_stream PRIVATE mcm_common)
 
 add_executable(calib_reg bench/calib_reg.cpp)
 target_link_libraries(calib_reg PRIVATE mcm_common)
+
+add_executable(run_query bench/run_query.cpp)
+target_link_libraries(run_query PRIVATE mcm_common)
+
+add_executable(val_q14 bench/val_q14.cpp)
+target_link_libraries(val_q14 PRIVATE mcm_common)

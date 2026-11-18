@@ -1,0 +1,2 @@
+machine,op,data,rows,threads,duckdb,runs,t_ms_median,t_ms_min,t_ms_max
+Apple-M3-Ultra,q14,tpch-sf10,59986052,32,1.4.4,5,26.572,25.873,29.153

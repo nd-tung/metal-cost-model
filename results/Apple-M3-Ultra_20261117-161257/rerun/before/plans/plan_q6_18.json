@@ -1,0 +1,35 @@
+{
+  "query": "q6",
+  "model": "models/Apple-M3-Ultra.json",
+  "n": 262144,
+  "morsels": 229,
+  "bytes_per_row": 16,
+  "p_workers": 24,
+  "e_workers": 8,
+  "inflight": 16,
+  "solo_us_per_morsel": {
+    "gpu-warm-pipe-spin": 16.66692595180004,
+    "cpu-p": 59.52924581742708,
+    "cpu-e": 319.9351081554556
+  },
+  "solo_demand_GBps": {
+    "gpu": 251.65432498648693,
+    "cpu": 1795.867803304929,
+    "cpu_capped": 290.2457
+  },
+  "cpu_cap_GBps": 290.2457,
+  "B_max_GBps": 808.6089382768798,
+  "w_gpu": 1.9075951218024207,
+  "both_us_per_morsel": {
+    "gpu": 16.66692595180004,
+    "p": 368.3315753464803,
+    "e": 1979.568206809827
+  },
+  "gpu_share": 0.4643925325391198,
+  "fill_us": 226.46778008935428,
+  "pred_ms": {
+    "gpu": 4.043193823051563,
+    "cpu": 3.309250114644248,
+    "both": 1.877629019033441
+  }
+}

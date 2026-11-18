@@ -1,0 +1,528 @@
+## --policy gpu --morsel-log2 16 --build-device gpu --machine-json results/Apple-M3-Ultra_20261117-155421_ringrouter/machine.json
+machine: Apple M3 Ultra | P=24 E=8 GPU cores=80 | power=AC
+q14: 59986052 rows, 916 morsels of 2^16 (915 MiB) | policy gpu | GPU on, 16 in flight | CPU off | build on gpu
+gpu spin: 167678 iterations ~ 19.9802 ms
+warm-up: 30.0409 ms (build 1.050916 ms on gpu) | GPU 916 morsels | P 0 | E 0 | finished at GPU 29.9842 P 0 E 0 ms | exact
+rep 0: 21.9728 ms (build 0.543875 ms on gpu) | GPU 916 morsels | P 0 | E 0 | finished at GPU 21.927 P 0 E 0 ms | exact
+rep 1: 21.3683 ms (build 0.526666 ms on gpu) | GPU 916 morsels | P 0 | E 0 | finished at GPU 21.3212 P 0 E 0 ms | exact
+rep 2: 21.3373 ms (build 0.520167 ms on gpu) | GPU 916 morsels | P 0 | E 0 | finished at GPU 21.302 P 0 E 0 ms | exact
+rep 3: 22.011 ms (build 0.534125 ms on gpu) | GPU 916 morsels | P 0 | E 0 | finished at GPU 21.969 P 0 E 0 ms | exact
+rep 4: 21.6459 ms (build 0.524917 ms on gpu) | GPU 916 morsels | P 0 | E 0 | finished at GPU 21.6039 P 0 E 0 ms | exact
+-> results/Apple-M3-Ultra_20261117-155421_ringrouter/run_query.csv
+## --policy gpu --morsel-log2 18 --build-device gpu --machine-json results/Apple-M3-Ultra_20261117-155421_ringrouter/machine.json
+machine: Apple M3 Ultra | P=24 E=8 GPU cores=80 | power=AC
+q14: 59986052 rows, 229 morsels of 2^18 (915 MiB) | policy gpu | GPU on, 16 in flight | CPU off | build on gpu
+gpu spin: 168197 iterations ~ 19.9924 ms
+warm-up: 14.8888 ms (build 1.004667 ms on gpu) | GPU 229 morsels | P 0 | E 0 | finished at GPU 14.8253 P 0 E 0 ms | exact
+rep 0: 7.06371 ms (build 0.571208 ms on gpu) | GPU 229 morsels | P 0 | E 0 | finished at GPU 7.00746 P 0 E 0 ms | exact
+rep 1: 6.93229 ms (build 0.549084 ms on gpu) | GPU 229 morsels | P 0 | E 0 | finished at GPU 6.864 P 0 E 0 ms | exact
+rep 2: 6.81983 ms (build 0.776334 ms on gpu) | GPU 229 morsels | P 0 | E 0 | finished at GPU 6.76646 P 0 E 0 ms | exact
+rep 3: 6.41917 ms (build 0.580250 ms on gpu) | GPU 229 morsels | P 0 | E 0 | finished at GPU 6.37575 P 0 E 0 ms | exact
+rep 4: 6.35842 ms (build 0.534500 ms on gpu) | GPU 229 morsels | P 0 | E 0 | finished at GPU 6.31679 P 0 E 0 ms | exact
+-> results/Apple-M3-Ultra_20261117-155421_ringrouter/run_query.csv
+## --policy gpu --morsel-log2 20 --build-device gpu --machine-json results/Apple-M3-Ultra_20261117-155421_ringrouter/machine.json
+machine: Apple M3 Ultra | P=24 E=8 GPU cores=80 | power=AC
+q14: 59986052 rows, 58 morsels of 2^20 (915 MiB) | policy gpu | GPU on, 16 in flight | CPU off | build on gpu
+gpu spin: 168711 iterations ~ 20.0005 ms
+warm-up: 10.5171 ms (build 1.100916 ms on gpu) | GPU 58 morsels | P 0 | E 0 | finished at GPU 10.4531 P 0 E 0 ms | exact
+rep 0: 2.44658 ms (build 0.601334 ms on gpu) | GPU 58 morsels | P 0 | E 0 | finished at GPU 2.388 P 0 E 0 ms | exact
+rep 1: 2.36408 ms (build 0.606083 ms on gpu) | GPU 58 morsels | P 0 | E 0 | finished at GPU 2.30971 P 0 E 0 ms | exact
+rep 2: 2.47492 ms (build 0.621000 ms on gpu) | GPU 58 morsels | P 0 | E 0 | finished at GPU 2.4065 P 0 E 0 ms | exact
+rep 3: 2.46542 ms (build 0.605042 ms on gpu) | GPU 58 morsels | P 0 | E 0 | finished at GPU 2.40308 P 0 E 0 ms | exact
+rep 4: 2.35842 ms (build 0.588625 ms on gpu) | GPU 58 morsels | P 0 | E 0 | finished at GPU 2.30821 P 0 E 0 ms | exact
+-> results/Apple-M3-Ultra_20261117-155421_ringrouter/run_query.csv
+## --policy gpu --morsel-log2 22 --build-device gpu --machine-json results/Apple-M3-Ultra_20261117-155421_ringrouter/machine.json
+machine: Apple M3 Ultra | P=24 E=8 GPU cores=80 | power=AC
+q14: 59986052 rows, 15 morsels of 2^22 (915 MiB) | policy gpu | GPU on, 16 in flight | CPU off | build on gpu
+gpu spin: 167181 iterations ~ 19.797 ms
+warm-up: 9.2205 ms (build 1.083584 ms on gpu) | GPU 15 morsels | P 0 | E 0 | finished at GPU 9.15392 P 0 E 0 ms | exact
+rep 0: 1.52113 ms (build 0.617459 ms on gpu) | GPU 15 morsels | P 0 | E 0 | finished at GPU 1.44263 P 0 E 0 ms | exact
+rep 1: 1.36854 ms (build 0.559667 ms on gpu) | GPU 15 morsels | P 0 | E 0 | finished at GPU 1.29188 P 0 E 0 ms | exact
+rep 2: 1.41117 ms (build 0.613625 ms on gpu) | GPU 15 morsels | P 0 | E 0 | finished at GPU 1.33587 P 0 E 0 ms | exact
+rep 3: 1.38167 ms (build 0.554375 ms on gpu) | GPU 15 morsels | P 0 | E 0 | finished at GPU 1.30212 P 0 E 0 ms | exact
+rep 4: 1.35642 ms (build 0.587166 ms on gpu) | GPU 15 morsels | P 0 | E 0 | finished at GPU 1.30546 P 0 E 0 ms | exact
+-> results/Apple-M3-Ultra_20261117-155421_ringrouter/run_query.csv
+## --policy cpu --morsel-log2 16 --build-device cpu --p-workers 24 --e-workers 8 --pred-ms 2.733
+machine: Apple M3 Ultra | P=24 E=8 GPU cores=80 | power=AC
+q14: 59986052 rows, 916 morsels of 2^16 (915 MiB) | policy cpu | GPU off | CPU 24 P + 8 E workers | build on cpu
+gpu spin: 169215 iterations ~ 20.1212 ms
+core probe (qos=p): 2.30795 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+core probe (qos=e): 2.20539 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+warm-up: 3.70854 ms (build 1.018000 ms on cpu) | GPU 0 morsels | P 781 | E 135 | finished at GPU 0 P 3.41213 E 3.44092 ms | exact
+rep 0: 3.693 ms (build 1.005583 ms on cpu) | GPU 0 morsels | P 778 | E 138 | finished at GPU 0 P 3.42996 E 3.43913 ms | exact
+rep 1: 3.99921 ms (build 1.219750 ms on cpu) | GPU 0 morsels | P 790 | E 126 | finished at GPU 0 P 3.60979 E 3.63262 ms | exact
+rep 2: 3.86429 ms (build 1.063750 ms on cpu) | GPU 0 morsels | P 778 | E 138 | finished at GPU 0 P 3.45046 E 3.51788 ms | exact
+rep 3: 3.65788 ms (build 1.023166 ms on cpu) | GPU 0 morsels | P 780 | E 136 | finished at GPU 0 P 3.40208 E 3.43046 ms | exact
+rep 4: 3.85375 ms (build 1.120500 ms on cpu) | GPU 0 morsels | P 779 | E 137 | finished at GPU 0 P 3.50829 E 3.58604 ms | exact
+-> results/Apple-M3-Ultra_20261117-155421_ringrouter/run_query.csv
+## --policy router --morsel-log2 16 --build-device gpu --p-workers 24 --e-workers 8 --t-gpu 15.804 --t-p 45.571 --t-e 278.125 --pred-ms 2.144
+machine: Apple M3 Ultra | P=24 E=8 GPU cores=80 | power=AC
+q14: 59986052 rows, 916 morsels of 2^16 (915 MiB) | policy router | GPU on, 16 in flight | CPU 24 P + 8 E workers | build on gpu
+gpu spin: 168200 iterations ~ 20.0661 ms
+core probe (qos=p): 2.31252 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+core probe (qos=e): 2.19925 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+warm-up: 10.501 ms (build 1.172792 ms on gpu) | GPU 16 morsels | P 796 | E 104 | finished at GPU 10.3796 P 3.70621 E 3.37725 ms | exact
+rep 0: 3.48208 ms (build 0.587166 ms on gpu) | GPU 35 morsels | P 793 | E 88 | finished at GPU 3.35938 P 3.08858 E 2.71229 ms | exact
+rep 1: 3.56 ms (build 0.593250 ms on gpu) | GPU 18 morsels | P 786 | E 112 | finished at GPU 3.41854 P 3.07242 E 2.71642 ms | exact
+rep 2: 3.37588 ms (build 0.680542 ms on gpu) | GPU 37 morsels | P 788 | E 91 | finished at GPU 3.2455 P 3.11708 E 2.83654 ms | exact
+rep 3: 3.4065 ms (build 0.619041 ms on gpu) | GPU 38 morsels | P 779 | E 99 | finished at GPU 3.29692 P 3.06333 E 2.76592 ms | exact
+rep 4: 3.422 ms (build 0.639083 ms on gpu) | GPU 41 morsels | P 785 | E 90 | finished at GPU 3.30821 P 3.09171 E 2.78692 ms | exact
+-> results/Apple-M3-Ultra_20261117-155421_ringrouter/run_query.csv
+## --policy split --morsel-log2 16 --build-device gpu --p-workers 24 --e-workers 8 --t-gpu 15.804 --t-p 45.571 --t-e 278.125 --pred-ms 2.144
+machine: Apple M3 Ultra | P=24 E=8 GPU cores=80 | power=AC
+q14: 59986052 rows, 916 morsels of 2^16 (915 MiB) | policy split | GPU on, 16 in flight | CPU 24 P + 8 E workers | build on gpu
+split: GPU share 0.102273 -> morsels [0, 94), CPU [94, 916)
+gpu spin: 166733 iterations ~ 19.6985 ms
+core probe (qos=p): 2.28258 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+core probe (qos=e): 2.19926 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+warm-up: 11.7578 ms (build 1.282417 ms on gpu) | GPU 94 morsels | P 704 | E 118 | finished at GPU 11.641 P 3.55517 E 3.6175 ms | exact
+rep 0: 4.74483 ms (build 0.642208 ms on gpu) | GPU 94 morsels | P 724 | E 98 | finished at GPU 4.58671 P 2.941 E 2.99967 ms | exact
+rep 1: 4.774 ms (build 0.582958 ms on gpu) | GPU 94 morsels | P 721 | E 101 | finished at GPU 4.65763 P 2.9235 E 2.97721 ms | exact
+rep 2: 4.54563 ms (build 0.548833 ms on gpu) | GPU 94 morsels | P 723 | E 99 | finished at GPU 4.41921 P 2.83954 E 2.87179 ms | exact
+rep 3: 4.76683 ms (build 0.584208 ms on gpu) | GPU 94 morsels | P 718 | E 104 | finished at GPU 4.638 P 2.88254 E 2.94067 ms | exact
+rep 4: 4.66942 ms (build 0.592459 ms on gpu) | GPU 94 morsels | P 724 | E 98 | finished at GPU 4.56054 P 2.87808 E 2.95642 ms | exact
+-> results/Apple-M3-Ultra_20261117-155421_ringrouter/run_query.csv
+## --policy router --morsel-log2 16 --build-device gpu --p-workers 24 --e-workers 8 --t-gpu 22.775 --t-p 45.571 --t-e 278.125 --pred-ms 0
+machine: Apple M3 Ultra | P=24 E=8 GPU cores=80 | power=AC
+q14: 59986052 rows, 916 morsels of 2^16 (915 MiB) | policy router | GPU on, 16 in flight | CPU 24 P + 8 E workers | build on gpu
+gpu spin: 156632 iterations ~ 18.7319 ms
+core probe (qos=p): 2.31884 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+core probe (qos=e): 2.19982 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+warm-up: 9.76267 ms (build 1.146166 ms on gpu) | GPU 16 morsels | P 801 | E 99 | finished at GPU 9.62504 P 3.62658 E 3.29008 ms | exact
+rep 0: 3.39054 ms (build 0.627375 ms on gpu) | GPU 21 morsels | P 787 | E 108 | finished at GPU 3.22713 P 3.15504 E 2.8285 ms | exact
+rep 1: 3.34187 ms (build 0.615292 ms on gpu) | GPU 39 morsels | P 789 | E 88 | finished at GPU 3.18721 P 3.11717 E 2.75387 ms | exact
+rep 2: 3.38713 ms (build 0.658208 ms on gpu) | GPU 45 morsels | P 781 | E 90 | finished at GPU 3.24713 P 3.10408 E 2.73033 ms | exact
+rep 3: 3.2955 ms (build 0.608250 ms on gpu) | GPU 47 morsels | P 789 | E 80 | finished at GPU 3.13804 P 3.08258 E 2.75567 ms | exact
+rep 4: 3.27488 ms (build 0.573292 ms on gpu) | GPU 47 morsels | P 785 | E 84 | finished at GPU 3.05967 P 3.04342 E 2.80075 ms | exact
+-> results/Apple-M3-Ultra_20261117-155421_ringrouter/run_query.csv
+## --policy split --morsel-log2 16 --build-device gpu --p-workers 24 --e-workers 8 --t-gpu 22.775 --t-p 45.571 --t-e 278.125 --pred-ms 0
+machine: Apple M3 Ultra | P=24 E=8 GPU cores=80 | power=AC
+q14: 59986052 rows, 916 morsels of 2^16 (915 MiB) | policy split | GPU on, 16 in flight | CPU 24 P + 8 E workers | build on gpu
+split: GPU share 0.0732624 -> morsels [0, 67), CPU [67, 916)
+gpu spin: 165437 iterations ~ 19.4886 ms
+core probe (qos=p): 2.29978 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+core probe (qos=e): 2.19968 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+warm-up: 11.2727 ms (build 1.310042 ms on gpu) | GPU 67 morsels | P 721 | E 128 | finished at GPU 11.1297 P 3.9145 E 3.92367 ms | exact
+rep 0: 4.32096 ms (build 0.637625 ms on gpu) | GPU 67 morsels | P 735 | E 114 | finished at GPU 4.19046 P 3.06171 E 3.11475 ms | exact
+rep 1: 4.62508 ms (build 0.583916 ms on gpu) | GPU 67 morsels | P 733 | E 116 | finished at GPU 4.49479 P 2.93292 E 3.02892 ms | exact
+rep 2: 3.87004 ms (build 0.571792 ms on gpu) | GPU 67 morsels | P 744 | E 105 | finished at GPU 3.75137 P 2.92675 E 2.98396 ms | exact
+rep 3: 3.92554 ms (build 0.595083 ms on gpu) | GPU 67 morsels | P 747 | E 102 | finished at GPU 3.8065 P 2.98 E 3.01225 ms | exact
+rep 4: 3.74233 ms (build 0.568291 ms on gpu) | GPU 67 morsels | P 753 | E 96 | finished at GPU 3.63013 P 2.95921 E 3.02287 ms | exact
+-> results/Apple-M3-Ultra_20261117-155421_ringrouter/run_query.csv
+## --policy router --morsel-log2 16 --build-device gpu --p-workers 24 --e-workers 8 --t-gpu 15.804 --t-p 45.571 --t-e 278.125 --pred-ms 2.144
+machine: Apple M3 Ultra | P=24 E=8 GPU cores=80 | power=AC
+q14: 59986052 rows, 916 morsels of 2^16 (915 MiB) | policy router | GPU on, 16 in flight | CPU 24 P + 8 E workers | build on gpu
+gpu spin: 168462 iterations ~ 20.0855 ms
+core probe (qos=p): 2.31168 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+core probe (qos=e): 2.19973 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+warm-up: 10.1765 ms (build 1.499833 ms on gpu) | GPU 16 morsels | P 813 | E 87 | finished at GPU 10.0424 P 4.18108 E 3.77425 ms | exact
+rep 0: 3.34879 ms (build 0.632292 ms on gpu) | GPU 21 morsels | P 789 | E 106 | finished at GPU 3.20312 P 3.10613 E 2.71075 ms | exact
+rep 1: 3.30529 ms (build 0.580542 ms on gpu) | GPU 40 morsels | P 792 | E 84 | finished at GPU 3.16133 P 3.05521 E 2.77767 ms | exact
+rep 2: 3.49938 ms (build 0.627875 ms on gpu) | GPU 47 morsels | P 784 | E 85 | finished at GPU 3.39004 P 3.07796 E 2.75387 ms | exact
+rep 3: 3.41329 ms (build 0.596458 ms on gpu) | GPU 45 morsels | P 800 | E 71 | finished at GPU 3.29992 P 3.08521 E 2.76512 ms | exact
+rep 4: 3.41946 ms (build 0.610250 ms on gpu) | GPU 45 morsels | P 783 | E 88 | finished at GPU 3.31167 P 3.10392 E 2.75033 ms | exact
+-> results/Apple-M3-Ultra_20261117-155421_ringrouter/run_query.csv
+## --policy split --morsel-log2 16 --build-device gpu --p-workers 24 --e-workers 8 --t-gpu 15.804 --t-p 45.571 --t-e 278.125 --pred-ms 2.144
+machine: Apple M3 Ultra | P=24 E=8 GPU cores=80 | power=AC
+q14: 59986052 rows, 916 morsels of 2^16 (915 MiB) | policy split | GPU on, 16 in flight | CPU 24 P + 8 E workers | build on gpu
+split: GPU share 0.102273 -> morsels [0, 94), CPU [94, 916)
+gpu spin: 168093 iterations ~ 20.0415 ms
+core probe (qos=p): 2.31469 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+core probe (qos=e): 2.19947 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+warm-up: 11.6683 ms (build 1.021375 ms on gpu) | GPU 94 morsels | P 762 | E 60 | finished at GPU 11.5289 P 3.39908 E 3.44433 ms | exact
+rep 0: 4.84367 ms (build 0.599083 ms on gpu) | GPU 94 morsels | P 743 | E 79 | finished at GPU 4.709 P 2.94888 E 3.02729 ms | exact
+rep 1: 4.73004 ms (build 0.612750 ms on gpu) | GPU 94 morsels | P 744 | E 78 | finished at GPU 4.61838 P 2.96779 E 3.04121 ms | exact
+rep 2: 4.58258 ms (build 0.649833 ms on gpu) | GPU 94 morsels | P 758 | E 64 | finished at GPU 4.46517 P 3.06375 E 3.13225 ms | exact
+rep 3: 4.57904 ms (build 0.563000 ms on gpu) | GPU 94 morsels | P 731 | E 91 | finished at GPU 4.43004 P 2.87729 E 2.95179 ms | exact
+rep 4: 4.58954 ms (build 0.599417 ms on gpu) | GPU 94 morsels | P 723 | E 99 | finished at GPU 4.46537 P 2.87754 E 2.91721 ms | exact
+-> results/Apple-M3-Ultra_20261117-155421_ringrouter/run_query.csv
+## --policy router --morsel-log2 16 --build-device gpu --p-workers 24 --e-workers 8 --t-gpu 22.775 --t-p 45.571 --t-e 278.125 --pred-ms 0
+machine: Apple M3 Ultra | P=24 E=8 GPU cores=80 | power=AC
+q14: 59986052 rows, 916 morsels of 2^16 (915 MiB) | policy router | GPU on, 16 in flight | CPU 24 P + 8 E workers | build on gpu
+gpu spin: 168183 iterations ~ 19.87 ms
+core probe (qos=p): 2.28658 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+core probe (qos=e): 2.20077 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+warm-up: 8.91267 ms (build 1.136750 ms on gpu) | GPU 5 morsels | P 813 | E 98 | finished at GPU 8.76313 P 3.71808 E 3.38908 ms | exact
+rep 0: 3.56304 ms (build 0.626792 ms on gpu) | GPU 25 morsels | P 802 | E 89 | finished at GPU 3.43921 P 3.17692 E 2.81046 ms | exact
+rep 1: 3.36217 ms (build 0.582125 ms on gpu) | GPU 31 morsels | P 794 | E 91 | finished at GPU 3.20996 P 3.08283 E 2.82604 ms | exact
+rep 2: 3.31462 ms (build 0.618208 ms on gpu) | GPU 43 morsels | P 782 | E 91 | finished at GPU 3.16142 P 3.08342 E 2.793 ms | exact
+rep 3: 3.31617 ms (build 0.594208 ms on gpu) | GPU 40 morsels | P 787 | E 89 | finished at GPU 3.18304 P 3.07892 E 2.74154 ms | exact
+rep 4: 3.35825 ms (build 0.587042 ms on gpu) | GPU 42 morsels | P 789 | E 85 | finished at GPU 3.24083 P 3.07854 E 2.74458 ms | exact
+-> results/Apple-M3-Ultra_20261117-155421_ringrouter/run_query.csv
+## --policy split --morsel-log2 16 --build-device gpu --p-workers 24 --e-workers 8 --t-gpu 22.775 --t-p 45.571 --t-e 278.125 --pred-ms 0
+machine: Apple M3 Ultra | P=24 E=8 GPU cores=80 | power=AC
+q14: 59986052 rows, 916 morsels of 2^16 (915 MiB) | policy split | GPU on, 16 in flight | CPU 24 P + 8 E workers | build on gpu
+split: GPU share 0.0732624 -> morsels [0, 67), CPU [67, 916)
+gpu spin: 168159 iterations ~ 19.867 ms
+core probe (qos=p): 2.30652 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+core probe (qos=e): 2.19888 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+warm-up: 10.9199 ms (build 1.112167 ms on gpu) | GPU 67 morsels | P 731 | E 118 | finished at GPU 10.7897 P 3.49388 E 3.49971 ms | exact
+rep 0: 4.12533 ms (build 0.599292 ms on gpu) | GPU 67 morsels | P 747 | E 102 | finished at GPU 4.00308 P 2.97742 E 3.06913 ms | exact
+rep 1: 4.13958 ms (build 0.610458 ms on gpu) | GPU 67 morsels | P 743 | E 106 | finished at GPU 4.02021 P 3.01142 E 3.07004 ms | exact
+rep 2: 4.0695 ms (build 0.587209 ms on gpu) | GPU 67 morsels | P 749 | E 100 | finished at GPU 3.95742 P 2.965 E 3.02467 ms | exact
+rep 3: 3.992 ms (build 0.596750 ms on gpu) | GPU 67 morsels | P 748 | E 101 | finished at GPU 3.87288 P 2.99771 E 3.15442 ms | exact
+rep 4: 4.09229 ms (build 0.572625 ms on gpu) | GPU 67 morsels | P 745 | E 104 | finished at GPU 3.96433 P 2.94496 E 3.02817 ms | exact
+-> results/Apple-M3-Ultra_20261117-155421_ringrouter/run_query.csv
+## --policy cpu --morsel-log2 18 --build-device cpu --p-workers 24 --e-workers 8 --pred-ms 2.733
+machine: Apple M3 Ultra | P=24 E=8 GPU cores=80 | power=AC
+q14: 59986052 rows, 229 morsels of 2^18 (915 MiB) | policy cpu | GPU off | CPU 24 P + 8 E workers | build on cpu
+gpu spin: 169215 iterations ~ 19.9672 ms
+core probe (qos=p): 2.30618 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+core probe (qos=e): 2.20133 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+warm-up: 3.61054 ms (build 0.983708 ms on cpu) | GPU 0 morsels | P 192 | E 37 | finished at GPU 0 P 3.31567 E 3.55675 ms | exact
+rep 0: 3.61767 ms (build 0.998375 ms on cpu) | GPU 0 morsels | P 192 | E 37 | finished at GPU 0 P 3.36504 E 3.536 ms | exact
+rep 1: 3.56188 ms (build 1.000583 ms on cpu) | GPU 0 morsels | P 192 | E 37 | finished at GPU 0 P 3.33771 E 3.50679 ms | exact
+rep 2: 3.55475 ms (build 0.951334 ms on cpu) | GPU 0 morsels | P 192 | E 37 | finished at GPU 0 P 3.28279 E 3.49108 ms | exact
+rep 3: 3.60229 ms (build 1.046083 ms on cpu) | GPU 0 morsels | P 192 | E 37 | finished at GPU 0 P 3.3715 E 3.51308 ms | exact
+rep 4: 3.62808 ms (build 1.029042 ms on cpu) | GPU 0 morsels | P 192 | E 37 | finished at GPU 0 P 3.35804 E 3.51796 ms | exact
+-> results/Apple-M3-Ultra_20261117-155421_ringrouter/run_query.csv
+## --policy router --morsel-log2 18 --build-device gpu --p-workers 24 --e-workers 8 --t-gpu 16.023 --t-p 182.397 --t-e 1099.902 --pred-ms 1.848
+machine: Apple M3 Ultra | P=24 E=8 GPU cores=80 | power=AC
+q14: 59986052 rows, 229 morsels of 2^18 (915 MiB) | policy router | GPU on, 16 in flight | CPU 24 P + 8 E workers | build on gpu
+gpu spin: 168197 iterations ~ 19.9896 ms
+core probe (qos=p): 2.30623 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+core probe (qos=e): 2.20336 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+warm-up: 9.42763 ms (build 1.092166 ms on gpu) | GPU 16 morsels | P 213 | E 0 | finished at GPU 9.28742 P 3.48746 E 0 ms | exact
+rep 0: 2.9455 ms (build 0.617375 ms on gpu) | GPU 44 morsels | P 185 | E 0 | finished at GPU 2.80362 P 2.78642 E 0 ms | exact
+rep 1: 3.02038 ms (build 0.606625 ms on gpu) | GPU 49 morsels | P 180 | E 0 | finished at GPU 2.88267 P 2.67867 E 0 ms | exact
+rep 2: 3.07192 ms (build 0.579875 ms on gpu) | GPU 54 morsels | P 175 | E 0 | finished at GPU 2.94462 P 2.58779 E 0 ms | exact
+rep 3: 2.96963 ms (build 0.575292 ms on gpu) | GPU 56 morsels | P 170 | E 3 | finished at GPU 2.841 P 2.57362 E 1.02946 ms | exact
+rep 4: 3.025 ms (build 0.541250 ms on gpu) | GPU 49 morsels | P 180 | E 0 | finished at GPU 2.88796 P 2.644 E 0 ms | exact
+-> results/Apple-M3-Ultra_20261117-155421_ringrouter/run_query.csv
+## --policy split --morsel-log2 18 --build-device gpu --p-workers 24 --e-workers 8 --t-gpu 16.023 --t-p 182.397 --t-e 1099.902 --pred-ms 1.848
+machine: Apple M3 Ultra | P=24 E=8 GPU cores=80 | power=AC
+q14: 59986052 rows, 229 morsels of 2^18 (915 MiB) | policy split | GPU on, 16 in flight | CPU 24 P + 8 E workers | build on gpu
+split: GPU share 0.31009 -> morsels [0, 71), CPU [71, 229)
+gpu spin: 166175 iterations ~ 19.7824 ms
+core probe (qos=p): 2.27749 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+core probe (qos=e): 2.2016 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+warm-up: 10.7846 ms (build 1.145291 ms on gpu) | GPU 71 morsels | P 139 | E 19 | finished at GPU 10.6659 P 2.92713 E 2.93812 ms | exact
+rep 0: 3.67417 ms (build 0.583333 ms on gpu) | GPU 71 morsels | P 136 | E 22 | finished at GPU 3.56775 P 2.34275 E 2.42862 ms | exact
+rep 1: 3.91496 ms (build 0.590834 ms on gpu) | GPU 71 morsels | P 137 | E 21 | finished at GPU 3.79396 P 2.37604 E 2.53196 ms | exact
+rep 2: 3.68542 ms (build 0.538042 ms on gpu) | GPU 71 morsels | P 139 | E 19 | finished at GPU 3.55837 P 2.33367 E 2.37296 ms | exact
+rep 3: 3.70704 ms (build 0.700875 ms on gpu) | GPU 71 morsels | P 137 | E 21 | finished at GPU 3.58158 P 2.51554 E 2.70433 ms | exact
+rep 4: 4.0745 ms (build 0.569250 ms on gpu) | GPU 71 morsels | P 139 | E 19 | finished at GPU 3.94588 P 2.37204 E 2.462 ms | exact
+-> results/Apple-M3-Ultra_20261117-155421_ringrouter/run_query.csv
+## --policy router --morsel-log2 18 --build-device gpu --p-workers 24 --e-workers 8 --t-gpu 25.043 --t-p 182.397 --t-e 1099.902 --pred-ms 0
+machine: Apple M3 Ultra | P=24 E=8 GPU cores=80 | power=AC
+q14: 59986052 rows, 229 morsels of 2^18 (915 MiB) | policy router | GPU on, 16 in flight | CPU 24 P + 8 E workers | build on gpu
+gpu spin: 168707 iterations ~ 20.0222 ms
+core probe (qos=p): 2.29394 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+core probe (qos=e): 2.20029 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+warm-up: 9.80779 ms (build 1.250209 ms on gpu) | GPU 16 morsels | P 206 | E 7 | finished at GPU 9.66779 P 3.66508 E 1.97 ms | exact
+rep 0: 2.91667 ms (build 0.565875 ms on gpu) | GPU 44 morsels | P 177 | E 8 | finished at GPU 2.77579 P 2.65646 E 1.529 ms | exact
+rep 1: 3.05342 ms (build 0.629917 ms on gpu) | GPU 42 morsels | P 181 | E 6 | finished at GPU 2.92846 P 2.78475 E 1.39342 ms | exact
+rep 2: 3.23325 ms (build 0.784958 ms on gpu) | GPU 44 morsels | P 178 | E 7 | finished at GPU 3.09954 P 2.86808 E 1.63379 ms | exact
+rep 3: 3.12625 ms (build 0.587000 ms on gpu) | GPU 52 morsels | P 169 | E 8 | finished at GPU 2.99929 P 2.60113 E 1.549 ms | exact
+rep 4: 2.79479 ms (build 0.607875 ms on gpu) | GPU 46 morsels | P 177 | E 6 | finished at GPU 2.65792 P 2.68404 E 1.29867 ms | exact
+-> results/Apple-M3-Ultra_20261117-155421_ringrouter/run_query.csv
+## --policy split --morsel-log2 18 --build-device gpu --p-workers 24 --e-workers 8 --t-gpu 25.043 --t-p 182.397 --t-e 1099.902 --pred-ms 0
+machine: Apple M3 Ultra | P=24 E=8 GPU cores=80 | power=AC
+q14: 59986052 rows, 229 morsels of 2^18 (915 MiB) | policy split | GPU on, 16 in flight | CPU 24 P + 8 E workers | build on gpu
+split: GPU share 0.223347 -> morsels [0, 51), CPU [51, 229)
+gpu spin: 167680 iterations ~ 19.8405 ms
+core probe (qos=p): 2.28144 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+core probe (qos=e): 2.20038 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+warm-up: 10.642 ms (build 1.176708 ms on gpu) | GPU 51 morsels | P 153 | E 25 | finished at GPU 10.5058 P 3.21383 E 3.25338 ms | exact
+rep 0: 3.57512 ms (build 0.645459 ms on gpu) | GPU 51 morsels | P 158 | E 20 | finished at GPU 3.45467 P 2.68662 E 2.75492 ms | exact
+rep 1: 3.31283 ms (build 0.578000 ms on gpu) | GPU 51 morsels | P 157 | E 21 | finished at GPU 3.18175 P 2.58108 E 2.69287 ms | exact
+rep 2: 3.43471 ms (build 0.632792 ms on gpu) | GPU 51 morsels | P 155 | E 23 | finished at GPU 3.31983 P 2.6445 E 2.76092 ms | exact
+rep 3: 3.30337 ms (build 0.558917 ms on gpu) | GPU 51 morsels | P 155 | E 23 | finished at GPU 3.1705 P 2.57683 E 2.71504 ms | exact
+rep 4: 3.25392 ms (build 0.588667 ms on gpu) | GPU 51 morsels | P 165 | E 13 | finished at GPU 3.1305 P 2.66029 E 2.68117 ms | exact
+-> results/Apple-M3-Ultra_20261117-155421_ringrouter/run_query.csv
+## --policy router --morsel-log2 18 --build-device gpu --p-workers 24 --e-workers 8 --t-gpu 16.023 --t-p 182.397 --t-e 1099.902 --pred-ms 1.848
+machine: Apple M3 Ultra | P=24 E=8 GPU cores=80 | power=AC
+q14: 59986052 rows, 229 morsels of 2^18 (915 MiB) | policy router | GPU on, 16 in flight | CPU 24 P + 8 E workers | build on gpu
+gpu spin: 166195 iterations ~ 19.7547 ms
+core probe (qos=p): 2.29086 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+core probe (qos=e): 2.19986 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+warm-up: 9.64021 ms (build 1.159541 ms on gpu) | GPU 16 morsels | P 210 | E 3 | finished at GPU 9.50304 P 3.53713 E 1.77875 ms | exact
+rep 0: 3.05596 ms (build 0.579584 ms on gpu) | GPU 55 morsels | P 174 | E 0 | finished at GPU 2.91154 P 2.62858 E 0 ms | exact
+rep 1: 2.93542 ms (build 0.585459 ms on gpu) | GPU 47 morsels | P 182 | E 0 | finished at GPU 2.80421 P 2.66442 E 0 ms | exact
+rep 2: 2.88142 ms (build 0.577583 ms on gpu) | GPU 41 morsels | P 188 | E 0 | finished at GPU 2.72604 P 2.72383 E 0 ms | exact
+rep 3: 2.914 ms (build 0.575959 ms on gpu) | GPU 55 morsels | P 173 | E 1 | finished at GPU 2.78042 P 2.57437 E 1.01079 ms | exact
+rep 4: 2.95696 ms (build 0.582667 ms on gpu) | GPU 46 morsels | P 182 | E 1 | finished at GPU 2.82754 P 2.67013 E 0.947334 ms | exact
+-> results/Apple-M3-Ultra_20261117-155421_ringrouter/run_query.csv
+## --policy split --morsel-log2 18 --build-device gpu --p-workers 24 --e-workers 8 --t-gpu 16.023 --t-p 182.397 --t-e 1099.902 --pred-ms 1.848
+machine: Apple M3 Ultra | P=24 E=8 GPU cores=80 | power=AC
+q14: 59986052 rows, 229 morsels of 2^18 (915 MiB) | policy split | GPU on, 16 in flight | CPU 24 P + 8 E workers | build on gpu
+split: GPU share 0.31009 -> morsels [0, 71), CPU [71, 229)
+gpu spin: 167183 iterations ~ 19.8972 ms
+core probe (qos=p): 2.30725 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+core probe (qos=e): 2.20031 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+warm-up: 11.1161 ms (build 1.201583 ms on gpu) | GPU 71 morsels | P 141 | E 17 | finished at GPU 10.9923 P 3.00846 E 3.04204 ms | exact
+rep 0: 3.74379 ms (build 0.660500 ms on gpu) | GPU 71 morsels | P 139 | E 19 | finished at GPU 3.61454 P 2.46283 E 2.53167 ms | exact
+rep 1: 3.711 ms (build 0.569166 ms on gpu) | GPU 71 morsels | P 138 | E 20 | finished at GPU 3.5885 P 2.36175 E 2.38638 ms | exact
+rep 2: 3.70412 ms (build 0.565583 ms on gpu) | GPU 71 morsels | P 138 | E 20 | finished at GPU 3.57096 P 2.32388 E 2.39521 ms | exact
+rep 3: 3.75554 ms (build 0.606792 ms on gpu) | GPU 71 morsels | P 136 | E 22 | finished at GPU 3.64608 P 2.37504 E 2.44137 ms | exact
+rep 4: 3.74042 ms (build 0.559584 ms on gpu) | GPU 71 morsels | P 139 | E 19 | finished at GPU 3.60558 P 2.30946 E 2.37 ms | exact
+-> results/Apple-M3-Ultra_20261117-155421_ringrouter/run_query.csv
+## --policy router --morsel-log2 18 --build-device gpu --p-workers 24 --e-workers 8 --t-gpu 25.043 --t-p 182.397 --t-e 1099.902 --pred-ms 0
+machine: Apple M3 Ultra | P=24 E=8 GPU cores=80 | power=AC
+q14: 59986052 rows, 229 morsels of 2^18 (915 MiB) | policy router | GPU on, 16 in flight | CPU 24 P + 8 E workers | build on gpu
+gpu spin: 167691 iterations ~ 19.9932 ms
+core probe (qos=p): 2.29429 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+core probe (qos=e): 2.19965 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+warm-up: 9.18154 ms (build 0.988667 ms on gpu) | GPU 15 morsels | P 208 | E 6 | finished at GPU 9.04529 P 3.40183 E 1.71533 ms | exact
+rep 0: 3.43492 ms (build 0.663959 ms on gpu) | GPU 27 morsels | P 194 | E 8 | finished at GPU 3.29954 P 2.98225 E 1.56021 ms | exact
+rep 1: 2.88937 ms (build 0.588292 ms on gpu) | GPU 39 morsels | P 183 | E 7 | finished at GPU 2.744 P 2.81517 E 1.45283 ms | exact
+rep 2: 3.06992 ms (build 0.631792 ms on gpu) | GPU 50 morsels | P 171 | E 8 | finished at GPU 2.94629 P 2.74833 E 1.68342 ms | exact
+rep 3: 2.94679 ms (build 0.581625 ms on gpu) | GPU 44 morsels | P 178 | E 7 | finished at GPU 2.82225 P 2.67854 E 1.31267 ms | exact
+rep 4: 3.08308 ms (build 0.635375 ms on gpu) | GPU 47 morsels | P 175 | E 7 | finished at GPU 2.95371 P 2.70575 E 1.44321 ms | exact
+-> results/Apple-M3-Ultra_20261117-155421_ringrouter/run_query.csv
+## --policy split --morsel-log2 18 --build-device gpu --p-workers 24 --e-workers 8 --t-gpu 25.043 --t-p 182.397 --t-e 1099.902 --pred-ms 0
+machine: Apple M3 Ultra | P=24 E=8 GPU cores=80 | power=AC
+q14: 59986052 rows, 229 morsels of 2^18 (915 MiB) | policy split | GPU on, 16 in flight | CPU 24 P + 8 E workers | build on gpu
+split: GPU share 0.223347 -> morsels [0, 51), CPU [51, 229)
+gpu spin: 166842 iterations ~ 19.7116 ms
+core probe (qos=p): 2.30938 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+core probe (qos=e): 2.20185 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+warm-up: 10.5252 ms (build 1.130417 ms on gpu) | GPU 51 morsels | P 155 | E 23 | finished at GPU 10.393 P 3.11583 E 3.20517 ms | exact
+rep 0: 3.57625 ms (build 0.605000 ms on gpu) | GPU 51 morsels | P 155 | E 23 | finished at GPU 3.44379 P 2.62892 E 2.73504 ms | exact
+rep 1: 3.45512 ms (build 0.582791 ms on gpu) | GPU 51 morsels | P 152 | E 26 | finished at GPU 3.33312 P 2.56596 E 2.859 ms | exact
+rep 2: 3.42583 ms (build 0.580083 ms on gpu) | GPU 51 morsels | P 151 | E 27 | finished at GPU 3.31079 P 2.61733 E 2.69954 ms | exact
+rep 3: 3.37496 ms (build 0.605417 ms on gpu) | GPU 51 morsels | P 156 | E 22 | finished at GPU 3.24729 P 2.61808 E 2.74592 ms | exact
+rep 4: 3.52188 ms (build 0.555875 ms on gpu) | GPU 51 morsels | P 153 | E 25 | finished at GPU 3.40654 P 2.57892 E 2.67308 ms | exact
+-> results/Apple-M3-Ultra_20261117-155421_ringrouter/run_query.csv
+## --policy cpu --morsel-log2 20 --build-device cpu --p-workers 24 --e-workers 8 --pred-ms 2.754
+machine: Apple M3 Ultra | P=24 E=8 GPU cores=80 | power=AC
+q14: 59986052 rows, 58 morsels of 2^20 (915 MiB) | policy cpu | GPU off | CPU 24 P + 8 E workers | build on cpu
+gpu spin: 169220 iterations ~ 20.1875 ms
+core probe (qos=p): 2.28966 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+core probe (qos=e): 2.19943 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+warm-up: 3.615 ms (build 1.098750 ms on cpu) | GPU 0 morsels | P 50 | E 8 | finished at GPU 0 P 3.56571 E 3.33237 ms | exact
+rep 0: 3.67554 ms (build 1.066208 ms on cpu) | GPU 0 morsels | P 48 | E 10 | finished at GPU 0 P 3.32317 E 3.65821 ms | exact
+rep 1: 3.73862 ms (build 0.956458 ms on cpu) | GPU 0 morsels | P 48 | E 10 | finished at GPU 0 P 3.18271 E 3.71346 ms | exact
+rep 2: 3.80375 ms (build 1.081458 ms on cpu) | GPU 0 morsels | P 48 | E 10 | finished at GPU 0 P 3.31342 E 3.784 ms | exact
+rep 3: 3.64288 ms (build 0.974541 ms on cpu) | GPU 0 morsels | P 48 | E 10 | finished at GPU 0 P 3.19917 E 3.60796 ms | exact
+rep 4: 3.60833 ms (build 0.979958 ms on cpu) | GPU 0 morsels | P 48 | E 10 | finished at GPU 0 P 3.20921 E 3.58921 ms | exact
+-> results/Apple-M3-Ultra_20261117-155421_ringrouter/run_query.csv
+## --policy router --morsel-log2 20 --build-device gpu --p-workers 24 --e-workers 8 --t-gpu 16.896 --t-p 729.703 --t-e 4387.019 --pred-ms 1.401
+machine: Apple M3 Ultra | P=24 E=8 GPU cores=80 | power=AC
+q14: 59986052 rows, 58 morsels of 2^20 (915 MiB) | policy router | GPU on, 16 in flight | CPU 24 P + 8 E workers | build on gpu
+gpu spin: 168711 iterations ~ 19.9321 ms
+core probe (qos=p): 2.2967 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+core probe (qos=e): 2.20061 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+warm-up: 9.76533 ms (build 1.107417 ms on gpu) | GPU 44 morsels | P 14 | E 0 | finished at GPU 9.61146 P 2.46854 E 0 ms | exact
+rep 0: 2.46783 ms (build 0.632708 ms on gpu) | GPU 51 morsels | P 7 | E 0 | finished at GPU 2.36229 P 1.31592 E 0 ms | exact
+rep 1: 2.3975 ms (build 0.613250 ms on gpu) | GPU 51 morsels | P 7 | E 0 | finished at GPU 2.29621 P 1.35825 E 0 ms | exact
+rep 2: 2.57587 ms (build 0.618000 ms on gpu) | GPU 50 morsels | P 8 | E 0 | finished at GPU 2.4535 P 1.29983 E 0 ms | exact
+rep 3: 2.28425 ms (build 0.568875 ms on gpu) | GPU 50 morsels | P 8 | E 0 | finished at GPU 2.16275 P 1.34413 E 0 ms | exact
+rep 4: 2.66396 ms (build 0.660250 ms on gpu) | GPU 51 morsels | P 7 | E 0 | finished at GPU 2.54258 P 1.25771 E 0 ms | exact
+-> results/Apple-M3-Ultra_20261117-155421_ringrouter/run_query.csv
+## --policy split --morsel-log2 20 --build-device gpu --p-workers 24 --e-workers 8 --t-gpu 16.896 --t-p 729.703 --t-e 4387.019 --pred-ms 1.401
+machine: Apple M3 Ultra | P=24 E=8 GPU cores=80 | power=AC
+q14: 59986052 rows, 58 morsels of 2^20 (915 MiB) | policy split | GPU on, 16 in flight | CPU 24 P + 8 E workers | build on gpu
+split: GPU share 0.63031 -> morsels [0, 37), CPU [37, 58)
+gpu spin: 168712 iterations ~ 20.1769 ms
+core probe (qos=p): 2.29185 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+core probe (qos=e): 2.19998 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+warm-up: 9.74467 ms (build 1.125000 ms on gpu) | GPU 37 morsels | P 18 | E 3 | finished at GPU 9.61471 P 2.17875 E 2.38183 ms | exact
+rep 0: 2.58487 ms (build 0.676250 ms on gpu) | GPU 37 morsels | P 18 | E 3 | finished at GPU 2.36229 P 1.70379 E 2.53313 ms | exact
+rep 1: 2.05604 ms (build 0.562375 ms on gpu) | GPU 37 morsels | P 16 | E 5 | finished at GPU 1.9025 P 1.64162 E 1.97175 ms | exact
+rep 2: 2.18754 ms (build 0.633375 ms on gpu) | GPU 37 morsels | P 18 | E 3 | finished at GPU 2.0745 P 1.78242 E 1.91825 ms | exact
+rep 3: 2.14521 ms (build 0.581708 ms on gpu) | GPU 37 morsels | P 18 | E 3 | finished at GPU 2.03971 P 1.56067 E 1.70929 ms | exact
+rep 4: 2.08058 ms (build 0.546792 ms on gpu) | GPU 37 morsels | P 18 | E 3 | finished at GPU 1.97904 P 1.62171 E 1.71588 ms | exact
+-> results/Apple-M3-Ultra_20261117-155421_ringrouter/run_query.csv
+## --policy router --morsel-log2 20 --build-device gpu --p-workers 24 --e-workers 8 --t-gpu 26.319 --t-p 729.703 --t-e 4387.019 --pred-ms 0
+machine: Apple M3 Ultra | P=24 E=8 GPU cores=80 | power=AC
+q14: 59986052 rows, 58 morsels of 2^20 (915 MiB) | policy router | GPU on, 16 in flight | CPU 24 P + 8 E workers | build on gpu
+gpu spin: 159018 iterations ~ 19.0173 ms
+core probe (qos=p): 2.3148 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+core probe (qos=e): 2.1995 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+warm-up: 9.28913 ms (build 1.168125 ms on gpu) | GPU 28 morsels | P 30 | E 0 | finished at GPU 9.16371 P 3.29021 E 0 ms | exact
+rep 0: 2.22475 ms (build 0.593666 ms on gpu) | GPU 42 morsels | P 16 | E 0 | finished at GPU 2.10021 P 1.6685 E 0 ms | exact
+rep 1: 2.34938 ms (build 0.618333 ms on gpu) | GPU 43 morsels | P 15 | E 0 | finished at GPU 2.19342 P 1.41846 E 0 ms | exact
+rep 2: 2.52879 ms (build 0.571417 ms on gpu) | GPU 41 morsels | P 17 | E 0 | finished at GPU 2.41929 P 1.70233 E 0 ms | exact
+rep 3: 2.12008 ms (build 0.539292 ms on gpu) | GPU 43 morsels | P 15 | E 0 | finished at GPU 1.99225 P 1.43821 E 0 ms | exact
+rep 4: 2.21596 ms (build 0.579042 ms on gpu) | GPU 42 morsels | P 16 | E 0 | finished at GPU 2.10312 P 1.77204 E 0 ms | exact
+-> results/Apple-M3-Ultra_20261117-155421_ringrouter/run_query.csv
+## --policy split --morsel-log2 20 --build-device gpu --p-workers 24 --e-workers 8 --t-gpu 26.319 --t-p 729.703 --t-e 4387.019 --pred-ms 0
+machine: Apple M3 Ultra | P=24 E=8 GPU cores=80 | power=AC
+q14: 59986052 rows, 58 morsels of 2^20 (915 MiB) | policy split | GPU on, 16 in flight | CPU 24 P + 8 E workers | build on gpu
+split: GPU share 0.522567 -> morsels [0, 30), CPU [30, 58)
+gpu spin: 168195 iterations ~ 20.115 ms
+core probe (qos=p): 2.30091 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+core probe (qos=e): 2.20296 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+warm-up: 9.47454 ms (build 1.223834 ms on gpu) | GPU 30 morsels | P 23 | E 5 | finished at GPU 9.32662 P 2.45292 E 2.94154 ms | exact
+rep 0: 2.31663 ms (build 0.563625 ms on gpu) | GPU 30 morsels | P 22 | E 6 | finished at GPU 2.19188 P 1.75904 E 2.22354 ms | exact
+rep 1: 2.32433 ms (build 0.624250 ms on gpu) | GPU 30 morsels | P 22 | E 6 | finished at GPU 2.05042 P 1.79337 E 2.29446 ms | exact
+rep 2: 2.336 ms (build 0.572125 ms on gpu) | GPU 30 morsels | P 24 | E 4 | finished at GPU 2.21921 P 1.75333 E 1.97975 ms | exact
+rep 3: 2.48317 ms (build 0.598291 ms on gpu) | GPU 30 morsels | P 23 | E 5 | finished at GPU 2.35129 P 1.80129 E 2.28667 ms | exact
+rep 4: 2.31321 ms (build 0.636708 ms on gpu) | GPU 30 morsels | P 23 | E 5 | finished at GPU 2.16854 P 1.83571 E 2.20512 ms | exact
+-> results/Apple-M3-Ultra_20261117-155421_ringrouter/run_query.csv
+## --policy router --morsel-log2 20 --build-device gpu --p-workers 24 --e-workers 8 --t-gpu 16.896 --t-p 729.703 --t-e 4387.019 --pred-ms 1.401
+machine: Apple M3 Ultra | P=24 E=8 GPU cores=80 | power=AC
+q14: 59986052 rows, 58 morsels of 2^20 (915 MiB) | policy router | GPU on, 16 in flight | CPU 24 P + 8 E workers | build on gpu
+gpu spin: 168200 iterations ~ 19.9323 ms
+core probe (qos=p): 2.29169 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+core probe (qos=e): 2.20062 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+warm-up: 9.42604 ms (build 1.155166 ms on gpu) | GPU 44 morsels | P 14 | E 0 | finished at GPU 9.28667 P 2.76771 E 0 ms | exact
+rep 0: 2.31733 ms (build 0.617584 ms on gpu) | GPU 51 morsels | P 7 | E 0 | finished at GPU 2.19167 P 1.32579 E 0 ms | exact
+rep 1: 2.38629 ms (build 0.606875 ms on gpu) | GPU 51 morsels | P 7 | E 0 | finished at GPU 2.25108 P 1.24737 E 0 ms | exact
+rep 2: 2.63175 ms (build 0.558917 ms on gpu) | GPU 50 morsels | P 8 | E 0 | finished at GPU 2.50267 P 1.56475 E 0 ms | exact
+rep 3: 2.38142 ms (build 0.640625 ms on gpu) | GPU 51 morsels | P 7 | E 0 | finished at GPU 2.26308 P 1.39771 E 0 ms | exact
+rep 4: 2.291 ms (build 0.567917 ms on gpu) | GPU 51 morsels | P 7 | E 0 | finished at GPU 2.15883 P 1.16854 E 0 ms | exact
+-> results/Apple-M3-Ultra_20261117-155421_ringrouter/run_query.csv
+## --policy split --morsel-log2 20 --build-device gpu --p-workers 24 --e-workers 8 --t-gpu 16.896 --t-p 729.703 --t-e 4387.019 --pred-ms 1.401
+machine: Apple M3 Ultra | P=24 E=8 GPU cores=80 | power=AC
+q14: 59986052 rows, 58 morsels of 2^20 (915 MiB) | policy split | GPU on, 16 in flight | CPU 24 P + 8 E workers | build on gpu
+split: GPU share 0.63031 -> morsels [0, 37), CPU [37, 58)
+gpu spin: 169133 iterations ~ 20.2674 ms
+core probe (qos=p): 2.34908 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+core probe (qos=e): 2.20051 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+warm-up: 9.72083 ms (build 1.266833 ms on gpu) | GPU 37 morsels | P 17 | E 4 | finished at GPU 9.60337 P 2.32437 E 2.34467 ms | exact
+rep 0: 2.96646 ms (build 1.249667 ms on gpu) | GPU 37 morsels | P 16 | E 5 | finished at GPU 2.81562 P 2.185 E 2.85221 ms | exact
+rep 1: 2.45512 ms (build 0.593750 ms on gpu) | GPU 37 morsels | P 16 | E 5 | finished at GPU 2.32987 P 1.61471 E 2.08433 ms | exact
+rep 2: 2.13129 ms (build 0.577875 ms on gpu) | GPU 37 morsels | P 19 | E 2 | finished at GPU 2.01542 P 1.67171 E 1.73033 ms | exact
+rep 3: 2.42104 ms (build 0.619458 ms on gpu) | GPU 37 morsels | P 13 | E 8 | finished at GPU 2.00567 P 1.40504 E 2.41017 ms | exact
+rep 4: 1.93592 ms (build 0.606125 ms on gpu) | GPU 37 morsels | P 19 | E 2 | finished at GPU 1.82779 P 1.63692 E 1.72725 ms | exact
+-> results/Apple-M3-Ultra_20261117-155421_ringrouter/run_query.csv
+## --policy router --morsel-log2 20 --build-device gpu --p-workers 24 --e-workers 8 --t-gpu 26.319 --t-p 729.703 --t-e 4387.019 --pred-ms 0
+machine: Apple M3 Ultra | P=24 E=8 GPU cores=80 | power=AC
+q14: 59986052 rows, 58 morsels of 2^20 (915 MiB) | policy router | GPU on, 16 in flight | CPU 24 P + 8 E workers | build on gpu
+gpu spin: 168205 iterations ~ 20.1167 ms
+core probe (qos=p): 2.3031 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+core probe (qos=e): 2.19948 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+warm-up: 9.48504 ms (build 1.150208 ms on gpu) | GPU 28 morsels | P 30 | E 0 | finished at GPU 9.3445 P 3.20337 E 0 ms | exact
+rep 0: 2.39062 ms (build 0.603125 ms on gpu) | GPU 40 morsels | P 18 | E 0 | finished at GPU 2.25817 P 1.75417 E 0 ms | exact
+rep 1: 2.24204 ms (build 0.605000 ms on gpu) | GPU 42 morsels | P 16 | E 0 | finished at GPU 2.12613 P 1.71988 E 0 ms | exact
+rep 2: 2.28775 ms (build 0.631667 ms on gpu) | GPU 40 morsels | P 18 | E 0 | finished at GPU 2.16425 P 1.79446 E 0 ms | exact
+rep 3: 2.1385 ms (build 0.597250 ms on gpu) | GPU 42 morsels | P 16 | E 0 | finished at GPU 2.008 P 1.6495 E 0 ms | exact
+rep 4: 2.20296 ms (build 0.551667 ms on gpu) | GPU 42 morsels | P 16 | E 0 | finished at GPU 2.10083 P 1.65833 E 0 ms | exact
+-> results/Apple-M3-Ultra_20261117-155421_ringrouter/run_query.csv
+## --policy split --morsel-log2 20 --build-device gpu --p-workers 24 --e-workers 8 --t-gpu 26.319 --t-p 729.703 --t-e 4387.019 --pred-ms 0
+machine: Apple M3 Ultra | P=24 E=8 GPU cores=80 | power=AC
+q14: 59986052 rows, 58 morsels of 2^20 (915 MiB) | policy split | GPU on, 16 in flight | CPU 24 P + 8 E workers | build on gpu
+split: GPU share 0.522567 -> morsels [0, 30), CPU [30, 58)
+gpu spin: 167188 iterations ~ 19.8724 ms
+core probe (qos=p): 2.2788 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+core probe (qos=e): 2.19992 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+warm-up: 9.25113 ms (build 0.987958 ms on gpu) | GPU 30 morsels | P 23 | E 5 | finished at GPU 9.12708 P 2.20717 E 2.53525 ms | exact
+rep 0: 2.44958 ms (build 0.579291 ms on gpu) | GPU 30 morsels | P 24 | E 4 | finished at GPU 2.17283 P 1.78171 E 2.42746 ms | exact
+rep 1: 2.33237 ms (build 0.714042 ms on gpu) | GPU 30 morsels | P 23 | E 5 | finished at GPU 2.16571 P 1.92504 E 2.24388 ms | exact
+rep 2: 2.60442 ms (build 0.707584 ms on gpu) | GPU 30 morsels | P 23 | E 5 | finished at GPU 2.33121 P 1.95558 E 2.54558 ms | exact
+rep 3: 2.25254 ms (build 0.592500 ms on gpu) | GPU 30 morsels | P 24 | E 4 | finished at GPU 1.84112 P 1.79367 E 2.23821 ms | exact
+rep 4: 2.26954 ms (build 0.754125 ms on gpu) | GPU 30 morsels | P 23 | E 5 | finished at GPU 1.84183 P 2.01021 E 2.24538 ms | exact
+-> results/Apple-M3-Ultra_20261117-155421_ringrouter/run_query.csv
+## --policy cpu --morsel-log2 22 --build-device cpu --p-workers 24 --e-workers 8 --pred-ms 2.812
+machine: Apple M3 Ultra | P=24 E=8 GPU cores=80 | power=AC
+q14: 59986052 rows, 15 morsels of 2^22 (915 MiB) | policy cpu | GPU off | CPU 24 P + 8 E workers | build on cpu
+gpu spin: 167686 iterations ~ 20.0138 ms
+core probe (qos=p): 2.29228 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+core probe (qos=e): 2.19927 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+warm-up: 5.12554 ms (build 1.590875 ms on cpu) | GPU 0 morsels | P 15 | E 0 | finished at GPU 0 P 5.06283 E 0 ms | exact
+rep 0: 3.86963 ms (build 1.012791 ms on cpu) | GPU 0 morsels | P 15 | E 0 | finished at GPU 0 P 3.82012 E 0 ms | exact
+rep 1: 4.02975 ms (build 1.075791 ms on cpu) | GPU 0 morsels | P 15 | E 0 | finished at GPU 0 P 3.96679 E 0 ms | exact
+rep 2: 3.77367 ms (build 1.008458 ms on cpu) | GPU 0 morsels | P 15 | E 0 | finished at GPU 0 P 3.70246 E 0 ms | exact
+rep 3: 4.07263 ms (build 1.039708 ms on cpu) | GPU 0 morsels | P 15 | E 0 | finished at GPU 0 P 4.00846 E 0 ms | exact
+rep 4: 4.16242 ms (build 0.908458 ms on cpu) | GPU 0 morsels | P 15 | E 0 | finished at GPU 0 P 4.08662 E 0 ms | exact
+-> results/Apple-M3-Ultra_20261117-155421_ringrouter/run_query.csv
+## --policy router --morsel-log2 22 --build-device gpu --p-workers 24 --e-workers 8 --t-gpu 46.795 --t-p 9022.579 --t-e 54203.247 --pred-ms 1.461
+machine: Apple M3 Ultra | P=24 E=8 GPU cores=80 | power=AC
+q14: 59986052 rows, 15 morsels of 2^22 (915 MiB) | policy router | GPU on, 16 in flight | CPU 24 P + 8 E workers | build on gpu
+gpu spin: 168200 iterations ~ 19.9327 ms
+core probe (qos=p): 2.29271 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+core probe (qos=e): 2.20006 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+warm-up: 8.94333 ms (build 1.123875 ms on gpu) | GPU 15 morsels | P 0 | E 0 | finished at GPU 8.82125 P 0 E 0 ms | exact
+rep 0: 1.50454 ms (build 0.601208 ms on gpu) | GPU 15 morsels | P 0 | E 0 | finished at GPU 1.40046 P 0 E 0 ms | exact
+rep 1: 1.57108 ms (build 0.641375 ms on gpu) | GPU 15 morsels | P 0 | E 0 | finished at GPU 1.46467 P 0 E 0 ms | exact
+rep 2: 1.56417 ms (build 0.638833 ms on gpu) | GPU 15 morsels | P 0 | E 0 | finished at GPU 1.46692 P 0 E 0 ms | exact
+rep 3: 1.44925 ms (build 0.576459 ms on gpu) | GPU 15 morsels | P 0 | E 0 | finished at GPU 1.34792 P 0 E 0 ms | exact
+rep 4: 1.57875 ms (build 0.605542 ms on gpu) | GPU 15 morsels | P 0 | E 0 | finished at GPU 1.47142 P 0 E 0 ms | exact
+-> results/Apple-M3-Ultra_20261117-155421_ringrouter/run_query.csv
+## --policy split --morsel-log2 22 --build-device gpu --p-workers 24 --e-workers 8 --t-gpu 46.795 --t-p 9022.579 --t-e 54203.247 --pred-ms 1.461
+machine: Apple M3 Ultra | P=24 E=8 GPU cores=80 | power=AC
+q14: 59986052 rows, 15 morsels of 2^22 (915 MiB) | policy split | GPU on, 16 in flight | CPU 24 P + 8 E workers | build on gpu
+split: GPU share 0.883876 -> morsels [0, 13), CPU [13, 15)
+gpu spin: 168197 iterations ~ 20.0333 ms
+core probe (qos=p): 2.28891 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+core probe (qos=e): 2.20087 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+warm-up: 8.64608 ms (build 1.173042 ms on gpu) | GPU 13 morsels | P 2 | E 0 | finished at GPU 8.51146 P 2.35904 E 0 ms | exact
+rep 0: 2.15908 ms (build 0.678709 ms on gpu) | GPU 13 morsels | P 2 | E 0 | finished at GPU 1.47079 P 2.096 E 0 ms | exact
+rep 1: 1.93988 ms (build 0.645625 ms on gpu) | GPU 13 morsels | P 2 | E 0 | finished at GPU 1.44442 P 1.89837 E 0 ms | exact
+rep 2: 1.95871 ms (build 0.685250 ms on gpu) | GPU 13 morsels | P 2 | E 0 | finished at GPU 1.44146 P 1.89446 E 0 ms | exact
+rep 3: 1.92487 ms (build 0.652542 ms on gpu) | GPU 13 morsels | P 2 | E 0 | finished at GPU 1.41996 P 1.87546 E 0 ms | exact
+rep 4: 1.76742 ms (build 0.564500 ms on gpu) | GPU 13 morsels | P 2 | E 0 | finished at GPU 1.23612 P 1.73092 E 0 ms | exact
+-> results/Apple-M3-Ultra_20261117-155421_ringrouter/run_query.csv
+## --policy router --morsel-log2 22 --build-device gpu --p-workers 24 --e-workers 8 --t-gpu 32.439 --t-p 9022.579 --t-e 54203.247 --pred-ms 0
+machine: Apple M3 Ultra | P=24 E=8 GPU cores=80 | power=AC
+q14: 59986052 rows, 15 morsels of 2^22 (915 MiB) | policy router | GPU on, 16 in flight | CPU 24 P + 8 E workers | build on gpu
+gpu spin: 168200 iterations ~ 19.9929 ms
+core probe (qos=p): 2.30996 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+core probe (qos=e): 2.20021 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+warm-up: 8.59279 ms (build 1.210166 ms on gpu) | GPU 15 morsels | P 0 | E 0 | finished at GPU 8.47375 P 0 E 0 ms | exact
+rep 0: 1.74625 ms (build 0.732458 ms on gpu) | GPU 15 morsels | P 0 | E 0 | finished at GPU 1.62921 P 0 E 0 ms | exact
+rep 1: 1.52633 ms (build 0.581458 ms on gpu) | GPU 15 morsels | P 0 | E 0 | finished at GPU 1.42446 P 0 E 0 ms | exact
+rep 2: 1.54033 ms (build 0.542750 ms on gpu) | GPU 15 morsels | P 0 | E 0 | finished at GPU 1.451 P 0 E 0 ms | exact
+rep 3: 1.60817 ms (build 0.665375 ms on gpu) | GPU 15 morsels | P 0 | E 0 | finished at GPU 1.49238 P 0 E 0 ms | exact
+rep 4: 1.52054 ms (build 0.574459 ms on gpu) | GPU 15 morsels | P 0 | E 0 | finished at GPU 1.41958 P 0 E 0 ms | exact
+-> results/Apple-M3-Ultra_20261117-155421_ringrouter/run_query.csv
+## --policy split --morsel-log2 22 --build-device gpu --p-workers 24 --e-workers 8 --t-gpu 32.439 --t-p 9022.579 --t-e 54203.247 --pred-ms 0
+machine: Apple M3 Ultra | P=24 E=8 GPU cores=80 | power=AC
+q14: 59986052 rows, 15 morsels of 2^22 (915 MiB) | policy split | GPU on, 16 in flight | CPU 24 P + 8 E workers | build on gpu
+split: GPU share 0.916527 -> morsels [0, 14), CPU [14, 15)
+gpu spin: 154021 iterations ~ 18.3088 ms
+core probe (qos=p): 2.3167 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+core probe (qos=e): 2.2006 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+warm-up: 8.32758 ms (build 1.140042 ms on gpu) | GPU 14 morsels | P 1 | E 0 | finished at GPU 8.20862 P 1.62058 E 0 ms | exact
+rep 0: 1.58342 ms (build 0.559291 ms on gpu) | GPU 14 morsels | P 1 | E 0 | finished at GPU 1.48313 P 1.02821 E 0 ms | exact
+rep 1: 1.71008 ms (build 0.661584 ms on gpu) | GPU 14 morsels | P 1 | E 0 | finished at GPU 1.59521 P 1.13042 E 0 ms | exact
+rep 2: 1.39496 ms (build 0.542291 ms on gpu) | GPU 14 morsels | P 1 | E 0 | finished at GPU 1.29854 P 0.831583 E 0 ms | exact
+rep 3: 1.59729 ms (build 0.686500 ms on gpu) | GPU 14 morsels | P 1 | E 0 | finished at GPU 1.49421 P 1.16283 E 0 ms | exact
+rep 4: 1.46908 ms (build 0.555458 ms on gpu) | GPU 14 morsels | P 1 | E 0 | finished at GPU 1.3645 P 0.990791 E 0 ms | exact
+-> results/Apple-M3-Ultra_20261117-155421_ringrouter/run_query.csv
+## --policy router --morsel-log2 22 --build-device gpu --p-workers 24 --e-workers 8 --t-gpu 46.795 --t-p 9022.579 --t-e 54203.247 --pred-ms 1.461
+machine: Apple M3 Ultra | P=24 E=8 GPU cores=80 | power=AC
+q14: 59986052 rows, 15 morsels of 2^22 (915 MiB) | policy router | GPU on, 16 in flight | CPU 24 P + 8 E workers | build on gpu
+gpu spin: 167183 iterations ~ 19.7813 ms
+core probe (qos=p): 2.27688 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+core probe (qos=e): 2.19949 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+warm-up: 8.43171 ms (build 1.125709 ms on gpu) | GPU 15 morsels | P 0 | E 0 | finished at GPU 8.31208 P 0 E 0 ms | exact
+rep 0: 1.64958 ms (build 0.689208 ms on gpu) | GPU 15 morsels | P 0 | E 0 | finished at GPU 1.54137 P 0 E 0 ms | exact
+rep 1: 1.4505 ms (build 0.561959 ms on gpu) | GPU 15 morsels | P 0 | E 0 | finished at GPU 1.33462 P 0 E 0 ms | exact
+rep 2: 1.52471 ms (build 0.554084 ms on gpu) | GPU 15 morsels | P 0 | E 0 | finished at GPU 1.42013 P 0 E 0 ms | exact
+rep 3: 1.54888 ms (build 0.646084 ms on gpu) | GPU 15 morsels | P 0 | E 0 | finished at GPU 1.43608 P 0 E 0 ms | exact
+rep 4: 1.64738 ms (build 0.666083 ms on gpu) | GPU 15 morsels | P 0 | E 0 | finished at GPU 1.54129 P 0 E 0 ms | exact
+-> results/Apple-M3-Ultra_20261117-155421_ringrouter/run_query.csv
+## --policy split --morsel-log2 22 --build-device gpu --p-workers 24 --e-workers 8 --t-gpu 46.795 --t-p 9022.579 --t-e 54203.247 --pred-ms 1.461
+machine: Apple M3 Ultra | P=24 E=8 GPU cores=80 | power=AC
+q14: 59986052 rows, 15 morsels of 2^22 (915 MiB) | policy split | GPU on, 16 in flight | CPU 24 P + 8 E workers | build on gpu
+split: GPU share 0.883876 -> morsels [0, 13), CPU [13, 15)
+gpu spin: 167189 iterations ~ 19.8117 ms
+core probe (qos=p): 2.29384 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+core probe (qos=e): 2.20209 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+warm-up: 8.43992 ms (build 1.083834 ms on gpu) | GPU 13 morsels | P 2 | E 0 | finished at GPU 8.32133 P 2.19533 E 0 ms | exact
+rep 0: 2.01262 ms (build 0.644750 ms on gpu) | GPU 13 morsels | P 2 | E 0 | finished at GPU 1.45096 P 1.962 E 0 ms | exact
+rep 1: 2.04258 ms (build 0.745083 ms on gpu) | GPU 13 morsels | P 2 | E 0 | finished at GPU 1.59021 P 1.97783 E 0 ms | exact
+rep 2: 1.97604 ms (build 0.737666 ms on gpu) | GPU 13 morsels | P 2 | E 0 | finished at GPU 1.56158 P 1.93521 E 0 ms | exact
+rep 3: 1.78487 ms (build 0.588792 ms on gpu) | GPU 13 morsels | P 2 | E 0 | finished at GPU 1.29429 P 1.73917 E 0 ms | exact
+rep 4: 1.91758 ms (build 0.682542 ms on gpu) | GPU 13 morsels | P 2 | E 0 | finished at GPU 1.44008 P 1.86733 E 0 ms | exact
+-> results/Apple-M3-Ultra_20261117-155421_ringrouter/run_query.csv
+## --policy router --morsel-log2 22 --build-device gpu --p-workers 24 --e-workers 8 --t-gpu 32.439 --t-p 9022.579 --t-e 54203.247 --pred-ms 0
+machine: Apple M3 Ultra | P=24 E=8 GPU cores=80 | power=AC
+q14: 59986052 rows, 15 morsels of 2^22 (915 MiB) | policy router | GPU on, 16 in flight | CPU 24 P + 8 E workers | build on gpu
+gpu spin: 167380 iterations ~ 20.0173 ms
+core probe (qos=p): 2.29305 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+core probe (qos=e): 2.19982 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+warm-up: 8.61575 ms (build 1.128083 ms on gpu) | GPU 15 morsels | P 0 | E 0 | finished at GPU 8.49113 P 0 E 0 ms | exact
+rep 0: 1.3965 ms (build 0.560958 ms on gpu) | GPU 15 morsels | P 0 | E 0 | finished at GPU 1.30067 P 0 E 0 ms | exact
+rep 1: 1.40946 ms (build 0.572083 ms on gpu) | GPU 15 morsels | P 0 | E 0 | finished at GPU 1.28862 P 0 E 0 ms | exact
+rep 2: 1.61017 ms (build 0.676709 ms on gpu) | GPU 15 morsels | P 0 | E 0 | finished at GPU 1.504 P 0 E 0 ms | exact
+rep 3: 1.50646 ms (build 0.536750 ms on gpu) | GPU 15 morsels | P 0 | E 0 | finished at GPU 1.4075 P 0 E 0 ms | exact
+rep 4: 1.33712 ms (build 0.534833 ms on gpu) | GPU 15 morsels | P 0 | E 0 | finished at GPU 1.23542 P 0 E 0 ms | exact
+-> results/Apple-M3-Ultra_20261117-155421_ringrouter/run_query.csv
+## --policy split --morsel-log2 22 --build-device gpu --p-workers 24 --e-workers 8 --t-gpu 32.439 --t-p 9022.579 --t-e 54203.247 --pred-ms 0
+machine: Apple M3 Ultra | P=24 E=8 GPU cores=80 | power=AC
+q14: 59986052 rows, 15 morsels of 2^22 (915 MiB) | policy split | GPU on, 16 in flight | CPU 24 P + 8 E workers | build on gpu
+split: GPU share 0.916527 -> morsels [0, 14), CPU [14, 15)
+gpu spin: 167845 iterations ~ 19.8902 ms
+core probe (qos=p): 2.31345 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+core probe (qos=e): 2.20224 ns/iter (M1: ~3.5 on P-cores, ~6-9 on E-cores)
+warm-up: 8.47271 ms (build 1.157625 ms on gpu) | GPU 14 morsels | P 1 | E 0 | finished at GPU 8.33904 P 1.58196 E 0 ms | exact
+rep 0: 1.60346 ms (build 0.648791 ms on gpu) | GPU 14 morsels | P 1 | E 0 | finished at GPU 1.47875 P 1.21475 E 0 ms | exact
+rep 1: 1.706 ms (build 0.637625 ms on gpu) | GPU 14 morsels | P 1 | E 0 | finished at GPU 1.60354 P 1.18242 E 0 ms | exact
+rep 2: 1.62542 ms (build 0.684541 ms on gpu) | GPU 14 morsels | P 1 | E 0 | finished at GPU 1.50967 P 1.10112 E 0 ms | exact
+rep 3: 1.56313 ms (build 0.667667 ms on gpu) | GPU 14 morsels | P 1 | E 0 | finished at GPU 1.45396 P 1.16967 E 0 ms | exact
+rep 4: 1.35021 ms (build 0.569000 ms on gpu) | GPU 14 morsels | P 1 | E 0 | finished at GPU 1.25017 P 1.09712 E 0 ms | exact
+-> results/Apple-M3-Ultra_20261117-155421_ringrouter/run_query.csv

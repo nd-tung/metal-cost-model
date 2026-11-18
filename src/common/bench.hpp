@@ -294,9 +294,15 @@ class GpuSpin {
 //   cpu-read  : the same thread reads (sums) the rows: another scan has just used the column
 //   gpu-write, gpu-read : a GPU kernel does the same (kernels/touch.metal, compiled with the benchmark's
 //               kernels), one sync command buffer over the morsel's buffers, untimed
-inline const std::vector<std::string> kCachePolicies = {"cold", "hot", "cpu-write", "cpu-read", "gpu-write", "gpu-read"};
+//   cpu-touch1, gpu-touch1 : diagnostics: the same step over one row only, so the protocol runs (a CPU
+//               pass, or one more command buffer before the timed one) without a cache state to show
+inline const std::vector<std::string> kCachePolicies = {"cold", "hot", "cpu-write", "cpu-read", "gpu-write", "gpu-read",
+                                                        "cpu-touch1", "gpu-touch1"};
+inline constexpr const char* kCachePolicyHelp =
+    "--cache must be one of cold, hot, cpu-write, cpu-read, gpu-write, gpu-read, cpu-touch1, gpu-touch1";
 inline bool cache_policy_touches(const std::string& p) { return p != "cold" && p != "hot"; }
 inline bool cache_policy_on_gpu(const std::string& p) { return p.rfind("gpu-", 0) == 0; }
+inline bool cache_policy_one_row(const std::string& p) { return p.size() > 6 && p.compare(p.size() - 6, 6, "touch1") == 0; }
 
 struct TouchParams {
   uint32_t n, zero;  // must match TouchParams in kernels/touch.metal
@@ -314,11 +320,11 @@ class Toucher {
   // ctx may be null for a policy without a GPU step.
   Toucher(MetalCtx* ctx, const std::string& policy) : policy_(policy) {
     if (std::find(kCachePolicies.begin(), kCachePolicies.end(), policy) == kCachePolicies.end())
-      throw std::runtime_error("--cache must be one of cold, hot, cpu-write, cpu-read, gpu-write, gpu-read");
+      throw std::runtime_error(kCachePolicyHelp);
     if (cache_policy_on_gpu(policy)) {
       if (!ctx) throw std::runtime_error("--cache " + policy + " needs the GPU");
       ctx_ = ctx;
-      pso_ = ctx->pipeline(policy == "gpu-write" ? "touch_write" : "touch_read");
+      pso_ = ctx->pipeline(policy == "gpu-write" ? "touch_write" : "touch_read");  // touch1: reads one row
       out_ = ctx->device()->newBuffer(sizeof(uint32_t), MTL::ResourceStorageModeShared);
       tg_ = std::min<NS::UInteger>(256, pso_->maxTotalThreadsPerThreadgroup());
     }
@@ -331,8 +337,10 @@ class Toucher {
   Toucher& operator=(const Toucher&) = delete;
 
   bool active() const { return cache_policy_touches(policy_); }
-  void operator()(const std::vector<Range>& ranges) {
+  void operator()(std::vector<Range> ranges) {
     if (!active()) return;
+    if (cache_policy_one_row(policy_))
+      for (Range& r : ranges) r.n = std::min<uint32_t>(r.n, 1);
     if (cache_policy_on_gpu(policy_)) {
       gpu(ranges);
     } else {

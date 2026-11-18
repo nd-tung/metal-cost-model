@@ -1,0 +1,78 @@
+runs: Apple-M3-Ultra_20261117-175046_cache, Apple-M3-Ultra_20261117-194427_cache, Apple-M3-Ultra_20261117-213808_cache
+model: /Users/tea/Documents/metal-cost-model/models/Apple-M3-Ultra.json; state form delta
+
+rule                        cpu-p                  cpu-e          gpu-warm-spin     gpu-warm-pipe-spin              cpu-p-hot              cpu-e-hot      gpu-warm-spin-hot gpu-warm-pipe-spin-hot        cpu-p-cpu-write        cpu-e-cpu-write gpu-warm-spin-cpu-write gpu-warm-pipe-spin-cpu-write         cpu-p-cpu-read         cpu-e-cpu-read gpu-warm-spin-cpu-read gpu-warm-pipe-spin-cpu-read        cpu-p-gpu-write        cpu-e-gpu-write gpu-warm-spin-gpu-write gpu-warm-pipe-spin-gpu-write         cpu-p-gpu-read         cpu-e-gpu-read gpu-warm-spin-gpu-read gpu-warm-pipe-spin-gpu-read       cpu-p-cpu-touch1       cpu-e-cpu-touch1 gpu-warm-spin-cpu-touch1 gpu-warm-pipe-spin-cpu-touch1       cpu-p-gpu-touch1       cpu-e-gpu-touch1 gpu-warm-spin-gpu-touch1 gpu-warm-pipe-spin-gpu-touch1   placement: sync-spin  sync-spin@hot  sync-spin@cpu-write  sync-spin@cpu-read  sync-spin@gpu-write  sync-spin@gpu-read  sync-spin@cpu-touch1  sync-spin@gpu-touch1  pipelined-spin  pipelined-spin@hot  pipelined-spin@cpu-write  pipelined-spin@cpu-read  pipelined-spin@gpu-write  pipelined-spin@gpu-read  pipelined-spin@cpu-touch1  pipelined-spin@gpu-touch1
+cold+state        7% med   37% p90        2% med   25% p90        1% med    3% p90        5% med   11% p90        9% med  147% p90        2% med   64% p90        2% med    4% p90        5% med   12% p90       10% med  147% p90        2% med   58% p90        1% med    3% p90        4% med   10% p90        9% med  147% p90        2% med   64% p90        1% med    4% p90        4% med   10% p90        8% med   40% p90        2% med   26% p90        1% med    3% p90        5% med   11% p90        8% med   38% p90        2% med   25% p90        1% med    3% p90        5% med   11% p90        7% med   36% p90        2% med   27% p90        1% med    3% p90        5% med   11% p90        6% med   19% p90        2% med   25% p90        1% med    3% p90        5% med   11% p90        100%           100%                 100%                100%                  98%                100%                  100%                   94%            100%                100%                       94%                      94%                       94%                      96%                       100%                        98%
+cold-only         7% med   37% p90        2% med   25% p90        1% med    3% p90        5% med   11% p90       62% med  107% p90       21% med  200% p90        2% med    5% p90        2% med   10% p90       55% med  102% p90       21% med  189% p90        5% med   17% p90        7% med   16% p90       61% med  120% p90       21% med  223% p90        6% med   17% p90        7% med   26% p90       40% med   75% p90       20% med   37% p90        4% med    6% p90        4% med   12% p90       38% med   80% p90       20% med   30% p90        3% med    5% p90        4% med   11% p90        7% med   35% p90        2% med   25% p90        2% med    3% p90        5% med   11% p90       55% med   84% p90       15% med   19% p90        2% med    4% p90        4% med   10% p90        100%           100%                 100%                100%                  98%                100%                  100%                  100%            100%                100%                       94%                      94%                       94%                      92%                       100%                        92%
+own-fit           8% med   42% p90        1% med   12% p90        1% med    3% p90        5% med   25% p90        7% med   22% p90       11% med   26% p90        2% med    4% p90        5% med   28% p90        5% med   17% p90       10% med   25% p90        4% med   13% p90        4% med   16% p90       13% med   27% p90       17% med   26% p90        5% med   11% p90        3% med   14% p90       21% med   58% p90        2% med    7% p90        2% med    5% p90        3% med   15% p90       22% med   58% p90        2% med    8% p90        2% med    4% p90        3% med   14% p90        6% med   26% p90        1% med    6% p90        1% med    3% p90        5% med   25% p90       18% med   49% p90        5% med   10% p90        1% med    4% p90        6% med   25% p90        100%           100%                 100%                100%                  98%                 94%                  100%                   88%            100%                100%                       94%                      94%                       94%                      85%                       100%                        83%
+(error = |predicted - measured| / measured over every (run, n) median)
+
+crossovers (GPU faster from):
+  gpu-warm-spin            vs cpu-p           : measured 2^22.2 (measured: GPU slower at 2^22.0, faster from 2^23.0 on); predicted cold+state 2^22.1, cold-only 2^22.1
+  gpu-warm-spin            vs cpu-e           : measured 2^19.6 (measured: GPU slower at 2^19.0, faster from 2^20.0 on); predicted cold+state 2^19.5, cold-only 2^19.5
+  gpu-warm-pipe-spin       vs cpu-p           : measured 2^18.4 (measured: GPU slower at 2^18.0, faster from 2^19.0 on); predicted cold+state 2^18.1, cold-only 2^18.1
+  gpu-warm-pipe-spin       vs cpu-e           : measured 2^15.7 (measured: GPU slower at 2^15.0, faster from 2^16.0 on); predicted cold+state 2^15.6, cold-only 2^15.6
+  gpu-warm-spin-hot        vs cpu-p-hot       : measured 2^22.7 (measured: GPU slower at 2^22.0, faster from 2^23.0 on); predicted cold+state 2^22.6, cold-only 2^22.1
+  gpu-warm-spin-hot        vs cpu-e-hot       : measured 2^19.7 (measured: GPU slower at 2^19.0, faster from 2^20.0 on); predicted cold+state 2^19.6, cold-only 2^19.5
+  gpu-warm-pipe-spin-hot   vs cpu-p-hot       : measured 2^18.9 (measured: GPU slower at 2^18.0, faster from 2^19.0 on); predicted cold+state 2^18.6, cold-only 2^18.1
+  gpu-warm-pipe-spin-hot   vs cpu-e-hot       : measured 2^15.9 (measured: GPU slower at 2^15.0, faster from 2^16.0 on); predicted cold+state 2^15.8, cold-only 2^15.6
+  gpu-warm-spin-cpu-write  vs cpu-p-cpu-write : measured 2^23.0 (measured: GPU slower at 2^22.0, faster from 2^23.0 on); predicted cold+state 2^22.9, cold-only 2^22.1
+  gpu-warm-spin-cpu-write  vs cpu-e-cpu-write : measured 2^20.1 (measured: GPU slower at 2^20.0, faster from 2^21.0 on); predicted cold+state 2^20.0, cold-only 2^19.5
+  gpu-warm-pipe-spin-cpu-write vs cpu-p-cpu-write : measured 2^19.1 (measured: GPU slower at 2^19.0, faster from 2^20.0 on); predicted cold+state 2^18.8, cold-only 2^18.1
+  gpu-warm-pipe-spin-cpu-write vs cpu-e-cpu-write : measured 2^16.1 (measured: GPU slower at 2^16.0, faster from 2^17.0 on); predicted cold+state 2^15.9, cold-only 2^15.6
+  gpu-warm-spin-cpu-read   vs cpu-p-cpu-read  : measured 2^22.6 (measured: GPU slower at 2^22.0, faster from 2^23.0 on); predicted cold+state 2^22.5, cold-only 2^22.1
+  gpu-warm-spin-cpu-read   vs cpu-e-cpu-read  : measured 2^19.9 (measured: GPU slower at 2^19.0, faster from 2^20.0 on); predicted cold+state 2^19.9, cold-only 2^19.5
+  gpu-warm-pipe-spin-cpu-read vs cpu-p-cpu-read  : measured 2^19.1 (measured: GPU slower at 2^19.0, faster from 2^20.0 on); predicted cold+state 2^18.8, cold-only 2^18.1
+  gpu-warm-pipe-spin-cpu-read vs cpu-e-cpu-read  : measured 2^16.0 (measured: GPU slower at 2^16.0, faster from 2^17.0 on); predicted cold+state 2^15.9, cold-only 2^15.6
+  gpu-warm-spin-gpu-write  vs cpu-p-gpu-write : measured 2^22.5 (measured: GPU slower at 2^22.0, faster from 2^23.0 on); predicted cold+state 2^22.5, cold-only 2^22.1
+  gpu-warm-spin-gpu-write  vs cpu-e-gpu-write : measured 2^19.8 (measured: GPU slower at 2^19.0, faster from 2^20.0 on); predicted cold+state 2^19.8, cold-only 2^19.5
+  gpu-warm-pipe-spin-gpu-write vs cpu-p-gpu-write : measured 2^18.4 (measured: GPU slower at 2^18.0, faster from 2^19.0 on); predicted cold+state 2^18.2, cold-only 2^18.1
+  gpu-warm-pipe-spin-gpu-write vs cpu-e-gpu-write : measured 2^16.0 (measured: GPU slower at 2^15.0, faster from 2^16.0 on); predicted cold+state 2^15.8, cold-only 2^15.6
+  gpu-warm-spin-gpu-read   vs cpu-p-gpu-read  : measured 2^22.5 (measured: GPU slower at 2^22.0, faster from 2^23.0 on); predicted cold+state 2^22.5, cold-only 2^22.1
+  gpu-warm-spin-gpu-read   vs cpu-e-gpu-read  : measured 2^19.8 (measured: GPU slower at 2^19.0, faster from 2^20.0 on); predicted cold+state 2^19.8, cold-only 2^19.5
+  gpu-warm-pipe-spin-gpu-read vs cpu-p-gpu-read  : measured 2^16.9 (measured: GPU slower at 2^16.0, faster from 2^17.0 on); predicted cold+state 2^16.7, cold-only 2^18.1
+  gpu-warm-pipe-spin-gpu-read vs cpu-e-gpu-read  : measured 2^15.9 (measured: GPU slower at 2^15.0, faster from 2^16.0 on); predicted cold+state 2^15.8, cold-only 2^15.6
+  gpu-warm-spin-cpu-touch1 vs cpu-p-cpu-touch1: measured 2^22.2 (measured: GPU slower at 2^22.0, faster from 2^23.0 on); predicted cold+state 2^22.1, cold-only 2^22.1
+  gpu-warm-spin-cpu-touch1 vs cpu-e-cpu-touch1: measured 2^19.6 (measured: GPU slower at 2^19.0, faster from 2^20.0 on); predicted cold+state 2^19.5, cold-only 2^19.5
+  gpu-warm-pipe-spin-cpu-touch1 vs cpu-p-cpu-touch1: measured 2^18.4 (measured: GPU slower at 2^18.0, faster from 2^19.0 on); predicted cold+state 2^18.2, cold-only 2^18.1
+  gpu-warm-pipe-spin-cpu-touch1 vs cpu-e-cpu-touch1: measured 2^15.7 (measured: GPU slower at 2^15.0, faster from 2^16.0 on); predicted cold+state 2^15.6, cold-only 2^15.6
+  gpu-warm-spin-gpu-touch1 vs cpu-p-gpu-touch1: measured 2^22.1 (measured: GPU slower at 2^22.0, faster from 2^23.0 on); predicted cold+state 2^22.0, cold-only 2^22.1
+  gpu-warm-spin-gpu-touch1 vs cpu-e-gpu-touch1: measured 2^19.8 (measured: GPU slower at 2^19.0, faster from 2^20.0 on); predicted cold+state 2^19.8, cold-only 2^19.5
+  gpu-warm-pipe-spin-gpu-touch1 vs cpu-p-gpu-touch1: measured 2^18.1 (measured: GPU slower at 2^18.0, faster from 2^19.0 on); predicted cold+state 2^18.0, cold-only 2^18.1
+  gpu-warm-pipe-spin-gpu-touch1 vs cpu-e-gpu-touch1: measured 2^15.9 (measured: GPU slower at 2^15.0, faster from 2^16.0 on); predicted cold+state 2^15.8, cold-only 2^15.6
+
+error per device config, cold+state against cold-only (median | p90 | median bias):
+  cpu-p                              6.6%   37.0%   +5.7%   |   6.6%   37.0%   +5.7%
+  cpu-e                              1.8%   24.9%   +1.1%   |   1.8%   24.9%   +1.1%
+  gpu-warm-spin                      1.1%    3.3%   -0.1%   |   1.1%    3.3%   -0.1%
+  gpu-warm-pipe-spin                 4.9%   11.3%   -4.3%   |   4.9%   11.3%   -4.3%
+  cpu-p-hot                          9.5%  146.8%   +7.3%   |  61.6%  107.1%  +61.6%
+  cpu-e-hot                          2.2%   64.0%   +2.1%   |  20.5%  200.0%  +20.5%
+  gpu-warm-spin-hot                  1.5%    3.7%   +0.4%   |   2.2%    5.1%   -0.6%
+  gpu-warm-pipe-spin-hot             4.6%   12.4%   -3.7%   |   2.2%    9.7%   +0.6%
+  cpu-p-cpu-write                    9.5%  146.8%   +7.1%   |  55.3%  101.6%  +55.3%
+  cpu-e-cpu-write                    2.0%   57.8%   +2.0%   |  21.2%  188.9%  +21.2%
+  gpu-warm-spin-cpu-write            1.2%    3.1%   -0.1%   |   5.3%   16.9%   -5.3%
+  gpu-warm-pipe-spin-cpu-write       3.7%    9.9%   -2.5%   |   7.1%   16.4%   -7.1%
+  cpu-p-cpu-read                     9.2%  146.8%   +6.5%   |  60.9%  120.1%  +60.9%
+  cpu-e-cpu-read                     2.1%   64.1%   +2.1%   |  21.3%  223.4%  +21.3%
+  gpu-warm-spin-cpu-read             1.2%    3.7%   +0.2%   |   5.8%   17.4%   -5.8%
+  gpu-warm-pipe-spin-cpu-read        4.3%    9.6%   -3.3%   |   7.3%   26.1%   -7.3%
+  cpu-p-gpu-write                    8.1%   40.2%   +6.2%   |  40.0%   75.2%  -32.1%
+  cpu-e-gpu-write                    2.1%   26.3%   +2.0%   |  20.0%   37.5%  +20.0%
+  gpu-warm-spin-gpu-write            1.1%    3.3%   +0.1%   |   3.6%    6.1%   -3.2%
+  gpu-warm-pipe-spin-gpu-write       4.8%   10.8%   -4.5%   |   3.9%   12.3%   -3.9%
+  cpu-p-gpu-read                     8.0%   38.2%   +6.7%   |  38.0%   79.7%  -34.1%
+  cpu-e-gpu-read                     2.0%   25.3%   +2.0%   |  19.6%   30.1%  +19.6%
+  gpu-warm-spin-gpu-read             1.4%    3.5%   +0.4%   |   3.2%    5.3%   -3.2%
+  gpu-warm-pipe-spin-gpu-read        4.8%   11.2%   -3.7%   |   3.9%   11.0%   -3.8%
+  cpu-p-cpu-touch1                   6.5%   35.8%   +5.8%   |   6.7%   34.5%   +5.9%
+  cpu-e-cpu-touch1                   1.8%   26.8%   +1.7%   |   2.5%   24.5%   +2.3%
+  gpu-warm-spin-cpu-touch1           1.0%    3.3%   -0.3%   |   1.6%    3.0%   -1.0%
+  gpu-warm-pipe-spin-cpu-touch1      4.8%   11.5%   -4.0%   |   4.9%   11.5%   -4.5%
+  cpu-p-gpu-touch1                   6.1%   19.0%   +1.9%   |  55.5%   84.0%  -55.5%
+  cpu-e-gpu-touch1                   2.1%   25.2%   +1.9%   |  14.6%   18.5%  +14.6%
+  gpu-warm-spin-gpu-touch1           1.3%    3.3%   -0.0%   |   2.1%    4.4%   -1.8%
+  gpu-warm-pipe-spin-gpu-touch1      5.0%   10.7%   -3.7%   |   3.5%    9.6%   -3.0%
+
+-> results/Apple-M3-Ultra_20261117-175046_cache/predict_filter_state_delta.json

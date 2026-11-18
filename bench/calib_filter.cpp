@@ -213,7 +213,7 @@ void usage() {
                "                    [--column data/tpch-sf1/l_quantity.u32 --thr 2400]   (TPC-H column)\n"
                "                    [--sel 0.5]                                       (random data)\n"
                "                    [--min-log2 10] [--max-log2 26] [--reps 15]\n"
-               "                    [--cache cold|hot|cpu-write|cpu-read|gpu-write|gpu-read] [--flush-mb 64]\n"
+               "                    [--cache cold|hot|cpu-write|cpu-read|gpu-write|gpu-read|cpu-touch1|gpu-touch1] [--flush-mb 64]\n"
                "                        (cold: flush caches before each timed rep; cpu-*/gpu-*: flush, then that device\n"
                "                         rewrites or reads the morsel's rows, untimed: its cache state at dispatch)\n"
                "                    [--dispatch sync|pipelined] [--batch 16] [--batch-mb 1024]   (GPU only)\n"
@@ -242,7 +242,7 @@ int main(int argc, char** argv) {
     if (max_l2 > 30) throw std::runtime_error("max-log2 > 30 not supported (uint32 n)");
     const std::string cache = a.str("cache", "cold");
     if (std::find(kCachePolicies.begin(), kCachePolicies.end(), cache) == kCachePolicies.end())
-      throw std::runtime_error("--cache must be one of cold, hot, cpu-write, cpu-read, gpu-write, gpu-read");
+      throw std::runtime_error(kCachePolicyHelp);
     const std::string dispatch = a.str("dispatch", "sync");
     if (dispatch != "sync" && dispatch != "pipelined") throw std::runtime_error("--dispatch must be sync or pipelined");
     const bool pipelined = dispatch == "pipelined";
@@ -260,7 +260,7 @@ int main(int argc, char** argv) {
     const size_t batch_cap = static_cast<size_t>(a.i64("batch-mb", 1024)) << 20;
     acquire_bench_lock();  // one benchmark process at a time (common/bench.hpp)
     CacheFlusher flusher(static_cast<size_t>(a.i64("flush-mb", default_flush_mb())) << 20);
-    auto flush = [&] { if (cache == "cold") flusher(); };
+    auto flush = [&] { if (cache != "hot") flusher(); };  // hot is the only state without the flush
 
     NS::AutoreleasePool* pool = NS::AutoreleasePool::alloc()->init();
     MetalCtx ctx(std::vector<std::string>{std::string(MCM_KERNEL_DIR) + "/filter.metal", std::string(MCM_KERNEL_DIR) + "/spin.metal",

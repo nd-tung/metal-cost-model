@@ -1,0 +1,61 @@
+Q1 runs: Apple-M3-Ultra_20261115-104837_q1cache, Apple-M3-Ultra_20261115-110341_q1cache, Apple-M3-Ultra_20261115-112046_q1cache
+model: models/Apple-M3-Ultra.json
+cache states: cpu-write, gpu-write, hot (form line)
+
+device              calibration          alpha us     k  stream  compute  Q1 fit   (ns/row; Q1 fit = measured; pipelined: overlap)
+cpu-p               cpu-p                    -0.0  1.00   0.397    1.065   1.657
+cpu-e               cpu-e                     1.3  1.00   2.127   10.419  11.345
+gpu-warm-spin       gpu-warm-spin           226.5  1.00   0.039    0.035   0.041
+gpu-warm-pipe-spin  gpu-warm-pipe-spin       15.7  0.18   0.035    0.001   0.035
+cpu-p-hot           cpu-p                    -0.0  1.00   0.397    1.065   1.663
+cpu-e-hot           cpu-e                     1.3  1.00   2.127   10.419  11.338
+gpu-warm-spin-hot   gpu-warm-spin           226.5  1.00   0.039    0.035   0.039
+gpu-warm-pipe-spin-hot gpu-warm-pipe-spin       15.7  0.18   0.035    0.001   0.035
+cpu-p-cpu-write     cpu-p                    -0.0  1.00   0.397    1.065   1.644
+cpu-e-cpu-write     cpu-e                     1.3  1.00   2.127   10.419  11.377
+gpu-warm-spin-cpu-write gpu-warm-spin           226.5  1.00   0.039    0.035   0.044
+gpu-warm-pipe-spin-cpu-write gpu-warm-pipe-spin       15.7  0.18   0.035    0.001   0.037
+cpu-p-gpu-write     cpu-p                    -0.0  1.00   0.397    1.065   1.815
+cpu-e-gpu-write     cpu-e                     1.3  1.00   2.127   10.419  11.369
+gpu-warm-spin-gpu-write gpu-warm-spin           226.5  1.00   0.039    0.035   0.041
+gpu-warm-pipe-spin-gpu-write gpu-warm-pipe-spin       15.7  0.18   0.035    0.001   0.039
+
+rule register, GPU (register_agg at C columns; alpha and k of agg_reg at C, U = 36):
+device               C  alpha us     k  36 upd kappa    beta   (ns/row)
+gpu-warm-spin        7     267.9  1.00   0.022  0.00   0.039
+gpu-warm-pipe-spin   7      16.2  0.58   0.018  0.19   0.038
+gpu-warm-spin-hot    7     267.9  1.00   0.022  0.00   0.039
+gpu-warm-pipe-spin-hot  7      16.2  0.58   0.018  0.19   0.038
+gpu-warm-spin-cpu-write  7     267.9  1.00   0.022  0.00   0.039
+gpu-warm-pipe-spin-cpu-write  7      16.2  0.58   0.018  0.19   0.038
+gpu-warm-spin-gpu-write  7     267.9  1.00   0.022  0.00   0.039
+gpu-warm-pipe-spin-gpu-write  7      16.2  0.58   0.018  0.19   0.038
+
+rule                        cpu-p                  cpu-e          gpu-warm-spin     gpu-warm-pipe-spin              cpu-p-hot              cpu-e-hot      gpu-warm-spin-hot gpu-warm-pipe-spin-hot        cpu-p-cpu-write        cpu-e-cpu-write gpu-warm-spin-cpu-write gpu-warm-pipe-spin-cpu-write        cpu-p-gpu-write        cpu-e-gpu-write gpu-warm-spin-gpu-write gpu-warm-pipe-spin-gpu-write   placement: sync-spin  sync-spin@hot  sync-spin@cpu-write  sync-spin@gpu-write  pipelined-spin  pipelined-spin@hot  pipelined-spin@cpu-write  pipelined-spin@gpu-write
+stream           76% med   80% p90       81% med   81% p90       16% med   21% p90       28% med   35% p90       84% med   93% p90       85% med   85% p90       14% med   21% p90       23% med   37% p90       84% med   94% p90       85% med   85% p90       15% med   19% p90       25% med   32% p90       78% med   91% p90       84% med   84% p90       16% med   22% p90       11% med   25% p90         88%            81%                  81%                  88%             88%                 88%                       81%                       75%
+roofline         36% med   47% p90        9% med   12% p90       16% med   21% p90       28% med   35% p90       57% med   63% p90       26% med   27% p90       14% med   21% p90       23% med   37% p90       56% med   66% p90       26% med   27% p90       15% med   19% p90       25% med   32% p90       42% med   80% p90       21% med   23% p90       16% med   22% p90       11% med   25% p90        100%            94%                  94%                 100%            100%                 94%                       94%                       88%
+additive         13% med   27% p90       10% med   11% p90       18% med   48% p90       27% med   35% p90       41% med   47% p90       11% med   12% p90       18% med   40% p90       22% med   37% p90       39% med   49% p90       11% med   12% p90       15% med   56% p90       24% med   32% p90       21% med   74% p90        5% med    8% p90       18% med   47% p90        9% med   24% p90        100%            94%                  94%                 100%            100%                 94%                       94%                       88%
+per-device       13% med   27% p90       10% med   11% p90       16% med   21% p90       28% med   35% p90       41% med   47% p90       11% med   12% p90       14% med   21% p90       23% med   37% p90       39% med   49% p90       11% med   12% p90       15% med   19% p90       25% med   32% p90       21% med   74% p90        5% med    8% p90       16% med   22% p90       11% med   25% p90        100%            94%                 100%                 100%            100%                 94%                       94%                       88%
+register         13% med   27% p90       10% med   11% p90        4% med    7% p90       11% med   32% p90       41% med   47% p90       11% med   12% p90        6% med   10% p90       18% med   35% p90       39% med   49% p90       11% med   12% p90        4% med    9% p90       21% med   30% p90       21% med   74% p90        5% med    8% p90        4% med    8% p90        5% med   20% p90        100%            94%                  94%                 100%            100%                 94%                       94%                       88%
+q1-fit            1% med    1% p90        0% med    1% p90        3% med    8% p90        8% med   33% p90        1% med    7% p90        0% med    2% p90        4% med   10% p90        9% med   37% p90        0% med    3% p90        0% med    2% p90        3% med    9% p90        5% med   16% p90       10% med   41% p90        0% med    1% p90        4% med    7% p90        4% med   13% p90        100%           100%                 100%                 100%            100%                100%                      100%                       94%
+(error = |predicted - measured| / measured over every (run, n) median)
+
+crossovers (GPU faster from):
+  gpu-warm-spin            vs cpu-p           : measured 2^17.4 (measured: GPU slower at 2^17.0, faster from 2^18.0 on); predicted stream 2^19.3, roofline 2^17.8, additive 2^17.3, per-device 2^17.3, register 2^17.5
+  gpu-warm-spin            vs cpu-e           : measured 2^14.6 (measured: GPU slower at 2^14.0, faster from 2^15.0 on); predicted stream 2^16.7, roofline 2^14.4, additive 2^14.1, per-device 2^14.1, register 2^14.4
+  gpu-warm-pipe-spin       vs cpu-p           : measured 2^13.8 (measured: GPU slower at 2^13.0, faster from 2^14.0 on); predicted stream 2^15.3, roofline 2^13.9, additive 2^13.4, per-device 2^13.4, register 2^13.5
+  gpu-warm-pipe-spin       vs cpu-e           : measured 2^10.8 (measured: GPU slower at 2^10.0, faster from 2^11.0 on); predicted stream 2^12.7, roofline 2^10.4, additive 2^10.2, per-device 2^10.2, register 2^10.2
+  gpu-warm-spin-hot        vs cpu-p-hot       : measured 2^17.6 (measured: GPU slower at 2^17.0, faster from 2^18.0 on); predicted stream 2^20.1, roofline 2^18.5, additive 2^18.1, per-device 2^18.0, register 2^18.2
+  gpu-warm-spin-hot        vs cpu-e-hot       : measured 2^14.8 (measured: GPU slower at 2^14.0, faster from 2^15.0 on); predicted stream 2^17.2, roofline 2^14.9, additive 2^14.6, per-device 2^14.6, register 2^14.8
+  gpu-warm-pipe-spin-hot   vs cpu-p-hot       : measured 2^14.0 (measured: GPU slower at 2^13.0, faster from 2^14.0 on); predicted stream 2^16.0, roofline 2^14.5, additive 2^14.1, per-device 2^14.1, register 2^14.1
+  gpu-warm-pipe-spin-hot   vs cpu-e-hot       : measured 2^11.1 (measured: GPU slower at 2^11.0, faster from 2^12.0 on); predicted stream 2^13.2, roofline 2^10.9, additive 2^10.6, per-device 2^10.6, register 2^10.7
+  gpu-warm-spin-cpu-write  vs cpu-p-cpu-write : measured 2^17.5 (measured: GPU slower at 2^17.0, faster from 2^18.0 on); predicted stream 2^20.0, roofline 2^18.4, additive 2^18.0, per-device 2^18.0, register 2^18.2
+  gpu-warm-spin-cpu-write  vs cpu-e-cpu-write : measured 2^14.6 (measured: GPU slower at 2^14.0, faster from 2^15.0 on); predicted stream 2^17.1, roofline 2^14.8, additive 2^14.5, per-device 2^14.5, register 2^14.8
+  gpu-warm-pipe-spin-cpu-write vs cpu-p-cpu-write : measured 2^13.9 (measured: GPU slower at 2^13.0, faster from 2^14.0 on); predicted stream 2^16.0, roofline 2^14.5, additive 2^14.1, per-device 2^14.1, register 2^14.1
+  gpu-warm-pipe-spin-cpu-write vs cpu-e-cpu-write : measured 2^11.0 (measured: GPU slower at 2^10.0, faster from 2^11.0 on); predicted stream 2^13.2, roofline 2^10.9, additive 2^10.6, per-device 2^10.6, register 2^10.6
+  gpu-warm-spin-gpu-write  vs cpu-p-gpu-write : measured 2^17.2 (measured: GPU slower at 2^17.0, faster from 2^18.0 on); predicted stream 2^19.3, roofline 2^17.8, additive 2^17.3, per-device 2^17.3, register 2^17.5
+  gpu-warm-spin-gpu-write  vs cpu-e-gpu-write : measured 2^14.6 (measured: GPU slower at 2^14.0, faster from 2^15.0 on); predicted stream 2^17.0, roofline 2^14.7, additive 2^14.4, per-device 2^14.4, register 2^14.6
+  gpu-warm-pipe-spin-gpu-write vs cpu-p-gpu-write : measured 2^11.3 (measured: GPU slower at 2^11.0, faster from 2^12.0 on); predicted stream 2^15.2, roofline 2^13.8, additive 2^13.3, per-device 2^13.3, register 2^13.4
+  gpu-warm-pipe-spin-gpu-write vs cpu-e-gpu-write : measured 2^10.3 (measured: GPU slower at 2^10.0, faster from 2^11.0 on); predicted stream 2^13.0, roofline 2^10.7, additive 2^10.4, per-device 2^10.4, register 2^10.4
+
+-> results/Apple-M3-Ultra_20261115-104837_q1cache/predict_q1_state_line.json

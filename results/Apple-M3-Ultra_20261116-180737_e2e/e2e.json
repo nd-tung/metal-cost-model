@@ -1,0 +1,597 @@
+{
+  "csv": "results/Apple-M3-Ultra_20261116-180737_e2e/run_query.csv",
+  "queries": {
+    "q6": {
+      "65536": {
+        "gpu": {
+          "policy": "gpu",
+          "build_device": "-",
+          "plan_build": null,
+          "ms_median": 19.8173,
+          "ms_min": 19.6352,
+          "pred_ms": 14.851,
+          "reps": 5,
+          "ok": true,
+          "build_ms": 0.0,
+          "probe_ms": 19.8173,
+          "morsels": [
+            916.0,
+            0.0,
+            0.0
+          ],
+          "finished_ms": [
+            19.7685,
+            0.0,
+            0.0
+          ],
+          "gpu_share": null,
+          "vs_best_static": 1.0
+        },
+        "split": {
+          "policy": "split",
+          "build_device": "-",
+          "plan_build": null,
+          "ms_median": 5.39583,
+          "ms_min": 4.98975,
+          "pred_ms": 2.741,
+          "reps": 5,
+          "ok": true,
+          "build_ms": 0.0,
+          "probe_ms": 5.39583,
+          "morsels": [
+            169.0,
+            650.0,
+            97.0
+          ],
+          "finished_ms": [
+            5.28371,
+            3.33042,
+            3.37958
+          ],
+          "gpu_share": 0.18454,
+          "vs_best_static": 0.27227876653227234
+        },
+        "dynamic": {
+          "policy": "dynamic",
+          "build_device": "-",
+          "plan_build": null,
+          "ms_median": 4.05508,
+          "ms_min": 3.95971,
+          "pred_ms": 2.741,
+          "reps": 5,
+          "ok": true,
+          "build_ms": 0.0,
+          "probe_ms": 4.05508,
+          "morsels": [
+            113.0,
+            699.0,
+            102.0
+          ],
+          "finished_ms": [
+            3.93025,
+            3.58637,
+            3.60179
+          ],
+          "gpu_share": null,
+          "vs_best_static": 0.2046232332356073
+        },
+        "router": {
+          "policy": "router",
+          "build_device": "-",
+          "plan_build": null,
+          "ms_median": 3.87467,
+          "ms_min": 3.84321,
+          "pred_ms": 2.741,
+          "reps": 5,
+          "ok": true,
+          "build_ms": 0.0,
+          "probe_ms": 3.87467,
+          "morsels": [
+            107.0,
+            724.0,
+            85.0
+          ],
+          "finished_ms": [
+            3.72225,
+            3.62737,
+            3.08162
+          ],
+          "gpu_share": null,
+          "vs_best_static": 0.1955195712836764
+        }
+      },
+      "262144": {
+        "gpu": {
+          "policy": "gpu",
+          "build_device": "-",
+          "plan_build": null,
+          "ms_median": 5.86437,
+          "ms_min": 5.65329,
+          "pred_ms": 4.043,
+          "reps": 5,
+          "ok": true,
+          "build_ms": 0.0,
+          "probe_ms": 5.86437,
+          "morsels": [
+            229.0,
+            0.0,
+            0.0
+          ],
+          "finished_ms": [
+            5.815,
+            0.0,
+            0.0
+          ],
+          "gpu_share": null,
+          "vs_best_static": 1.0
+        },
+        "split": {
+          "policy": "split",
+          "build_device": "-",
+          "plan_build": null,
+          "ms_median": 3.53733,
+          "ms_min": 3.42163,
+          "pred_ms": 1.878,
+          "reps": 5,
+          "ok": true,
+          "build_ms": 0.0,
+          "probe_ms": 3.53733,
+          "morsels": [
+            106.0,
+            103.0,
+            20.0
+          ],
+          "finished_ms": [
+            3.4135,
+            2.40375,
+            2.75721
+          ],
+          "gpu_share": 0.464421,
+          "vs_best_static": 0.603190112492902
+        },
+        "dynamic": {
+          "policy": "dynamic",
+          "build_device": "-",
+          "plan_build": null,
+          "ms_median": 3.08412,
+          "ms_min": 2.95629,
+          "pred_ms": 1.878,
+          "reps": 5,
+          "ok": true,
+          "build_ms": 0.0,
+          "probe_ms": 3.08412,
+          "morsels": [
+            81.0,
+            126.0,
+            21.0
+          ],
+          "finished_ms": [
+            2.89242,
+            2.81521,
+            2.96217
+          ],
+          "gpu_share": null,
+          "vs_best_static": 0.525908153817034
+        },
+        "router": {
+          "policy": "router",
+          "build_device": "-",
+          "plan_build": null,
+          "ms_median": 3.64021,
+          "ms_min": 3.51629,
+          "pred_ms": 1.878,
+          "reps": 5,
+          "ok": true,
+          "build_ms": 0.0,
+          "probe_ms": 3.64021,
+          "morsels": [
+            112.0,
+            117.0,
+            0.0
+          ],
+          "finished_ms": [
+            3.51117,
+            2.21738,
+            0.0
+          ],
+          "gpu_share": null,
+          "vs_best_static": 0.620733343905654
+        }
+      },
+      "1048576": {
+        "gpu": {
+          "policy": "gpu",
+          "build_device": "-",
+          "plan_build": null,
+          "ms_median": 1.873,
+          "ms_min": 1.73287,
+          "pred_ms": 1.604,
+          "reps": 5,
+          "ok": true,
+          "build_ms": 0.0,
+          "probe_ms": 1.873,
+          "morsels": [
+            58.0,
+            0.0,
+            0.0
+          ],
+          "finished_ms": [
+            1.817,
+            0.0,
+            0.0
+          ],
+          "gpu_share": null,
+          "vs_best_static": 1.0
+        },
+        "split": {
+          "policy": "split",
+          "build_device": "-",
+          "plan_build": null,
+          "ms_median": 1.90562,
+          "ms_min": 1.68521,
+          "pred_ms": 1.39,
+          "reps": 5,
+          "ok": true,
+          "build_ms": 0.0,
+          "probe_ms": 1.90562,
+          "morsels": [
+            48.0,
+            6.0,
+            4.0
+          ],
+          "finished_ms": [
+            1.67929,
+            0.707625,
+            1.88875
+          ],
+          "gpu_share": 0.822776,
+          "vs_best_static": 1.0174159103043248
+        },
+        "dynamic": {
+          "policy": "dynamic",
+          "build_device": "-",
+          "plan_build": null,
+          "ms_median": 2.97525,
+          "ms_min": 2.89871,
+          "pred_ms": 1.39,
+          "reps": 5,
+          "ok": true,
+          "build_ms": 0.0,
+          "probe_ms": 2.97525,
+          "morsels": [
+            27.0,
+            23.0,
+            8.0
+          ],
+          "finished_ms": [
+            1.25646,
+            2.31258,
+            2.96121
+          ],
+          "gpu_share": null,
+          "vs_best_static": 1.5884943940202882
+        },
+        "router": {
+          "policy": "router",
+          "build_device": "-",
+          "plan_build": null,
+          "ms_median": 1.93571,
+          "ms_min": 1.86879,
+          "pred_ms": 1.39,
+          "reps": 5,
+          "ok": true,
+          "build_ms": 0.0,
+          "probe_ms": 1.93571,
+          "morsels": [
+            58.0,
+            0.0,
+            0.0
+          ],
+          "finished_ms": [
+            1.82771,
+            0.0,
+            0.0
+          ],
+          "gpu_share": null,
+          "vs_best_static": 1.0334810464495463
+        }
+      }
+    },
+    "q1": {
+      "65536": {
+        "gpu": {
+          "policy": "gpu",
+          "build_device": "-",
+          "plan_build": null,
+          "ms_median": 23.1335,
+          "ms_min": 22.6393,
+          "pred_ms": 16.407,
+          "reps": 5,
+          "ok": true,
+          "build_ms": 0.0,
+          "probe_ms": 23.1335,
+          "morsels": [
+            916.0,
+            0.0,
+            0.0
+          ],
+          "finished_ms": [
+            23.0945,
+            0.0,
+            0.0
+          ],
+          "gpu_share": null,
+          "vs_best_static": 1.0
+        },
+        "split": {
+          "policy": "split",
+          "build_device": "-",
+          "plan_build": null,
+          "ms_median": 7.83733,
+          "ms_min": 7.33371,
+          "pred_ms": 4.333,
+          "reps": 5,
+          "ok": true,
+          "build_ms": 0.0,
+          "probe_ms": 7.83733,
+          "morsels": [
+            242.0,
+            609.0,
+            65.0
+          ],
+          "finished_ms": [
+            7.69671,
+            5.29475,
+            5.6245
+          ],
+          "gpu_share": 0.264098,
+          "vs_best_static": 0.3387870404391899
+        },
+        "dynamic": {
+          "policy": "dynamic",
+          "build_device": "-",
+          "plan_build": null,
+          "ms_median": 6.169,
+          "ms_min": 5.98963,
+          "pred_ms": 4.333,
+          "reps": 5,
+          "ok": true,
+          "build_ms": 0.0,
+          "probe_ms": 6.169,
+          "morsels": [
+            180.0,
+            661.0,
+            74.0
+          ],
+          "finished_ms": [
+            6.02567,
+            5.81771,
+            6.02846
+          ],
+          "gpu_share": null,
+          "vs_best_static": 0.2666695484902846
+        },
+        "router": {
+          "policy": "router",
+          "build_device": "-",
+          "plan_build": null,
+          "ms_median": 6.10592,
+          "ms_min": 6.03538,
+          "pred_ms": 4.333,
+          "reps": 5,
+          "ok": true,
+          "build_ms": 0.0,
+          "probe_ms": 6.10592,
+          "morsels": [
+            182.0,
+            681.0,
+            52.0
+          ],
+          "finished_ms": [
+            5.98225,
+            5.76888,
+            4.37879
+          ],
+          "gpu_share": null,
+          "vs_best_static": 0.2639427669829468
+        }
+      },
+      "262144": {
+        "gpu": {
+          "policy": "gpu",
+          "build_device": "-",
+          "plan_build": null,
+          "ms_median": 6.77908,
+          "ms_min": 6.14392,
+          "pred_ms": 5.302,
+          "reps": 5,
+          "ok": true,
+          "build_ms": 0.0,
+          "probe_ms": 6.77908,
+          "morsels": [
+            229.0,
+            0.0,
+            0.0
+          ],
+          "finished_ms": [
+            6.72567,
+            0.0,
+            0.0
+          ],
+          "gpu_share": null,
+          "vs_best_static": 1.0
+        },
+        "split": {
+          "policy": "split",
+          "build_device": "-",
+          "plan_build": null,
+          "ms_median": 4.95729,
+          "ms_min": 4.81946,
+          "pred_ms": 2.836,
+          "reps": 5,
+          "ok": true,
+          "build_ms": 0.0,
+          "probe_ms": 4.95729,
+          "morsels": [
+            123.0,
+            92.0,
+            14.0
+          ],
+          "finished_ms": [
+            4.75017,
+            3.31167,
+            4.38525
+          ],
+          "gpu_share": 0.53501,
+          "vs_best_static": 0.7312629442343209
+        },
+        "dynamic": {
+          "policy": "dynamic",
+          "build_device": "-",
+          "plan_build": null,
+          "ms_median": 4.95267,
+          "ms_min": 4.86862,
+          "pred_ms": 2.836,
+          "reps": 5,
+          "ok": true,
+          "build_ms": 0.0,
+          "probe_ms": 4.95267,
+          "morsels": [
+            96.0,
+            118.0,
+            16.0
+          ],
+          "finished_ms": [
+            4.14288,
+            4.34288,
+            4.93425
+          ],
+          "gpu_share": null,
+          "vs_best_static": 0.7305814358290506
+        },
+        "router": {
+          "policy": "router",
+          "build_device": "-",
+          "plan_build": null,
+          "ms_median": 4.71988,
+          "ms_min": 4.70404,
+          "pred_ms": 2.836,
+          "reps": 5,
+          "ok": true,
+          "build_ms": 0.0,
+          "probe_ms": 4.71988,
+          "morsels": [
+            133.0,
+            96.0,
+            0.0
+          ],
+          "finished_ms": [
+            4.60225,
+            3.33508,
+            0.0
+          ],
+          "gpu_share": null,
+          "vs_best_static": 0.696241967936652
+        }
+      },
+      "1048576": {
+        "gpu": {
+          "policy": "gpu",
+          "build_device": "-",
+          "plan_build": null,
+          "ms_median": 3.54554,
+          "ms_min": 3.47079,
+          "pred_ms": 3.141,
+          "reps": 5,
+          "ok": true,
+          "build_ms": 0.0,
+          "probe_ms": 3.54554,
+          "morsels": [
+            58.0,
+            0.0,
+            0.0
+          ],
+          "finished_ms": [
+            3.48725,
+            0.0,
+            0.0
+          ],
+          "gpu_share": null,
+          "vs_best_static": 1.0
+        },
+        "split": {
+          "policy": "split",
+          "build_device": "-",
+          "plan_build": null,
+          "ms_median": 6.32071,
+          "ms_min": 5.38371,
+          "pred_ms": 2.319,
+          "reps": 5,
+          "ok": true,
+          "build_ms": 0.0,
+          "probe_ms": 6.32071,
+          "morsels": [
+            46.0,
+            8.0,
+            4.0
+          ],
+          "finished_ms": [
+            2.98896,
+            2.3265,
+            6.302
+          ],
+          "gpu_share": 0.79575,
+          "vs_best_static": 1.78272139081776
+        },
+        "dynamic": {
+          "policy": "dynamic",
+          "build_device": "-",
+          "plan_build": null,
+          "ms_median": 7.66121,
+          "ms_min": 7.30467,
+          "pred_ms": 2.319,
+          "reps": 5,
+          "ok": true,
+          "build_ms": 0.0,
+          "probe_ms": 7.66121,
+          "morsels": [
+            27.0,
+            23.0,
+            8.0
+          ],
+          "finished_ms": [
+            2.12229,
+            3.58354,
+            7.64779
+          ],
+          "gpu_share": null,
+          "vs_best_static": 2.160802021694862
+        },
+        "router": {
+          "policy": "router",
+          "build_device": "-",
+          "plan_build": null,
+          "ms_median": 3.60667,
+          "ms_min": 3.54204,
+          "pred_ms": 2.319,
+          "reps": 5,
+          "ok": true,
+          "build_ms": 0.0,
+          "probe_ms": 3.60667,
+          "morsels": [
+            58.0,
+            0.0,
+            0.0
+          ],
+          "finished_ms": [
+            3.50862,
+            0.0,
+            0.0
+          ],
+          "gpu_share": null,
+          "vs_best_static": 1.0172413793103448
+        }
+      }
+    }
+  }
+}

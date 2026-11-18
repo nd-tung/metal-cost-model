@@ -1,0 +1,38 @@
+crossovers: 132, identical report 96, differ 36
+moved by >= 0.25 in log2 n (or present in one only): 22
+join_build/supplier_build      gpu-warm-spin vs cpu-p           old none up to 2^16.0 (at 2^16.0: GPU 1.87x the CPU time)        new none up to 2^16.0 (at 2^16.0: GPU 1.81x the CPU time)        
+join_build/supplier_build      gpu-cold-spin vs cpu-p           old none up to 2^16.0 (at 2^16.0: GPU 2.17x the CPU time)        new none up to 2^16.0 (at 2^16.0: GPU 2.16x the CPU time)        
+join_probe/part_promo_probe    gpu-warm-pipe-spin vs cpu-p      old 2^12.3 (measured: GPU slower at 2^12.0, faster from 2^13.0 on) new 2^11.8 (measured: GPU slower at 2^11.0, faster from 2^12.0 on) -0.50
+join_probe/supplier_probe      gpu-warm-pipe-spin vs cpu-p      old 2^12.1 (measured: GPU slower at 2^12.0, faster from 2^13.0 on) new 2^11.7 (measured: GPU slower at 2^11.0, faster from 2^12.0 on) -0.41
+join_probe/orders_probe        gpu-warm-pipe-spin vs cpu-p      old 2^11.4 (measured: GPU slower at 2^11.0, faster from 2^12.0 on) new 2^11.7 (measured: GPU slower at 2^11.0, faster from 2^12.0 on) +0.32
+join_probe/orders_probe        gpu-cold-pipe-spin vs cpu-p      old 2^11.8 (measured: GPU slower at 2^11.0, faster from 2^12.0 on) new 2^12.1 (measured: GPU slower at 2^12.0, faster from 2^13.0 on) +0.31
+join_probe/supplier_probe      gpu-cold-pipe-spin vs cpu-p      old 2^12.4 (measured: GPU slower at 2^12.0, faster from 2^13.0 on) new 2^12.1 (measured: GPU slower at 2^12.0, faster from 2^13.0 on) -0.29
+join_probe/part_probe          gpu-cold-pipe-spin vs cpu-p      old 2^12.0 (measured: GPU slower at 2^11.0, faster from 2^12.0 on) new 2^12.1 (measured: GPU slower at 2^12.0, faster from 2^13.0 on) +0.12
+agg_sum                        gpu-warm-pipe-spin vs cpu-e      old 2^15.6 (measured: GPU slower at 2^15.0, faster from 2^16.0 on) new 2^15.7 (measured: GPU slower at 2^15.0, faster from 2^16.0 on) +0.09
+filter_count                   gpu-warm-pipe-spin vs cpu-e      old 2^15.6 (measured: GPU slower at 2^15.0, faster from 2^16.0 on) new 2^15.7 (measured: GPU slower at 2^15.0, faster from 2^16.0 on) +0.08
+agg_group/G=100000             gpu-cold-pipe-spin vs cpu-p      old 2^13.8 (measured: GPU slower at 2^13.0, faster from 2^14.0 on) new 2^13.7 (measured: GPU slower at 2^13.0, faster from 2^14.0 on) -0.08
+join_probe/part_probe          gpu-warm-pipe-spin vs cpu-p      old 2^11.7 (measured: GPU slower at 2^11.0, faster from 2^12.0 on) new 2^11.8 (measured: GPU slower at 2^11.0, faster from 2^12.0 on) +0.07
+sort/l_orderkey                gpu-cold-spin vs cpu-e           old 2^13.4 (measured: GPU slower at 2^13.0, faster from 2^14.0 on) new 2^13.3 (measured: GPU slower at 2^13.0, faster from 2^14.0 on) -0.06
+join_build/part_promo_build    gpu-cold-spin vs cpu-p           old 2^17.5 (measured: GPU slower at 2^17.0, faster from 2^18.0 on) new 2^17.6 (measured: GPU slower at 2^17.0, faster from 2^18.0 on) +0.06
+join_probe/orders_probe        gpu-warm-spin vs cpu-p           old 2^15.8 (measured: GPU slower at 2^15.0, faster from 2^16.0 on) new 2^15.9 (measured: GPU slower at 2^15.0, faster from 2^16.0 on) +0.06
+join_probe/part_promo_probe    gpu-warm-spin vs cpu-p           old 2^15.8 (measured: GPU slower at 2^15.0, faster from 2^16.0 on) new 2^15.7 (measured: GPU slower at 2^15.0, faster from 2^16.0 on) -0.05
+join_probe/orders_probe        gpu-warm-spin vs cpu-e           old 2^13.0 (measured: GPU slower at 2^12.0, faster from 2^13.0 on) new 2^13.0 (measured: GPU slower at 2^13.0, faster from 2^14.0 on) +0.05
+join_probe/supplier_probe      gpu-cold-spin vs cpu-p           old 2^16.9 (measured: GPU slower at 2^16.0, faster from 2^17.0 on) new 2^17.0 (measured: GPU slower at 2^16.0, faster from 2^17.0 on) +0.05
+agg_group/G=7                  gpu-warm-spin vs cpu-p           old 2^19.7 (measured: GPU slower at 2^19.0, faster from 2^20.0 on) new 2^19.8 (measured: GPU slower at 2^19.0, faster from 2^20.0 on) +0.05
+sort/l_orderkey                gpu-cold-spin vs cpu-p           old 2^15.5 (measured: GPU slower at 2^15.0, faster from 2^16.0 on) new 2^15.4 (measured: GPU slower at 2^15.0, faster from 2^16.0 on) -0.05
+agg_group/G=100000             gpu-warm-spin vs cpu-e           old 2^14.4 (measured: GPU slower at 2^14.0, faster from 2^15.0 on) new 2^14.3 (measured: GPU slower at 2^14.0, faster from 2^15.0 on) -0.05
+agg_group/G=100000             gpu-cold-pipe-spin vs cpu-e      old 2^10.1 (measured: GPU slower at 2^10.0, faster from 2^11.0 on) new 2^10.0 (measured: GPU slower at 2^10.0, faster from 2^11.0 on) -0.04
+join_probe/part_promo_probe    gpu-warm-spin vs cpu-e           old 2^13.0 (measured: GPU slower at 2^12.0, faster from 2^13.0 on) new 2^12.9 (measured: GPU slower at 2^12.0, faster from 2^13.0 on) -0.04
+agg_group/G=2526               gpu-warm-spin vs cpu-e           old 2^15.9 (measured: GPU slower at 2^15.0, faster from 2^16.0 on) new 2^16.0 (measured: GPU slower at 2^15.0, faster from 2^16.0 on) +0.04
+agg_group/G=2526               gpu-warm-spin vs cpu-p           old 2^19.7 (measured: GPU slower at 2^19.0, faster from 2^20.0 on) new 2^19.6 (measured: GPU slower at 2^19.0, faster from 2^20.0 on) -0.03
+agg_sum                        gpu-warm-spin vs cpu-p           old 2^22.2 (measured: GPU slower at 2^22.0, faster from 2^23.0 on) new 2^22.3 (measured: GPU slower at 2^22.0, faster from 2^23.0 on) +0.03
+join_probe/nation_probe        gpu-warm-spin vs cpu-e           old 2^15.7 (measured: GPU slower at 2^15.0, faster from 2^16.0 on) new 2^15.8 (measured: GPU slower at 2^15.0, faster from 2^16.0 on) +0.03
+filter_count                   gpu-warm-spin vs cpu-e           old 2^19.5 (measured: GPU slower at 2^19.0, faster from 2^20.0 on) new 2^19.6 (measured: GPU slower at 2^19.0, faster from 2^20.0 on) +0.03
+join_build/part_build          gpu-warm-spin vs cpu-p           old 2^16.1 (measured: GPU slower at 2^16.0, faster from 2^17.0 on) new 2^16.2 (measured: GPU slower at 2^16.0, faster from 2^17.0 on) +0.02
+join_build/orders_build        gpu-cold-spin vs cpu-e           old 2^12.9 (measured: GPU slower at 2^12.0, faster from 2^13.0 on) new 2^13.0 (measured: GPU slower at 2^12.0, faster from 2^13.0 on) +0.02
+join_build/customer_build      gpu-warm-spin vs cpu-e           old 2^12.9 (measured: GPU slower at 2^12.0, faster from 2^13.0 on) new 2^13.0 (measured: GPU slower at 2^12.0, faster from 2^13.0 on) +0.02
+sort/l_shipdate                gpu-warm-spin vs cpu-e           old 2^14.4 (measured: GPU slower at 2^14.0, faster from 2^15.0 on) new 2^14.5 (measured: GPU slower at 2^14.0, faster from 2^15.0 on) +0.02
+agg_group/G=2526               gpu-cold-spin vs cpu-e           old 2^16.3 (measured: GPU slower at 2^16.0, faster from 2^17.0 on) new 2^16.2 (measured: GPU slower at 2^16.0, faster from 2^17.0 on) -0.01
+join_build/supplier_build      gpu-cold-spin vs cpu-e           old 2^13.2 (measured: GPU slower at 2^13.0, faster from 2^14.0 on) new 2^13.3 (measured: GPU slower at 2^13.0, faster from 2^14.0 on) +0.01
+sort/l_orderkey                gpu-warm-spin vs cpu-p           old 2^15.3 (measured: GPU slower at 2^15.0, faster from 2^16.0 on) new 2^15.4 (measured: GPU slower at 2^15.0, faster from 2^16.0 on) +0.01
+sort/l_partkey                 gpu-warm-spin vs cpu-p           old 2^16.9 (measured: GPU slower at 2^16.0, faster from 2^17.0 on) new 2^17.0 (measured: GPU slower at 2^16.0, faster from 2^17.0 on) +0.01

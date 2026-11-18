@@ -1,0 +1,7 @@
+commit: 881fea04c6a77eef79ae21207060918cde4ce8d6
+source_dirty: yes (36 changed or untracked source paths)
+started: 2026-11-17T10:31:25Z (local 11:31:25; this file written after the run, from the source tree that built the binaries, unchanged since)
+script: gpu_iso.sh (copy of /tmp/gpu_iso.sh; run without scripts/lib_sweep.sh, so no sweep lock)
+flush_mb: 512 (MCM_FLUSH_MB)
+load: 1.82 1.97 1.98
+power: Now drawing from 'AC Power'

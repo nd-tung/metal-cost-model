@@ -112,6 +112,8 @@ class Gpu {
     final_->release();
     partial_->release();
   }
+  // The buffer wrapping column i (bench/val_query.hpp: the cache-state producer step).
+  MTL::Buffer* column_buffer(int i) const { return cols_[i]; }
   Gpu(const Gpu&) = delete;
   Gpu& operator=(const Gpu&) = delete;
 

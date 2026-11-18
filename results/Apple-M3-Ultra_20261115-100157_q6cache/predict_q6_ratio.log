@@ -1,0 +1,46 @@
+Q6 runs: Apple-M3-Ultra_20261115-100157_q6cache, Apple-M3-Ultra_20261115-101517_q6cache, Apple-M3-Ultra_20261115-103435_q6cache
+model: models/Apple-M3-Ultra.json
+cache states: cpu-write, gpu-write, hot (form ratio)
+
+device              calibration          alpha us     k  stream  Q6 fit alpha fit   (ns/row; Q6 fit = measured; pipelined: overlap)
+cpu-p               cpu-p                     0.0  1.00   0.223   0.200       0.3
+cpu-e               cpu-e                     0.8  1.00   1.222   1.186       2.1
+gpu-warm-spin       gpu-warm-spin           227.2  1.00   0.022   0.022     242.7
+gpu-warm-pipe-spin  gpu-warm-pipe-spin       15.8  0.16   0.020   0.016      15.4
+cpu-p-hot           cpu-p                     0.0  1.00   0.223   0.192       0.0
+cpu-e-hot           cpu-e                     0.8  1.00   1.222   1.178      -0.0
+gpu-warm-spin-hot   gpu-warm-spin           227.2  1.00   0.022   0.021     258.4
+gpu-warm-pipe-spin-hot gpu-warm-pipe-spin       15.8  0.16   0.020   0.015      16.6
+cpu-p-cpu-write     cpu-p                     0.0  1.00   0.223   0.194       0.0
+cpu-e-cpu-write     cpu-e                     0.8  1.00   1.222   1.186       0.3
+gpu-warm-spin-cpu-write gpu-warm-spin           227.2  1.00   0.022   0.025     249.2
+gpu-warm-pipe-spin-cpu-write gpu-warm-pipe-spin       15.8  0.16   0.020   0.017      16.5
+cpu-p-gpu-write     cpu-p                     0.0  1.00   0.223   0.241       1.2
+cpu-e-gpu-write     cpu-e                     0.8  1.00   1.222   1.164       1.2
+gpu-warm-spin-gpu-write gpu-warm-spin           227.2  1.00   0.022   0.023     239.4
+gpu-warm-pipe-spin-gpu-write gpu-warm-pipe-spin       15.8  0.16   0.020   0.017      15.9
+
+rule                        cpu-p                  cpu-e          gpu-warm-spin     gpu-warm-pipe-spin              cpu-p-hot              cpu-e-hot      gpu-warm-spin-hot gpu-warm-pipe-spin-hot        cpu-p-cpu-write        cpu-e-cpu-write gpu-warm-spin-cpu-write gpu-warm-pipe-spin-cpu-write        cpu-p-gpu-write        cpu-e-gpu-write gpu-warm-spin-gpu-write gpu-warm-pipe-spin-gpu-write   placement: sync-spin  sync-spin@hot  sync-spin@cpu-write  sync-spin@gpu-write  pipelined-spin  pipelined-spin@hot  pipelined-spin@cpu-write  pipelined-spin@gpu-write
+stream           14% med   34% p90        3% med   27% p90        5% med   10% p90        8% med   15% p90       22% med   53% p90       10% med   30% p90       12% med   16% p90       10% med   25% p90       20% med   45% p90       11% med   37% p90        5% med    8% p90        8% med   25% p90       25% med   61% p90       11% med   19% p90        4% med    6% p90        7% med   21% p90        100%           100%                 100%                 100%            100%                100%                      100%                       90%
+q6-fit            3% med   11% p90        1% med    3% p90        2% med    5% p90       13% med   23% p90        1% med    4% p90        1% med   31% p90        5% med   11% p90        9% med   21% p90        1% med    4% p90        2% med    8% p90        3% med   11% p90        8% med   23% p90       23% med   61% p90        1% med    2% p90        3% med    8% p90        6% med   21% p90        100%           100%                 100%                 100%            100%                100%                      100%                       96%
+(error = |predicted - measured| / measured over every (run, n) median)
+
+crossovers (GPU faster from):
+  gpu-warm-spin            vs cpu-p           : measured 2^20.4 (measured: GPU slower at 2^20.0, faster from 2^21.0 on); predicted stream 2^20.1
+  gpu-warm-spin            vs cpu-e           : measured 2^17.7 (measured: GPU slower at 2^17.0, faster from 2^18.0 on); predicted stream 2^17.5
+  gpu-warm-pipe-spin       vs cpu-p           : measured 2^16.5 (measured: GPU slower at 2^16.0, faster from 2^17.0 on); predicted stream 2^16.1
+  gpu-warm-pipe-spin       vs cpu-e           : measured 2^13.7 (measured: GPU slower at 2^13.0, faster from 2^14.0 on); predicted stream 2^13.6
+  gpu-warm-spin-hot        vs cpu-p-hot       : measured 2^20.6 (measured: GPU slower at 2^20.0, faster from 2^21.0 on); predicted stream 2^20.6
+  gpu-warm-spin-hot        vs cpu-e-hot       : measured 2^17.9 (measured: GPU slower at 2^17.0, faster from 2^18.0 on); predicted stream 2^17.7
+  gpu-warm-pipe-spin-hot   vs cpu-p-hot       : measured 2^16.7 (measured: GPU slower at 2^16.0, faster from 2^17.0 on); predicted stream 2^16.6
+  gpu-warm-pipe-spin-hot   vs cpu-e-hot       : measured 2^14.0 (measured: GPU slower at 2^14.0, faster from 2^15.0 on); predicted stream 2^13.8
+  gpu-warm-spin-cpu-write  vs cpu-p-cpu-write : measured 2^20.6 (measured: GPU slower at 2^20.0, faster from 2^21.0 on); predicted stream 2^20.9
+  gpu-warm-spin-cpu-write  vs cpu-e-cpu-write : measured 2^17.9 (measured: GPU slower at 2^17.0, faster from 2^18.0 on); predicted stream 2^17.9
+  gpu-warm-pipe-spin-cpu-write vs cpu-p-cpu-write : measured 2^16.6 (measured: GPU slower at 2^16.0, faster from 2^17.0 on); predicted stream 2^16.8
+  gpu-warm-pipe-spin-cpu-write vs cpu-e-cpu-write : measured 2^13.9 (measured: GPU slower at 2^13.0, faster from 2^14.0 on); predicted stream 2^13.9
+  gpu-warm-spin-gpu-write  vs cpu-p-gpu-write : measured 2^20.1 (measured: GPU slower at 2^20.0, faster from 2^21.0 on); predicted stream 2^20.4
+  gpu-warm-spin-gpu-write  vs cpu-e-gpu-write : measured 2^17.7 (measured: GPU slower at 2^17.0, faster from 2^18.0 on); predicted stream 2^17.8
+  gpu-warm-pipe-spin-gpu-write vs cpu-p-gpu-write : measured 2^14.5 (measured: GPU slower at 2^14.0, faster from 2^15.0 on); predicted stream 2^16.2
+  gpu-warm-pipe-spin-gpu-write vs cpu-e-gpu-write : measured 2^13.8 (measured: GPU slower at 2^13.0, faster from 2^14.0 on); predicted stream 2^13.8
+
+-> results/Apple-M3-Ultra_20261115-100157_q6cache/predict_q6_state_ratio.json

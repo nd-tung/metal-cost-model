@@ -11,7 +11,12 @@
 //                                                     batch of K morsels on K disjoint row ranges,
 //                                                     t_total = GPU span / K (common/bench.hpp).
 //   device=cpu, qos=p|e                             : one worker thread on rows [0, n)
-// --cache cold (default) flushes 64 MB (MCM_FLUSH_MB) before every timed rep. CSV columns as
+// --cache <state> (default cold): the state of the morsel's input, as calib_filter's (common/bench.hpp
+// Toucher; README "Cache state"): cold flushes 64 MB (MCM_FLUSH_MB) before every timed rep; hot never
+// flushes; cpu-write, cpu-read, gpu-write, gpu-read flush and then let one CPU thread (the consumer
+// thread itself for CPU morsels, the dispatching thread for GPU ones) or a GPU kernel rewrite in place
+// or read every column of the morsel's rows (pipelined: of all K morsels of the batch), untimed, right
+// before the timed morsel; cpu-touch1, gpu-touch1 are the one-row controls. CSV columns as
 // calib_filter's, with op = the query, thr = the query's main threshold and bytes = the bytes the
 // kernel reads per row times n, plus gpu_spin_ms and gpu_groups.
 //
@@ -39,8 +44,9 @@
 //
 // A query Q is a struct with (see bench/val_q1.cpp):
 //   kOp ("q1"), kKernelFile ("q1.metal"), kPartialKernel ("q1_partial"; may be set before run()), kBytesPerRow, kThr, what()
-//   Columns (rows, mem), Result (merge, ==), Gpu (kThreads, default_max_groups(gpu_cores), Gpu(ctx, cols, max_groups),
-//   Slot, new_slot, free_slot, read, encode, partial_pso, max_groups, set_final_pass, final_pass, final_on_cpu),
+//   Columns (rows, mem[columns]), Result (merge, ==), Gpu (kThreads, default_max_groups(gpu_cores), Gpu(ctx, cols, max_groups),
+//   Slot, new_slot, free_slot, read, encode, partial_pso, max_groups, set_final_pass, final_pass, final_on_cpu,
+//   column_buffer(i)),
 //   load(dir), reference(cols, begin, n), cpu(cols, begin, n, out), load_expected(path, out), describe(result)
 
 #include <pthread/qos.h>
@@ -109,7 +115,8 @@ inline void write_rows(const std::string& path, const std::string& machine, cons
 inline void usage(const std::string& op) {
   std::cerr << "usage: val_" << op << " --device gpu|cpu [--qos p|e] [--dispatch sync|pipelined] [--batch 16] [--batch-mb 1024]\n"
             << "              [--data data/tpch-sf10] [--min-log2 10] [--max-log2 25] [--reps 15]\n"
-            << "              [--cache cold|hot] [--flush-mb 64] [--out results/val_" << op << ".csv] [--machine-json path]\n"
+            << "              [--cache cold|hot|cpu-write|cpu-read|gpu-write|gpu-read|cpu-touch1|gpu-touch1] [--flush-mb 64]\n"
+            << "              [--out results/val_" << op << ".csv] [--machine-json path]\n"
             << "              [--expect <data>/" << op << "_expected.txt] [--gpu-spin-ms 0] [--gpu-groups <query default>]\n"
             << "              [--gpu-final 1 (0: diagnostic, morsels without the final pass)]\n";
 }
@@ -160,7 +167,8 @@ int run(int argc, char** argv) {
     int max_l2 = static_cast<int>(a.i64("max-log2", 25));
     const int reps = static_cast<int>(a.i64("reps", 15));
     const std::string cache = a.str("cache", "cold");
-    if (cache != "cold" && cache != "hot") throw std::runtime_error("--cache must be cold or hot");
+    if (std::find(kCachePolicies.begin(), kCachePolicies.end(), cache) == kCachePolicies.end())
+      throw std::runtime_error(kCachePolicyHelp);
     const std::string out_path = a.str("out", "results/val_" + op + ".csv");
     const std::string expect_path = a.str("expect", data_dir + "/" + op + "_expected.txt");
     const double spin_ms = a.f64("gpu-spin-ms", 0);
@@ -180,7 +188,8 @@ int run(int argc, char** argv) {
 
     NS::AutoreleasePool* pool = NS::AutoreleasePool::alloc()->init();
     MetalCtx ctx(std::vector<std::string>{std::string(MCM_KERNEL_DIR) + "/" + Q::kKernelFile,
-                                          std::string(MCM_KERNEL_DIR) + "/spin.metal"});
+                                          std::string(MCM_KERNEL_DIR) + "/spin.metal",
+                                          std::string(MCM_KERNEL_DIR) + "/touch.metal"});
     MachineInfo mi = collect_machine_info(ctx.device());
     const NS::UInteger max_groups =
         groups_set ? static_cast<NS::UInteger>(groups_arg) : Gpu::default_max_groups(mi.gpu_cores);
@@ -201,7 +210,10 @@ int run(int argc, char** argv) {
     std::cerr << "data: " << data_dir << " (" << cols.rows << " rows) | " << Q::what() << "\n";
 
     CacheFlusher flusher(static_cast<size_t>(a.i64("flush-mb", default_flush_mb())) << 20);
-    auto flush = [&] { if (cache == "cold") flusher(); };
+    auto flush = [&] { if (cache != "hot") flusher(); };  // hot is the only state without the flush
+    Toucher touch(&ctx, cache);  // the producer step of the cache states (no-op for cold and hot)
+    const int kColumns = static_cast<int>(std::size(cols.mem));  // every column the kernel reads (a bench may leave some unloaded)
+    auto host_col = [&](int c) { return static_cast<uint32_t*>(cols.mem[c]->data()); };
 
     // ---- full table: correctness against the reference and DuckDB
     const Result ref_all = Q::reference(cols, 0, cols.rows);
@@ -268,10 +280,14 @@ int run(int argc, char** argv) {
         std::vector<size_t> begin(K);
         std::vector<Result> ref(K);
         std::vector<typename Gpu::Slot> slots(K);
+        std::vector<Toucher::Range> ranges;  // the producer step: every column of every morsel of the batch
         for (int k = 0; k < K; ++k) {
           begin[k] = (size_t(k) * n) % (cols.rows - n + 1);  // disjoint while K * n <= rows
           ref[k] = Q::reference(cols, begin[k], n);
           slots[k] = gpu->new_slot();
+          if (touch.active())
+            for (int c = 0; c < kColumns; ++c)
+              if (cols.mem[c]) ranges.push_back({host_col(c) + begin[k], gpu->column_buffer(c), begin[k] * sizeof(uint32_t), n});
         }
         auto check = [&] {
           for (int k = 0; k < K; ++k) {
@@ -301,6 +317,7 @@ int run(int argc, char** argv) {
         for (int r = 0; r < reps; ++r) {
           Row row{"gpu", "-", "warm", n, r};
           flush();
+          touch(ranges);
           if (spin) (*spin)();  // ALU only: leaves the flushed caches alone
           row.ok = timed(row);
           rows.push_back(row);
@@ -309,15 +326,23 @@ int run(int argc, char** argv) {
         std::cerr << "gpu warm " << dispatch << (pipelined ? " x" + std::to_string(K) : "") << " n=2^" << l2 << " done\n";
       }
     } else {
+      std::vector<MTL::Buffer*> col_bufs;  // the GPU producer step (gpu-*) needs the columns as buffers
+      if (cache_policy_on_gpu(cache))
+        for (int c = 0; c < kColumns; ++c) col_bufs.push_back(cols.mem[c] ? wrap_no_copy(ctx.device(), *cols.mem[c]) : nullptr);
       std::thread worker([&] {
         place_cpu_thread(qos);
         for (int l2 = min_l2; l2 <= max_l2; ++l2) {
           const uint64_t n = 1ull << l2;
           const Result ref = Q::reference(cols, 0, n);
+          std::vector<Toucher::Range> ranges;  // rows [0, n) of every column
+          if (touch.active())
+            for (int c = 0; c < kColumns; ++c)
+              if (cols.mem[c]) ranges.push_back({host_col(c), col_bufs.empty() ? nullptr : col_bufs[c], 0, static_cast<uint32_t>(n)});
           for (int r = 0; r < reps; ++r) {
             Row row{"cpu", qos, r == 0 ? "first" : "warm", n, r};
             Result got;
             flush();
+            touch(ranges);  // cpu-*: on this thread, its own L2; gpu-*: a kernel this thread waits for
             asm volatile("" ::: "memory");
             auto t0 = Clock::now();
             Q::cpu(cols, 0, n, got);
@@ -330,6 +355,8 @@ int run(int argc, char** argv) {
         }
       });
       worker.join();
+      for (MTL::Buffer* b : col_bufs)
+        if (b) b->release();
     }
 
     const size_t bad = std::count_if(rows.begin(), rows.end(), [](const Row& r) { return !r.ok; });

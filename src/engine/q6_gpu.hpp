@@ -50,6 +50,9 @@ class Gpu {
   Gpu(const Gpu&) = delete;
   Gpu& operator=(const Gpu&) = delete;
 
+  // The buffer wrapping column i of the Columns (bench/val_query.hpp: the cache-state producer step).
+  MTL::Buffer* column_buffer(int i) const { return cols_[i]; }
+
   Slot new_slot() const {
     Slot s;
     s.partials = ctx_.device()->newBuffer(max_groups_ * kVals * sizeof(uint64_t), MTL::ResourceStorageModeShared);

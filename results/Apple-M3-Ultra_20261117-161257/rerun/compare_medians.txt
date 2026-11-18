@@ -1,0 +1,92 @@
+
+=== calibration (cold): 2191 (config, n) cells, 0 only in one set
+|new/old - 1|: median 0.7%, p90 3.6%, p99 35.7%, max 98.8%; within 5%: 93%, within 10%: 95%
+run-to-run spread (max/min - 1) median: old 1.9%, new 1.8%; p90: old 19.7%, new 13.1%
+new median inside the old runs' range or old inside the new: 78% of cells
+
+by op family and device (|new/old - 1|; ratio_med: median new/old; spread: median max/min - 1 within a set)
+                       cells   med   p90    mx  ratio_med  spread_old  spread_new
+fam          devc                                                                
+agg_group    cpu-e        64 0.003 0.016 0.099      1.002       0.010       0.009
+             cpu-p        64 0.003 0.025 0.151      1.001       0.008       0.016
+             gpu-pipe    128 0.006 0.030 0.179      1.001       0.025       0.037
+             gpu-sync    128 0.010 0.026 0.059      1.005       0.018       0.023
+agg_reg      gpu-pipe    192 0.007 0.273 0.458      1.000       0.232       0.027
+             gpu-sync    192 0.009 0.022 0.040      1.004       0.021       0.020
+agg_sum      cpu-e        16 0.018 0.192 0.330      0.992       0.018       0.027
+             cpu-p        16 0.003 0.159 0.988      1.003       0.021       0.017
+             gpu-pipe     32 0.007 0.019 0.053      1.007       0.056       0.055
+             gpu-sync     32 0.015 0.025 0.044      1.015       0.023       0.025
+filter_count cpu-e        16 0.012 0.266 0.333      0.989       0.027       0.022
+             cpu-p        16 0.004 0.078 0.988      1.000       0.005       0.013
+             gpu-pipe     32 0.010 0.020 0.042      1.001       0.022       0.058
+             gpu-sync     32 0.007 0.016 0.022      1.003       0.025       0.015
+join_build   cpu-e        54 0.007 0.022 0.060      0.998       0.015       0.015
+             cpu-p       131 0.010 0.105 0.915      1.000       0.024       0.027
+             gpu-sync    108 0.008 0.019 0.481      1.000       0.019       0.020
+join_probe   cpu-e        89 0.004 0.019 0.038      1.000       0.012       0.013
+             cpu-p        89 0.007 0.023 0.045      1.000       0.008       0.012
+             gpu-pipe    178 0.014 0.269 0.464      1.000       0.036       0.039
+             gpu-sync    178 0.011 0.025 0.037      1.002       0.028       0.021
+sort         cpu-e        64 0.002 0.011 0.070      1.000       0.006       0.006
+             cpu-p       116 0.002 0.012 0.170      1.000       0.003       0.004
+             gpu-sync    128 0.006 0.022 0.093      1.001       0.016       0.015
+sort_merge   cpu-e        48 0.005 0.053 0.152      1.000       0.010       0.011
+             cpu-p        48 0.003 0.059 0.245      1.001       0.005       0.005
+
+largest moves outside both sets' run ranges (t in us)
+  join_build/orders_build|gpu-cold-spin                2^20 old     1175.7 [615.5, 1177.0, 1175.7]  new      610.5 [614.9, 610.1, 610.5]  x0.52
+  agg_reg/C=7/U=35|gpu-warm-pipe-spin                  2^17 old       16.1 [23.4, 15.8, 16.1]  new       23.5 [23.5, 23.8, 23.4]  x1.46
+  join_probe/part_probe|gpu-warm-pipe-spin             2^18 old       16.3 [16.3, 16.2, 17.0]  new       23.6 [23.8, 23.6, 16.5]  x1.45
+  agg_reg/C=7/U=35|gpu-warm-pipe-spin                  2^15 old       16.5 [23.1, 16.4, 16.5]  new       23.3 [23.3, 23.4, 23.3]  x1.42
+  agg_reg/C=7/U=14|gpu-warm-pipe-spin                  2^17 old       15.8 [15.6, 15.8, 21.5]  new       22.1 [22.1, 15.9, 22.4]  x1.40
+  agg_reg/C=7/U=35|gpu-warm-pipe-spin                  2^11 old       16.3 [21.8, 15.9, 16.3]  new       22.6 [22.5, 22.7, 22.6]  x1.39
+  agg_reg/C=7/U=35|gpu-warm-pipe-spin                  2^12 old       17.0 [22.8, 17.0, 17.0]  new       23.6 [23.6, 24.0, 23.6]  x1.38
+  agg_reg/C=7/U=14|gpu-warm-pipe-spin                  2^11 old       16.0 [15.6, 16.0, 21.9]  new       22.0 [22.3, 16.4, 22.0]  x1.38
+  join_probe/part_probe|gpu-warm-pipe-spin             2^17 old       15.4 [15.4, 15.5, 15.4]  new       21.0 [21.4, 21.0, 15.5]  x1.36
+  agg_reg/C=7/U=35|gpu-warm-pipe-spin                  2^10 old       16.6 [22.4, 15.9, 16.6]  new       22.5 [21.8, 22.5, 22.5]  x1.35
+  filter_count|cpu-e                                   2^10 old        1.6 [1.8, 1.3, 1.6]  new        1.0 [1.5, 1.0, 0.8]  x0.67
+  agg_sum|cpu-e                                        2^10 old        1.9 [2.0, 1.7, 1.9]  new        1.3 [1.7, 1.2, 1.3]  x0.67
+  join_probe/part_promo_probe|gpu-warm-pipe-spin       2^18 old       24.2 [24.4, 24.2, 17.1]  new       16.6 [16.5, 16.6, 24.1]  x0.68
+  join_build/part_build|cpu-p-t24                      2^17 old       91.6 [89.9, 91.6, 107.2]  new      120.5 [109.4, 120.5, 122.6]  x1.32
+  filter_count|cpu-e                                   2^11 old        2.1 [2.2, 1.6, 2.1]  new        1.4 [1.9, 1.4, 1.1]  x0.69
+  join_probe/part_promo_probe|gpu-warm-pipe-spin       2^17 old       22.2 [22.2, 22.4, 15.6]  new       15.5 [15.5, 15.4, 22.0]  x0.70
+  join_probe/part_promo_probe|gpu-warm-pipe-spin       2^12 old       22.3 [22.5, 22.3, 16.2]  new       15.8 [15.4, 15.8, 22.3]  x0.71
+  agg_reg/C=2/U=28|gpu-warm-pipe-spin                  2^12 old       22.8 [22.8, 22.8, 16.4]  new       16.1 [16.0, 22.7, 16.1]  x0.71
+  join_probe/supplier_probe|gpu-warm-pipe-spin         2^13 old       21.5 [21.5, 22.0, 15.8]  new       15.6 [15.5, 15.7, 15.6]  x0.72
+  join_probe/supplier_probe|gpu-warm-pipe-spin         2^18 old       23.8 [24.1, 23.8, 17.5]  new       17.3 [17.3, 18.2, 17.1]  x0.72
+
+=== cache states: 576 (config, n) cells, 0 only in one set
+|new/old - 1|: median 1.8%, p90 14.5%, p99 54.6%, max 148.8%; within 5%: 75%, within 10%: 85%
+run-to-run spread (max/min - 1) median: old 2.1%, new 2.2%; p90: old 15.9%, new 21.9%
+new median inside the old runs' range or old inside the new: 51% of cells
+
+by op family and device (|new/old - 1|; ratio_med: median new/old; spread: median max/min - 1 within a set)
+                       cells   med   p90    mx  ratio_med  spread_old  spread_new
+fam          devc                                                                
+filter_count cpu-e       128 0.006 0.148 0.536      0.996       0.018       0.013
+             cpu-p       128 0.009 0.341 1.488      0.995       0.012       0.013
+             gpu-pipe    160 0.027 0.153 0.374      0.976       0.022       0.030
+             gpu-sync    160 0.023 0.113 0.155      0.987       0.023       0.028
+
+largest moves outside both sets' run ranges (t in us)
+  filter_count|cpu-p                                   2^10 old        0.5 [0.1, 0.5, 0.5]  new        0.0 [0.0, 0.0, 0.1]  x0.09
+  filter_count|cpu-p-gpu-write                         2^18 old       36.0 [35.9, 36.0, 36.0]  new       12.7 [24.2, 12.4, 12.7]  x0.35
+  filter_count|cpu-p-gpu-read                          2^19 old       54.4 [54.1, 56.6, 54.4]  new       25.3 [25.3, 27.6, 25.2]  x0.46
+  filter_count|gpu-warm-pipe-spin-cpu-read             2^21 old       17.9 [16.8, 17.9, 18.2]  new       24.6 [24.9, 24.6, 23.6]  x1.37
+  filter_count|gpu-warm-pipe-spin-gpu-read             2^21 old       17.8 [16.1, 18.0, 17.8]  new       24.0 [24.3, 24.0, 18.0]  x1.35
+  filter_count|cpu-p-gpu-touch1                        2^20 old       86.3 [86.3, 57.5, 86.8]  new       57.5 [57.5, 57.2, 86.0]  x0.67
+  filter_count|cpu-p-gpu-write                         2^11 old        1.0 [0.9, 1.0, 1.0]  new        0.6 [0.5, 0.6, 0.8]  x0.67
+  filter_count|gpu-warm-pipe-spin-gpu-touch1           2^21 old       24.0 [23.8, 24.6, 24.0]  new       16.6 [17.6, 16.6, 16.4]  x0.69
+  filter_count|gpu-warm-pipe-spin                      2^21 old       24.1 [23.7, 24.2, 24.1]  new       16.7 [16.6, 16.7, 23.5]  x0.70
+  filter_count|cpu-e-gpu-write                         2^10 old        0.9 [1.1, 0.9, 0.9]  new        0.6 [0.6, 0.6, 0.8]  x0.71
+  filter_count|cpu-e-gpu-touch1                        2^11 old        1.6 [1.5, 1.6, 1.8]  new        1.2 [1.4, 1.1, 1.2]  x0.71
+  filter_count|gpu-cold-pipe-spin-hot                  2^16 old       29.7 [29.7, 29.7, 28.7]  new       21.1 [21.1, 21.0, 26.3]  x0.71
+  filter_count|cpu-e-gpu-touch1                        2^10 old        1.2 [1.2, 1.1, 1.2]  new        0.9 [1.0, 0.9, 0.9]  x0.73
+  filter_count|gpu-warm-pipe-spin-hot                  2^22 old       28.4 [29.0, 28.4, 26.2]  new       21.0 [21.0, 20.0, 26.0]  x0.74
+  filter_count|cpu-e-gpu-write                         2^11 old        1.2 [1.3, 1.2, 1.2]  new        0.9 [0.9, 0.9, 1.0]  x0.79
+  filter_count|gpu-cold-pipe-spin                      2^13 old       27.4 [27.6, 26.6, 27.4]  new       22.0 [22.0, 21.9, 26.8]  x0.80
+  filter_count|gpu-cold-pipe-spin                      2^15 old       27.5 [26.4, 27.5, 30.0]  new       22.1 [22.1, 21.9, 26.5]  x0.80
+  filter_count|gpu-cold-pipe-spin                      2^14 old       27.2 [27.6, 27.2, 26.9]  new       21.9 [21.9, 21.7, 26.3]  x0.81
+  filter_count|cpu-e-cpu-write                         2^13 old        1.7 [1.7, 1.5, 1.7]  new        1.4 [1.4, 1.5, 1.4]  x0.83
+  filter_count|cpu-p-gpu-read                          2^21 old      115.9 [115.9, 115.9, 114.6]  new       96.3 [96.3, 108.5, 86.2]  x0.83

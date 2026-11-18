@@ -1,0 +1,74 @@
+filter: runs Apple-M3-Ultra_20261117-175046_cache, Apple-M3-Ultra_20261117-194427_cache, Apple-M3-Ultra_20261117-213808_cache
+model /Users/tea/Documents/metal-cost-model/models/Apple-M3-Ultra.json; aware form delta
+
+== router sync-spin: candidates cpu-p, cpu-e, gpu-warm-spin
+  state      router           accuracy mean loss max loss      at  sizes where the pick is not the oracle's
+  cold       measured-cold        100%      1.00     1.00  2^10.0  -
+  cold       model-none           100%      1.00     1.00  2^10.0  -
+  cold       model-delta          100%      1.00     1.00  2^10.0  -
+  hot        measured-cold        100%      1.00     1.00  2^10.0  -
+  hot        model-none           100%      1.00     1.00  2^10.0  -
+  hot        model-delta          100%      1.00     1.00  2^10.0  -
+  cpu-write  measured-cold        100%      1.00     1.00  2^10.0  -
+  cpu-write  model-none           100%      1.00     1.00  2^10.0  -
+  cpu-write  model-delta          100%      1.00     1.00  2^10.0  -
+  cpu-read   measured-cold        100%      1.00     1.00  2^10.0  -
+  cpu-read   model-none           100%      1.00     1.00  2^10.0  -
+  cpu-read   model-delta          100%      1.00     1.00  2^10.0  -
+  gpu-write  measured-cold         94%      1.00     1.03  2^10.0  2^10.0..2^10.0 (1)
+  gpu-write  model-none            94%      1.00     1.03  2^10.0  2^10.0..2^10.0 (1)
+  gpu-write  model-delta           94%      1.00     1.03  2^10.0  2^10.0..2^10.0 (1)
+  gpu-read   measured-cold        100%      1.00     1.00  2^10.0  -
+  gpu-read   model-none           100%      1.00     1.00  2^10.0  -
+  gpu-read   model-delta          100%      1.00     1.00  2^10.0  -
+  cpu-touch1 measured-cold        100%      1.00     1.00  2^10.0  -
+  cpu-touch1 model-none           100%      1.00     1.00  2^10.0  -
+  cpu-touch1 model-delta          100%      1.00     1.00  2^10.0  -
+  gpu-touch1 measured-cold        100%      1.00     1.00  2^10.0  -
+  gpu-touch1 model-none           100%      1.00     1.00  2^10.0  -
+  gpu-touch1 model-delta           94%      1.00     1.03  2^22.0  2^22.0..2^22.0 (1)
+  cold       measured crossovers: cpu-p: 2^22.2; cpu-e: 2^19.6
+  hot        measured crossovers: cpu-p: 2^22.7; cpu-e: 2^19.7
+  cpu-write  measured crossovers: cpu-p: 2^23.0; cpu-e: 2^20.1
+  cpu-read   measured crossovers: cpu-p: 2^22.6; cpu-e: 2^19.9
+  gpu-write  measured crossovers: cpu-p: 2^22.5; cpu-e: 2^19.8
+  gpu-read   measured crossovers: cpu-p: 2^22.5; cpu-e: 2^19.8
+  cpu-touch1 measured crossovers: cpu-p: 2^22.2; cpu-e: 2^19.6
+  gpu-touch1 measured crossovers: cpu-p: 2^22.1; cpu-e: 2^19.8
+
+== router pipelined-spin: candidates cpu-p, cpu-e, gpu-warm-pipe-spin
+  state      router           accuracy mean loss max loss      at  sizes where the pick is not the oracle's
+  cold       measured-cold        100%      1.00     1.00  2^10.0  -
+  cold       model-none           100%      1.00     1.00  2^10.0  -
+  cold       model-delta          100%      1.00     1.00  2^10.0  -
+  hot        measured-cold        100%      1.00     1.00  2^10.0  -
+  hot        model-none           100%      1.00     1.00  2^10.0  -
+  hot        model-delta          100%      1.00     1.00  2^10.0  -
+  cpu-write  measured-cold         94%      1.00     1.03  2^19.0  2^19.0..2^19.0 (1)
+  cpu-write  model-none            94%      1.00     1.03  2^19.0  2^19.0..2^19.0 (1)
+  cpu-write  model-delta           94%      1.00     1.03  2^19.0  2^19.0..2^19.0 (1)
+  cpu-read   measured-cold         94%      1.00     1.05  2^19.0  2^19.0..2^19.0 (1)
+  cpu-read   model-none            94%      1.00     1.05  2^19.0  2^19.0..2^19.0 (1)
+  cpu-read   model-delta           94%      1.00     1.05  2^19.0  2^19.0..2^19.0 (1)
+  gpu-write  measured-cold         94%      1.00     1.03  2^10.0  2^10.0..2^10.0 (1)
+  gpu-write  model-none            94%      1.00     1.03  2^10.0  2^10.0..2^10.0 (1)
+  gpu-write  model-delta           94%      1.00     1.03  2^10.0  2^10.0..2^10.0 (1)
+  gpu-read   measured-cold         88%      1.03     1.37  2^18.0  2^17.0..2^18.0 (2)
+  gpu-read   model-none            88%      1.03     1.37  2^18.0  2^17.0..2^18.0 (2)
+  gpu-read   model-delta          100%      1.00     1.00  2^10.0  -
+  cpu-touch1 measured-cold        100%      1.00     1.00  2^10.0  -
+  cpu-touch1 model-none           100%      1.00     1.00  2^10.0  -
+  cpu-touch1 model-delta          100%      1.00     1.00  2^10.0  -
+  gpu-touch1 measured-cold         94%      1.01     1.11  2^17.0  2^17.0..2^17.0 (1)
+  gpu-touch1 model-none            94%      1.01     1.11  2^17.0  2^17.0..2^17.0 (1)
+  gpu-touch1 model-delta          100%      1.00     1.00  2^10.0  -
+  cold       measured crossovers: cpu-p: 2^18.4; cpu-e: 2^15.7
+  hot        measured crossovers: cpu-p: 2^18.9; cpu-e: 2^15.9
+  cpu-write  measured crossovers: cpu-p: 2^19.1; cpu-e: 2^16.1
+  cpu-read   measured crossovers: cpu-p: 2^19.1; cpu-e: 2^16.0
+  gpu-write  measured crossovers: cpu-p: 2^18.4; cpu-e: 2^16.0
+  gpu-read   measured crossovers: cpu-p: 2^16.9; cpu-e: 2^15.9
+  cpu-touch1 measured crossovers: cpu-p: 2^18.4; cpu-e: 2^15.7
+  gpu-touch1 measured crossovers: cpu-p: 2^18.1; cpu-e: 2^15.9
+routing map -> results/Apple-M3-Ultra_20261117-175046_cache/routing_map.pdf
+-> results/Apple-M3-Ultra_20261117-175046_cache/cache_policy.json

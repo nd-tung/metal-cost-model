@@ -13,17 +13,26 @@
 //   gpu warm  : input column(s) wrapped no-copy once and used before
 //   gpu cold  : a fresh host copy of the morsel's input, wrapped right before the rep (t_wrap)
 //   cpu p|e   : one worker thread
+//   --threads k (build only, no --filter): k worker threads of that QoS insert their shares of the
+//               morsel's rows together (join::cpu_build_concurrent: a relaxed CAS per row, the slot of
+//               the row 16 ahead prefetched), as bench/run_query's P workers build Q14's table; timed
+//               from the start signal (all k threads spinning) to the last one's finish. Config
+//               cpu-<qos>-t<k> (analysis/fit.py); without --threads the single-thread cpu_build.
 //   --dispatch pipelined (probe only): K morsels per timed rep, t_total = GPU span / K
 //   --gpu-spin-ms M : keep the GPU busy ~M ms (ALU only) before each timed GPU rep (busy regime)
 // The table is always GPU-resident: on UMA it is the same memory the CPU built or probes.
 // Checks: every probe morsel against an independent dense reference, every build against the exact
 // contents of the table, and the whole probe column against DuckDB (<probe dir>/join_expected.txt).
-// CSV columns as calib_agg's plus gpu_spin_ms: op = join_probe | join_build, data = <join name>_<phase>,
-// groups = build rows after the filter, path = linear-probe, bytes = 4 n (probe), 8 or 12 n (build).
+// CSV columns as calib_agg's plus gpu_spin_ms and cpu_threads (--threads; 0: the single-thread build):
+// op = join_probe | join_build, data = <join name>_<phase>, groups = build rows after the filter,
+// path = linear-probe, bytes = 4 n (probe), 8 or 12 n (build).
+
+#include <pthread/qos.h>
 
 #include <Foundation/Foundation.hpp>
 #include <Metal/Metal.hpp>
 #include <algorithm>
+#include <atomic>
 #include <cstdint>
 #include <cstring>
 #include <fstream>
@@ -166,26 +175,51 @@ class GpuJoin {
   MTL::Buffer* stats_ = nullptr;
 };
 
+// --threads k: k worker threads insert their shares of rows [0, n) together; `us` is the time from the
+// start signal, every thread ready and spinning, to the last thread's finish. Returns the rows inserted.
+uint32_t concurrent_build(join::Table& t, const uint32_t* keys, const uint32_t* pay, size_t n, int k,
+                          const std::string& qos, double& us) {
+  std::atomic<int> ready{0}, go{0}, done{0};
+  std::atomic<uint64_t> inserted{0};
+  Clock::time_point t_end;
+  std::vector<std::thread> th;
+  for (int w = 0; w < k; ++w)
+    th.emplace_back([&, w] {
+      pthread_set_qos_class_self_np(qos == "p" ? QOS_CLASS_USER_INTERACTIVE : QOS_CLASS_BACKGROUND, 0);
+      ready.fetch_add(1);
+      while (go.load(std::memory_order_acquire) == 0) std::this_thread::yield();
+      const size_t b = n * static_cast<size_t>(w) / static_cast<size_t>(k), e = n * static_cast<size_t>(w + 1) / static_cast<size_t>(k);
+      inserted.fetch_add(join::cpu_build_concurrent(t, keys, pay, b, e - b), std::memory_order_relaxed);
+      if (done.fetch_add(1, std::memory_order_acq_rel) == k - 1) t_end = Clock::now();
+    });
+  while (ready.load() < k) std::this_thread::yield();
+  const auto t0 = Clock::now();
+  go.store(1, std::memory_order_release);
+  for (auto& x : th) x.join();
+  us = us_since(t0, t_end);
+  return static_cast<uint32_t>(inserted.load());
+}
+
 void write_rows(const std::string& path, const std::string& machine, const std::string& op, const std::string& data,
                 const std::string& cache, size_t build_rows, uint64_t bytes_per_row, const std::string& dispatch,
-                double spin_ms, const std::vector<Row>& rows) {
+                double spin_ms, int threads, const std::vector<Row>& rows) {
   const bool exists = std::ifstream(path).good();
   std::ofstream f(path, std::ios::app);
   if (!exists)
     f << "machine,op,data,thr,device,qos,state,n,bytes,rep,t_wrap_us,t_encode_us,t_total_us,gpu_exec_us,ok,"
-         "cache,groups,path,dispatch,batch,gpu_spacing_us,gpu_spin_ms\n";
+         "cache,groups,path,dispatch,batch,gpu_spacing_us,gpu_spin_ms,cpu_threads\n";
   for (const Row& r : rows)
     f << machine << "," << op << "," << data << ",0," << r.device << "," << r.qos << "," << r.state << "," << r.n << ","
       << r.n * bytes_per_row << "," << r.rep << "," << r.t_wrap << "," << r.t_encode << "," << r.t_total << ","
       << r.gpu_exec << "," << (r.ok ? 1 : 0) << "," << cache << "," << build_rows << ",linear-probe,"
       << (r.device == "gpu" ? dispatch : "-") << "," << r.batch << "," << r.spacing << ","
-      << (r.device == "gpu" ? spin_ms : 0.0) << "\n";
+      << (r.device == "gpu" ? spin_ms : 0.0) << "," << (r.device == "cpu" ? threads : 0) << "\n";
 }
 
 void usage() {
   std::cerr << "usage: calib_join --name supplier --build s_suppkey.u32 --payload s_nationkey.u32 [--filter p_promo.u32]\n"
                "                  --probe l_suppkey.u32 [--phase probe|build]\n"
-               "                  --device gpu|cpu [--state warm|cold] [--qos p|e]\n"
+               "                  --device gpu|cpu [--state warm|cold] [--qos p|e] [--threads k (cpu build)]\n"
                "                  [--dispatch sync|pipelined] [--batch 16] [--batch-mb 1024] [--gpu-spin-ms 0]\n"
                "                  [--min-log2 10] [--max-log2 25] [--reps 15] [--cache cold|hot] [--flush-mb 64]\n"
                "                  [--out results/calib_join.csv] [--machine-json path] [--expect join_expected.txt]\n";
@@ -231,6 +265,10 @@ int main(int argc, char** argv) {
     const std::string out_path = a.str("out", "results/calib_join.csv");
     const std::string probe_path = a.str("probe", "");
     const std::string expect_path = a.str("expect", dir_of(probe_path) + "/join_expected.txt");
+    const int threads = static_cast<int>(a.i64("threads", 0));
+    if (threads < 0 || threads > 64) throw std::runtime_error("--threads must be in [0, 64]");
+    if (threads > 0 && (device != "cpu" || phase != "build" || a.has("filter")))
+      throw std::runtime_error("--threads applies to --device cpu --phase build without --filter");
     if (max_l2 > 30) throw std::runtime_error("max-log2 > 30 not supported (uint32 n)");
     acquire_bench_lock();  // one benchmark process at a time (common/bench.hpp)
 
@@ -301,6 +339,9 @@ int main(int argc, char** argv) {
         gpu->run_sync(r, [&](MTL::ComputeCommandEncoder* enc) {
           gpu->encode_build(enc, wkeys, wpay, wfilt, 0, static_cast<uint32_t>(bkeys.rows));
         });
+      } else if (threads > 0) {
+        double us = 0;
+        concurrent_build(table, bkeys.data(), bpay.data(), bkeys.rows, threads, qos, us);
       } else {
         join::cpu_build(table, bkeys.data(), bpay.data(), filt, 0, bkeys.rows);
       }
@@ -329,7 +370,8 @@ int main(int argc, char** argv) {
       const bool have = join::load_expected(expect_path, name, exp_rows, exp);
       const bool duck_ok = !have || (exp == got && exp_rows == build_rows);
       full_ok = build_ok && got == want && duck_ok;
-      std::cerr << "full build + probe on " << device << (device == "cpu" ? "-" + qos : "") << ": build "
+      std::cerr << "full build + probe on " << device << (device == "cpu" ? "-" + qos : "")
+                << (threads > 0 ? " x " + std::to_string(threads) + " threads" : "") << ": build "
                 << (build_ok ? "ok" : "WRONG") << " | " << got.matches << " matches ("
                 << 100.0 * got.matches / std::max<size_t>(probe.rows, 1) << "%) | reference "
                 << (got == want ? "match" : "MISMATCH") << " | DuckDB "
@@ -448,6 +490,9 @@ int main(int argc, char** argv) {
                 if (f) f->release();
               }
               row.ok = row.ok && gpu->inserted() == want_rows;
+            } else if (threads > 0) {
+              const uint32_t ins = concurrent_build(table, bkeys.data(), bpay.data(), n, threads, qos, row.t_total);
+              row.ok = ins == want_rows;
             } else {
               asm volatile("" ::: "memory");
               auto t0 = Clock::now();
@@ -468,14 +513,15 @@ int main(int argc, char** argv) {
             rows.push_back(row);
           }
         }
-        std::cerr << device << (device == "gpu" ? " " + state + " " + dispatch : " " + qos) << " " << phase << " n=2^"
+        std::cerr << device << (device == "gpu" ? " " + state + " " + dispatch : " " + qos)
+                  << (threads > 0 ? " x" + std::to_string(threads) : "") << " " << phase << " n=2^"
                   << l2 << " done\n";
       }
     });
 
     const size_t bad = std::count_if(rows.begin(), rows.end(), [](const Row& r) { return !r.ok; });
     const uint64_t bpr = phase == "probe" ? 4 : (filt ? 12 : 8);
-    write_rows(out_path, mi.tag(), "join_" + phase, name + "_" + phase, cache, build_rows, bpr, dispatch, spin_ms, rows);
+    write_rows(out_path, mi.tag(), "join_" + phase, name + "_" + phase, cache, build_rows, bpr, dispatch, spin_ms, threads, rows);
     std::cerr << rows.size() << " rows -> " << out_path
               << (bad ? " | WARNING: " + std::to_string(bad) + " rows failed the correctness check" : "")
               << (full_ok ? "" : " | WARNING: the full build/probe check failed") << "\n";

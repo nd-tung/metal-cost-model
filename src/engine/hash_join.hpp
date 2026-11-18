@@ -11,6 +11,7 @@
 // Probe output is fused, not materialized: match count and payload sum, both uint32 and wrapping
 // mod 2^32 on every device, so results are checked exactly.
 #include <algorithm>
+#include <atomic>
 #include <cstdint>
 #include <cstring>
 #include <fstream>
@@ -68,6 +69,34 @@ inline uint32_t cpu_build(Table& t, const uint32_t* keys, const uint32_t* payloa
     ++inserted;
   }
   return inserted;
+}
+
+// Inserts the build rows [begin, begin + n) while other threads insert into the same table: the key
+// slot is claimed with one relaxed 32-bit CAS, as join_build does on the GPU, then the payload is
+// stored (no other thread touches it). The table must have been cleared, and is read only after every
+// inserting thread is done: the caller's barrier (release/acquire) orders the inserts before the probes.
+// The slot of the key kBuildAhead rows ahead is prefetched for writing: on the M3 Ultra (part, 2M keys,
+// a 32 MiB table) 24 threads insert in 0.90-0.93 ms with it and 3.2-3.3 ms without; one thread takes
+// 4.6 ms with it (build_micro in results/Apple-M3-Ultra_20261117-095403_e2e; README "Router: end to end").
+inline constexpr size_t kBuildAhead = 16;
+
+inline uint32_t cpu_build_concurrent(Table& t, const uint32_t* keys, const uint32_t* payload, size_t begin, size_t n) {
+  uint32_t* s = t.slots();
+  const size_t end = begin + n;
+  for (size_t i = begin; i < end; ++i) {
+    if (i + kBuildAhead < end) __builtin_prefetch(s + 2 * t.slot_of(keys[i + kBuildAhead]), 1);
+    const uint32_t k = keys[i];
+    for (uint32_t h = t.slot_of(k);; h = (h + 1) & t.mask) {
+      std::atomic_ref<uint32_t> key(s[2 * h]);
+      uint32_t expected = kEmpty;
+      if (key.load(std::memory_order_relaxed) == kEmpty &&
+          key.compare_exchange_strong(expected, k, std::memory_order_relaxed, std::memory_order_relaxed)) {
+        s[2 * h + 1] = payload[i];
+        break;
+      }
+    }
+  }
+  return static_cast<uint32_t>(n);
 }
 
 // Probes [begin, begin + n). Slots are prefetched a batch of kBatch probes ahead, so a

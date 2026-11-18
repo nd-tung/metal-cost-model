@@ -1,0 +1,143 @@
+{
+ "_about": "Runs each machine's model (models/<machine>.json) is built from; see analysis/model.py and results/README.md. keep: all | sync (drop pipelined GPU rows) | sync-no-cpu-e (also drop CPU-E rows). cache_states: the cache-state probe runs (calib_filter --cache; every state against the cold rows of the same runs) -> models/<machine>.json cache_states; slc_mb: the system level cache, for the footprint bands.",
+ "Apple-M3-Ultra": {
+  "op_notes": {
+   "filter_count": "pipelined GPU: the linear fit implies ~1200 GB/s, above the 819 GB/s DRAM peak; measured per size it peaks at 798 GB/s (2^24); over the largest morsels (large_n) 801 GB/s, which the overlap form uses. Quote measured values or large_n, not the line",
+   "agg_sum": "pipelined GPU: the linear fit implies ~1200 GB/s; measured per size it peaks at 795 GB/s (2^24); over the largest morsels (large_n) 806 GB/s, which the overlap form uses. Quote measured values or large_n, not the line",
+   "agg_group/G=7": "pipelined GPU: the linear fit implies ~990 GB/s; measured per size it peaks at 778 GB/s (2^25); over the largest morsels (large_n) 787 GB/s, which the overlap form uses. Quote measured values or large_n, not the line",
+   "agg_group/G=2526": "pipelined GPU: the linear fit implies ~970 GB/s; measured per size it peaks at 776 GB/s (2^25); over the largest morsels (large_n) 790 GB/s, which the overlap form uses. Quote measured values or large_n, not the line",
+   "join_probe/nation_probe": "pipelined GPU: per-batch overhead dominates up to the largest size (2^20) and batches overlap on the 6 MB probe column, so beta is not identified (cv 70%); measured peak 228 GB/s",
+   "join_build/orders_build": "gpu-cold is bimodal between runs at 2^20-2^21 (2^20: 615 us in round 1, 1177 us in rounds 2-3); gpu-warm is stable"
+  },
+  "slc_mb": 96,
+  "calibration": [
+   {
+    "run": "Apple-M3-Ultra_20261117-161257",
+    "keep": "all",
+    "note": "rerun round 1, GPU kept busy (SPIN=20), flush 512 MB"
+   },
+   {
+    "run": "Apple-M3-Ultra_20261117-161547_agg",
+    "keep": "all",
+    "note": "rerun round 1, GPU kept busy (SPIN=20), flush 512 MB"
+   },
+   {
+    "run": "Apple-M3-Ultra_20261117-164321_sort",
+    "keep": "all",
+    "note": "rerun round 1, GPU kept busy (SPIN=20), flush 512 MB"
+   },
+   {
+    "run": "Apple-M3-Ultra_20261117-170711_join",
+    "keep": "all",
+    "note": "rerun round 1, GPU kept busy (SPIN=20), flush 512 MB"
+   },
+   {
+    "run": "Apple-M3-Ultra_20261117-173733_reg",
+    "keep": "all",
+    "note": "register aggregation; GPU only, rerun round 1, GPU kept busy (SPIN=20), flush 512 MB"
+   },
+   {
+    "run": "Apple-M3-Ultra_20261117-174311_reg",
+    "keep": "all",
+    "note": "register aggregation, 7 columns (COLS=7); GPU only, rerun round 1, GPU kept busy (SPIN=20), flush 512 MB"
+   },
+   {
+    "run": "Apple-M3-Ultra_20261117-174853_join",
+    "keep": "all",
+    "note": "concurrent CPU build: part, calib_join --threads 1 2 4 8 12 16 24 (cpu-p-t<k>), rerun round 1, GPU kept busy (SPIN=20), flush 512 MB"
+   },
+   {
+    "run": "Apple-M3-Ultra_20261117-180639",
+    "keep": "all",
+    "note": "rerun round 2, GPU kept busy (SPIN=20), flush 512 MB"
+   },
+   {
+    "run": "Apple-M3-Ultra_20261117-180929_agg",
+    "keep": "all",
+    "note": "rerun round 2, GPU kept busy (SPIN=20), flush 512 MB"
+   },
+   {
+    "run": "Apple-M3-Ultra_20261117-183701_sort",
+    "keep": "all",
+    "note": "rerun round 2, GPU kept busy (SPIN=20), flush 512 MB"
+   },
+   {
+    "run": "Apple-M3-Ultra_20261117-190051_join",
+    "keep": "all",
+    "note": "rerun round 2, GPU kept busy (SPIN=20), flush 512 MB"
+   },
+   {
+    "run": "Apple-M3-Ultra_20261117-193111_reg",
+    "keep": "all",
+    "note": "register aggregation; GPU only, rerun round 2, GPU kept busy (SPIN=20), flush 512 MB"
+   },
+   {
+    "run": "Apple-M3-Ultra_20261117-193649_reg",
+    "keep": "all",
+    "note": "register aggregation, 7 columns (COLS=7); GPU only, rerun round 2, GPU kept busy (SPIN=20), flush 512 MB"
+   },
+   {
+    "run": "Apple-M3-Ultra_20261117-194233_join",
+    "keep": "all",
+    "note": "concurrent CPU build: part, calib_join --threads 1 2 4 8 12 16 24 (cpu-p-t<k>), rerun round 2, GPU kept busy (SPIN=20), flush 512 MB"
+   },
+   {
+    "run": "Apple-M3-Ultra_20261117-200021",
+    "keep": "all",
+    "note": "rerun round 3, GPU kept busy (SPIN=20), flush 512 MB"
+   },
+   {
+    "run": "Apple-M3-Ultra_20261117-200311_agg",
+    "keep": "all",
+    "note": "rerun round 3, GPU kept busy (SPIN=20), flush 512 MB"
+   },
+   {
+    "run": "Apple-M3-Ultra_20261117-203043_sort",
+    "keep": "all",
+    "note": "rerun round 3, GPU kept busy (SPIN=20), flush 512 MB"
+   },
+   {
+    "run": "Apple-M3-Ultra_20261117-205428_join",
+    "keep": "all",
+    "note": "rerun round 3, GPU kept busy (SPIN=20), flush 512 MB"
+   },
+   {
+    "run": "Apple-M3-Ultra_20261117-212453_reg",
+    "keep": "all",
+    "note": "register aggregation; GPU only, rerun round 3, GPU kept busy (SPIN=20), flush 512 MB"
+   },
+   {
+    "run": "Apple-M3-Ultra_20261117-213031_reg",
+    "keep": "all",
+    "note": "register aggregation, 7 columns (COLS=7); GPU only, rerun round 3, GPU kept busy (SPIN=20), flush 512 MB"
+   },
+   {
+    "run": "Apple-M3-Ultra_20261117-213615_join",
+    "keep": "all",
+    "note": "concurrent CPU build: part, calib_join --threads 1 2 4 8 12 16 24 (cpu-p-t<k>), rerun round 3, GPU kept busy (SPIN=20), flush 512 MB"
+   }
+  ],
+  "contention": [
+   "Apple-M3-Ultra_20261117-163011_contention",
+   "Apple-M3-Ultra_20261117-182353_contention",
+   "Apple-M3-Ultra_20261117-201733_contention"
+  ],
+  "cache_states": [
+   {
+    "run": "Apple-M3-Ultra_20261117-175046_cache",
+    "keep": "all",
+    "note": "cache-state probe; SF10 l_quantity, rerun round 1, GPU kept busy (SPIN=20), flush 512 MB"
+   },
+   {
+    "run": "Apple-M3-Ultra_20261117-194427_cache",
+    "keep": "all",
+    "note": "cache-state probe; SF10 l_quantity, rerun round 2, GPU kept busy (SPIN=20), flush 512 MB"
+   },
+   {
+    "run": "Apple-M3-Ultra_20261117-213808_cache",
+    "keep": "all",
+    "note": "cache-state probe; SF10 l_quantity, rerun round 3, GPU kept busy (SPIN=20), flush 512 MB"
+   }
+  ]
+ }
+}

@@ -1,0 +1,156 @@
+{
+  "runs": [
+    "Apple-M1_20261110-163806_sort"
+  ],
+  "fit": [
+    "random",
+    "l_partkey"
+  ],
+  "test": [
+    "l_shipdate",
+    "l_orderkey"
+  ],
+  "passes": {
+    "l_orderkey": 4,
+    "l_partkey": 3,
+    "l_shipdate": 2,
+    "random": 4
+  },
+  "alpha_form": "pass",
+  "devices": {
+    "gpu-warm-spin": {
+      "alpha0_us": 463.02478595066077,
+      "alpha_per_pass_us": 0.0,
+      "alpha_pass_clipped": true,
+      "b_us_per_row_per_pass": 0.0008440034513077325,
+      "test": {
+        "l_shipdate": {
+          "passes": 2,
+          "pred_beta_ns_per_row": 1.688006902615465,
+          "meas_beta_ns_per_row": 1.4463278570936176,
+          "pred_alpha_us": 463.02478595066077,
+          "meas_alpha_us": 394.5034743300523,
+          "err_median": 0.19861354471448878,
+          "err_p90": 0.28784814498424793,
+          "bias_median": 0.19861354471448878
+        },
+        "l_orderkey": {
+          "passes": 4,
+          "pred_beta_ns_per_row": 3.37601380523093,
+          "meas_beta_ns_per_row": 3.208580580565668,
+          "pred_alpha_us": 463.02478595066077,
+          "meas_alpha_us": 418.21515498754945,
+          "err_median": 0.08977254171583218,
+          "err_p90": 0.1880704859829146,
+          "bias_median": 0.0748095840959073
+        }
+      }
+    },
+    "gpu-cold-spin": {
+      "alpha0_us": 633.0475719720764,
+      "alpha_per_pass_us": 0.0,
+      "alpha_pass_clipped": true,
+      "b_us_per_row_per_pass": 0.000892109502156536,
+      "test": {
+        "l_shipdate": {
+          "passes": 2,
+          "pred_beta_ns_per_row": 1.784219004313072,
+          "meas_beta_ns_per_row": 1.6494425077459776,
+          "pred_alpha_us": 633.0475719720764,
+          "meas_alpha_us": 489.4296232486997,
+          "err_median": 0.17835959355656683,
+          "err_p90": 0.3678882359017205,
+          "bias_median": 0.17835959355656683
+        },
+        "l_orderkey": {
+          "passes": 4,
+          "pred_beta_ns_per_row": 3.568438008626144,
+          "meas_beta_ns_per_row": 3.392395198721432,
+          "pred_alpha_us": 633.0475719720764,
+          "meas_alpha_us": 481.50360454248244,
+          "err_median": 0.14210544777121606,
+          "err_p90": 0.3942454101613274,
+          "bias_median": 0.14210544777121606
+        }
+      }
+    },
+    "cpu-p": {
+      "alpha0_us": -0.4064353900217752,
+      "alpha_per_pass_us": 0.0,
+      "alpha_pass_clipped": true,
+      "b_us_per_row_per_pass": 0.0013163376355096155,
+      "test": {
+        "l_shipdate": {
+          "passes": 2,
+          "pred_beta_ns_per_row": 2.632675271019231,
+          "meas_beta_ns_per_row": 2.9969198396751007,
+          "pred_alpha_us": -0.4064353900217752,
+          "meas_alpha_us": 0.3880617536017417,
+          "err_median": 0.16200018519111442,
+          "err_p90": 0.2052837620407195,
+          "bias_median": -0.16200018519111442
+        },
+        "l_orderkey": {
+          "passes": 4,
+          "pred_beta_ns_per_row": 5.265350542038462,
+          "meas_beta_ns_per_row": 13.206091647502646,
+          "pred_alpha_us": -0.4064353900217752,
+          "meas_alpha_us": 0.40828425785755573,
+          "err_median": 0.6031126379733278,
+          "err_p90": 0.6145486261398309,
+          "bias_median": -0.6031126379733278
+        }
+      }
+    },
+    "cpu-e": {
+      "alpha0_us": -13.068855830287786,
+      "alpha_per_pass_us": 0.0,
+      "alpha_pass_clipped": true,
+      "b_us_per_row_per_pass": 0.007729472129831504,
+      "test": {
+        "l_shipdate": {
+          "passes": 2,
+          "pred_beta_ns_per_row": 15.458944259663008,
+          "meas_beta_ns_per_row": 16.876371884715958,
+          "pred_alpha_us": -13.068855830287786,
+          "meas_alpha_us": -5.707335903574561,
+          "err_median": 0.252792443367466,
+          "err_p90": 0.47041963648088336,
+          "bias_median": -0.252792443367466
+        },
+        "l_orderkey": {
+          "passes": 4,
+          "pred_beta_ns_per_row": 30.917888519326016,
+          "meas_beta_ns_per_row": 32.59860478826158,
+          "pred_alpha_us": -13.068855830287786,
+          "meas_alpha_us": -12.971603630169085,
+          "err_median": 0.11781562157141102,
+          "err_p90": 0.32369545205621986,
+          "bias_median": -0.05207615328060087
+        }
+      }
+    }
+  },
+  "crossovers": {
+    "l_shipdate: gpu-warm-spin vs cpu-p": {
+      "measured": "2^18.5 (measured: GPU slower at 2^18.0, faster from 2^19.0 on)",
+      "measured_n": 365737.8754925267,
+      "predicted_n": 490575.5679358206
+    },
+    "l_shipdate: gpu-warm-spin vs cpu-e": {
+      "measured": "2^14.9 (measured: GPU slower at 2^14.0, faster from 2^15.0 on)",
+      "measured_n": 30822.877842870475,
+      "predicted_n": 34572.3482314222
+    },
+    "l_orderkey: gpu-warm-spin vs cpu-p": {
+      "measured": "2^15.4 (measured: GPU slower at 2^15.0, faster from 2^16.0 on)",
+      "measured_n": 43479.68579673368,
+      "predicted_n": 245287.7839679103
+    },
+    "l_orderkey: gpu-warm-spin vs cpu-e": {
+      "measured": "2^14.0 (measured: GPU slower at 2^13.0, faster from 2^14.0 on)",
+      "measured_n": 16005.343533764406,
+      "predicted_n": 17286.1741157111
+    }
+  }
+}

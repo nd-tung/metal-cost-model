@@ -1,0 +1,44 @@
+commit: 881fea04c6a77eef79ae21207060918cde4ce8d6
+source_dirty: yes
+started: 2026-11-17T15:12:57Z
+script: scripts/run_calib_filter.sh
+flush_mb: 512 (MCM_FLUSH_MB)
+load: 2.01 2.39 2.36 | users logged in: 4
+changed or untracked source files (snapshot in source.tar.gz):
+ M CMakeLists.txt
+ M bench/calib_agg.cpp
+ M bench/calib_filter.cpp
+ M bench/val_q1.cpp
+ M kernels/q1.metal
+ M src/common/bench.hpp
+ M src/common/metal_ctx.cpp
+ M src/common/metal_ctx.hpp
+ M src/engine/q1.hpp
+ M src/engine/q1_gpu.hpp
+?? analysis/
+?? bench/calib_join.cpp
+?? bench/calib_reg.cpp
+?? bench/calib_sort.cpp
+?? bench/run_query.cpp
+?? bench/val_q14.cpp
+?? bench/val_q6.cpp
+?? bench/val_query.hpp
+?? bench/val_stream.cpp
+?? kernels/agg_reg.metal
+?? kernels/join.metal
+?? kernels/q14.metal
+?? kernels/q6.metal
+?? kernels/sort.metal
+?? kernels/spin.metal
+?? kernels/stream.metal
+?? kernels/touch.metal
+?? scripts/
+?? src/engine/columns.hpp
+?? src/engine/hash_join.hpp
+?? src/engine/hash_join_gpu.hpp
+?? src/engine/q14.hpp
+?? src/engine/q14_gpu.hpp
+?? src/engine/q6.hpp
+?? src/engine/q6_gpu.hpp
+?? src/engine/radix_sort.hpp
+settings: MIN_LOG2=10 MAX_LOG2=26 REPS=15 CACHE='cold' COLUMN=data/tpch-sf10/l_quantity.u32 THR=2400 DISPATCH='sync pipelined' BATCH=16 STORAGE='shared' SPIN=20 COOLDOWN=20

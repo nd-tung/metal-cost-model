@@ -1,0 +1,253 @@
+{
+  "_about": "Runs each machine's model (models/<machine>.json) is built from; see analysis/model.py and results/README.md. keep: all | sync (drop pipelined GPU rows) | sync-no-cpu-e (also drop CPU-E rows). cache_states: the cache-state probe runs (calib_filter --cache; every state against the cold rows of the same runs) -> models/<machine>.json cache_states; slc_mb: the system level cache, for the footprint bands.",
+  "Apple-M1": {
+    "calibration": [
+      {
+        "run": "Apple-M1_20261109-1148",
+        "keep": "all"
+      },
+      {
+        "run": "Apple-M1_20261109-1204",
+        "keep": "all"
+      },
+      {
+        "run": "Apple-M1_20261109-1206",
+        "keep": "all"
+      },
+      {
+        "run": "Apple-M1_20261109-1208",
+        "keep": "all"
+      },
+      {
+        "run": "Apple-M1_20261109-134819",
+        "keep": "sync",
+        "note": "pipelined rows used the superseded spacing metric"
+      },
+      {
+        "run": "Apple-M1_20261110-092608",
+        "keep": "all"
+      },
+      {
+        "run": "Apple-M1_20261110-093904",
+        "keep": "all"
+      },
+      {
+        "run": "Apple-M1_20261109-1223_agg",
+        "keep": "all"
+      },
+      {
+        "run": "Apple-M1_20261109-1250_agg",
+        "keep": "all"
+      },
+      {
+        "run": "Apple-M1_20261109-1259_agg",
+        "keep": "all"
+      },
+      {
+        "run": "Apple-M1_20261109-135114_agg",
+        "keep": "sync-no-cpu-e",
+        "note": "pipelined rows superseded; CPU-E ran 1.1-1.7x slow (E-core clock)"
+      },
+      {
+        "run": "Apple-M1_20261110-092820_agg",
+        "keep": "all"
+      },
+      {
+        "run": "Apple-M1_20261110-094141_agg",
+        "keep": "all"
+      },
+      {
+        "run": "Apple-M1_20261110-163806_sort",
+        "keep": "all",
+        "note": "GPU kept busy (SPIN=20)"
+      },
+      {
+        "run": "Apple-M1_20261110-170352_join",
+        "keep": "all",
+        "note": "GPU kept busy (SPIN=20); nation pipelined probes at n >= 2^19 re-read a 6 MB probe column from cache"
+      },
+      {
+        "run": "Apple-M1_20261110-174243",
+        "keep": "all",
+        "note": "GPU kept busy (SPIN=20)"
+      },
+      {
+        "run": "Apple-M1_20261110-174530_agg",
+        "keep": "all",
+        "note": "GPU kept busy (SPIN=20)"
+      },
+      {
+        "run": "Apple-M1_20261110-180028",
+        "keep": "all",
+        "note": "GPU kept busy (SPIN=20)"
+      },
+      {
+        "run": "Apple-M1_20261110-180314_agg",
+        "keep": "all",
+        "note": "GPU kept busy (SPIN=20)"
+      },
+      {
+        "run": "Apple-M1_20261110-181810",
+        "keep": "all",
+        "note": "GPU kept busy (SPIN=20)"
+      },
+      {
+        "run": "Apple-M1_20261110-182058_agg",
+        "keep": "all",
+        "note": "GPU kept busy (SPIN=20)"
+      }
+    ],
+    "contention": [
+      "Apple-M1_20261109-1317_contention",
+      "Apple-M1_20261110-100812_contention",
+      "Apple-M1_20261110-101455_contention",
+      "Apple-M1_20261110-102138_contention"
+    ],
+    "op_notes": {
+      "agg_group/G=2000000": "GPU timing is bimodal between runs (sync warm at 2^25: ~29-31 or ~48-54 ms); treat GPU vs P-core as a tie",
+      "join_probe/nation_probe": "pipelined batches overlap on the 1.5M-row probe column (6 MB, fits the SLC) from 2^19 on: cache-assisted, not DRAM",
+      "sort/l_orderkey": "already-sorted input: the CPU radix sort's counters form dependency chains (2.5x slower per pass); the GPU is unaffected"
+    },
+    "slc_mb": 8
+  },
+  "Apple-M3-Ultra": {
+    "calibration": [
+      {
+        "run": "Apple-M3-Ultra_20261110-190109",
+        "keep": "all",
+        "note": "round 1; GPU kept busy (SPIN=20); flush 512 MB"
+      },
+      {
+        "run": "Apple-M3-Ultra_20261110-190401_agg",
+        "keep": "all",
+        "note": "round 1; GPU kept busy (SPIN=20); flush 512 MB"
+      },
+      {
+        "run": "Apple-M3-Ultra_20261110-193046_sort",
+        "keep": "all",
+        "note": "round 1; GPU kept busy (SPIN=20); flush 512 MB"
+      },
+      {
+        "run": "Apple-M3-Ultra_20261110-195434_join",
+        "keep": "all",
+        "note": "round 1; GPU kept busy (SPIN=20); flush 512 MB"
+      },
+      {
+        "run": "Apple-M3-Ultra_20261111-115341",
+        "keep": "all",
+        "note": "round 2; GPU kept busy (SPIN=20); flush 512 MB"
+      },
+      {
+        "run": "Apple-M3-Ultra_20261111-115631_agg",
+        "keep": "all",
+        "note": "round 2; GPU kept busy (SPIN=20); flush 512 MB"
+      },
+      {
+        "run": "Apple-M3-Ultra_20261111-122406_sort",
+        "keep": "all",
+        "note": "round 2; GPU kept busy (SPIN=20); flush 512 MB"
+      },
+      {
+        "run": "Apple-M3-Ultra_20261111-124754_join",
+        "keep": "all",
+        "note": "round 2; GPU kept busy (SPIN=20); flush 512 MB"
+      },
+      {
+        "run": "Apple-M3-Ultra_20261111-131748",
+        "keep": "all",
+        "note": "round 3; GPU kept busy (SPIN=20); flush 512 MB"
+      },
+      {
+        "run": "Apple-M3-Ultra_20261111-132038_agg",
+        "keep": "all",
+        "note": "round 3; GPU kept busy (SPIN=20); flush 512 MB; sum gpu-warm sync at 2^13-2^14 ran 1.4-1.7x slow (transient)"
+      },
+      {
+        "run": "Apple-M3-Ultra_20261111-134811_sort",
+        "keep": "all",
+        "note": "round 3; GPU kept busy (SPIN=20); flush 512 MB; random/cpu-e at 2^23-2^25 ran 1.2-1.6x faster than rounds 1-2 (likely E-cluster clock; not verified)"
+      },
+      {
+        "run": "Apple-M3-Ultra_20261111-141153_join",
+        "keep": "all",
+        "note": "round 3; GPU kept busy (SPIN=20); flush 512 MB"
+      },
+      {
+        "run": "Apple-M3-Ultra_20261113-180507_reg",
+        "keep": "all",
+        "note": "register aggregation, round 1; GPU only, sync + pipelined; GPU kept busy (SPIN=20); flush 512 MB"
+      },
+      {
+        "run": "Apple-M3-Ultra_20261113-181013_reg",
+        "keep": "all",
+        "note": "register aggregation, round 2; GPU only, sync + pipelined; GPU kept busy (SPIN=20); flush 512 MB"
+      },
+      {
+        "run": "Apple-M3-Ultra_20261113-181521_reg",
+        "keep": "all",
+        "note": "register aggregation, round 3; GPU only, sync + pipelined; GPU kept busy (SPIN=20); flush 512 MB"
+      },
+      {
+        "run": "Apple-M3-Ultra_20261113-183958_reg",
+        "keep": "all",
+        "note": "register aggregation, 7 columns (COLS=7), round 1; GPU only, sync + pipelined; GPU kept busy (SPIN=20); flush 512 MB"
+      },
+      {
+        "run": "Apple-M3-Ultra_20261113-184511_reg",
+        "keep": "all",
+        "note": "register aggregation, 7 columns (COLS=7), round 2; GPU only, sync + pipelined; GPU kept busy (SPIN=20); flush 512 MB"
+      },
+      {
+        "run": "Apple-M3-Ultra_20261113-185024_reg",
+        "keep": "all",
+        "note": "register aggregation, 7 columns (COLS=7), round 3; GPU only, sync + pipelined; GPU kept busy (SPIN=20); flush 512 MB"
+      },
+      {
+        "run": "Apple-M3-Ultra_20261117-101101_join",
+        "keep": "all",
+        "note": "concurrent CPU build, round 1: part, calib_join --threads 1 2 4 8 12 16 24 (cpu-p-t<k>); flush 512 MB"
+      },
+      {
+        "run": "Apple-M3-Ultra_20261117-101332_join",
+        "keep": "all",
+        "note": "concurrent CPU build, round 2: part, calib_join --threads 1 2 4 8 12 16 24 (cpu-p-t<k>); flush 512 MB"
+      },
+      {
+        "run": "Apple-M3-Ultra_20261117-101546_join",
+        "keep": "all",
+        "note": "concurrent CPU build, round 3: part, calib_join --threads 1 2 4 8 12 16 24 (cpu-p-t<k>); flush 512 MB"
+      }
+    ],
+    "contention": [
+      "Apple-M3-Ultra_20261111-113814_contention",
+      "Apple-M3-Ultra_20261111-121056_contention",
+      "Apple-M3-Ultra_20261111-133503_contention"
+    ],
+    "op_notes": {
+      "filter_count": "pipelined GPU: the linear fit implies ~1200 GB/s, above the 819 GB/s DRAM peak; measured per size it peaks at 798 GB/s (2^24); over the largest morsels (large_n) 801 GB/s, which the overlap form uses. Quote measured values or large_n, not the line",
+      "agg_sum": "pipelined GPU: the linear fit implies ~1200 GB/s; measured per size it peaks at 795 GB/s (2^24); over the largest morsels (large_n) 806 GB/s, which the overlap form uses. Quote measured values or large_n, not the line",
+      "agg_group/G=7": "pipelined GPU: the linear fit implies ~990 GB/s; measured per size it peaks at 778 GB/s (2^25); over the largest morsels (large_n) 787 GB/s, which the overlap form uses. Quote measured values or large_n, not the line",
+      "agg_group/G=2526": "pipelined GPU: the linear fit implies ~970 GB/s; measured per size it peaks at 776 GB/s (2^25); over the largest morsels (large_n) 790 GB/s, which the overlap form uses. Quote measured values or large_n, not the line",
+      "join_probe/nation_probe": "pipelined GPU: per-batch overhead dominates up to the largest size (2^20) and batches overlap on the 6 MB probe column, so beta is not identified (cv 70%); measured peak 228 GB/s",
+      "join_build/orders_build": "gpu-cold is bimodal between runs at 2^20-2^21 (2^20: 615 us in round 1, 1177 us in rounds 2-3); gpu-warm is stable"
+    },
+    "slc_mb": 96,
+    "cache_states": [
+      {
+        "run": "Apple-M3-Ultra_20261114-102341_cache",
+        "keep": "all",
+        "note": "cache-state probe round 1; SF10 l_quantity; GPU kept busy (SPIN=20); flush 512 MB"
+      },
+      {
+        "run": "Apple-M3-Ultra_20261114-104725_cache",
+        "keep": "all",
+        "note": "cache-state probe round 2; SF10 l_quantity; GPU kept busy (SPIN=20); flush 512 MB"
+      },
+      {
+        "run": "Apple-M3-Ultra_20261114-111012_cache",
+        "keep": "all",
+        "note": "cache-state probe round 3; SF10 l_quantity; GPU kept busy (SPIN=20); flush 512 MB"
+      }
+    ]
+  }
+}
